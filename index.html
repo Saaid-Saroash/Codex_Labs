@@ -1,9 +1,7 @@
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Codex Labs — Web Development Online Course</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap');
@@ -408,6 +406,7 @@
     .delete-btn.show { display: inline-flex; }
     .group-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
     .save-inline { min-width: 56px; color: #9ef1c4; font-weight: 800; }
+    .source-status { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
     @media (max-width: 920px) {
       .hero-grid, .grid2, .grid3, .admin-grid, .admin-grid-3 { grid-template-columns: 1fr; }
@@ -427,10 +426,10 @@
     <div class="wrap">
       <div class="nav-inner">
         <div class="brand" id="brandTrigger">
-          <img class="brand-logo" src="logo.png" alt="Codex Labs logo" />
+          <img class="brand-logo" src="logo.png" alt="Codex Labs logo">
           <div>
             <h1 id="brandName">Codex Labs</h1>
-            <p id="brandSub">gen z programing labs</p>
+            <p id="brandSub">Gen Z Programming Labs</p>
           </div>
         </div>
         <nav class="nav-links">
@@ -454,7 +453,7 @@
     <section class="hero hero-grid">
       <div>
         <h2 class="big-title" id="heroTitle">Codex Labs</h2>
-        <div class="sub-title" id="heroSubtitle">gen z programing labs</div>
+        <div class="sub-title" id="heroSubtitle">Gen Z Programming Labs</div>
         <p class="hero-copy" id="heroCopy">Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.</p>
         <div class="chips">
           <span class="chip">Beginner friendly</span>
@@ -462,7 +461,7 @@
           <span class="chip">E-certificate</span>
         </div>
         <div class="btn-row">
-          <a class="btn primary" id="joinBtn" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">Join Now</a>
+          <a class="btn primary" id="joinBtn" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">Join Now</a>
         </div>
       </div>
 
@@ -482,7 +481,7 @@
 
           <div class="join-box" style="min-width: 100%;">
             <div class="box-title">Join Now</div>
-            <div class="box-value" id="joinText">Registration Open</div>
+            <div class="box-value" id="joinText">Join Now</div>
           </div>
 
           <div class="card">
@@ -491,7 +490,7 @@
               <span class="live-dot"></span>
               <span class="live-label" id="liveCourseLabel">BASIC COURSE IS NOW LIVE !!</span>
             </div>
-            <ul class="level-list" id="liveDetailList"></ul>
+            <ul class="level-list" id="liveDetailList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
           </div>
         </div>
       </div>
@@ -504,20 +503,20 @@
         <p>Pick a level that matches the learner's starting point. The active live level is highlighted automatically.</p>
       </div>
       <div class="grid3">
-        <div class="card level-card" id="basicCard">
+        <div class="card level-card live" id="basicCard">
           <div class="level-head"><span>Basic</span></div>
-          <div id="basicLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
-          <ul class="level-list" id="basicList"></ul>
+          <div id="basicLiveRow" style="display: flex; margin-top: 10px; gap: 10px; align-items: center; flex-wrap: wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="basicList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
         </div>
         <div class="card level-card" id="intermediateCard">
           <div class="level-head"><span>Intermediate</span></div>
           <div id="intermediateLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">INTERMEDIATE COURSE IS NOW LIVE !!</span></div>
-          <ul class="level-list" id="intermediateList"></ul>
+          <ul class="level-list" id="intermediateList"><li>Layout planning</li><li>CSS styling basics</li><li>Flexbox and responsive design</li><li>Navigation bars and cards</li></ul>
         </div>
         <div class="card level-card" id="advanceCard">
           <div class="level-head"><span>Advance</span></div>
           <div id="advanceLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">ADVANCE COURSE IS NOW LIVE !!</span></div>
-          <ul class="level-list" id="advanceList"></ul>
+          <ul class="level-list" id="advanceList"><li>Interactive page design</li><li>Modern layout techniques</li><li>Form styling and validation</li><li>Project-based website building</li></ul>
         </div>
       </div>
     </section>
@@ -529,8 +528,8 @@
         <p>The layout keeps the original poster feel, with the details organized into easy-to-edit sections.</p>
       </div>
       <div class="grid2">
-        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"></ul></div>
-        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"><li>6 classes</li><li>3 classes per week</li><li>Monday, Wednesday and Thursday</li><li>Time: 5 p.m</li><li>E-certificate will be provided</li><li>Starting from: June 29, 2026</li></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age group: 10+</li><li>Laptop</li></ul></div>
       </div>
     </section>
 
@@ -542,8 +541,8 @@
       </div>
       <div class="grid3">
         <div class="card" style="text-align:center;"><div class="box-title">Contact number</div><a class="box-value contact-link" id="contactCardValue" href="tel:+923312497159">+92 331 2497159</a></div>
-        <div class="card" style="text-align:center;"><div class="box-title">Instagram & Email</div><div class="box-value" style="font-size:18px; line-height:1.5;" id="socialCardValue"><a class="contact-link" id="instagramCardLink" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">@codexlabs_genz</a><br/><a class="contact-link" id="emailCardLink" href="mailto:codexlabs.genz@gmail.com">codexlabs.genz@gmail.com</a></div></div>
-        <a class="card" id="googleCard" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noopener noreferrer" style="text-align:center;" onclick="return openExternal(this.href);"><div class="box-title">Link for registration</div><div class="box-value" id="googleCardValue">Open Link</div></a>
+        <div class="card" style="text-align:center;"><div class="box-title">Instagram &amp; Email</div><div class="box-value" style="font-size:18px; line-height:1.5;" id="socialCardValue"><a class="contact-link" id="instagramCardLink" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">@codexlabs_genz</a><br><a class="contact-link" id="emailCardLink" href="mailto:codexlabs.genz@gmail.com">codexlabs.genz@gmail.com</a></div></div>
+        <a class="card" id="googleCard" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" style="text-align:center;" onclick="return openExternal(this.href);"><div class="box-title">Link for registration</div><div class="box-value" id="googleCardValue">Register Now</div></a>
       </div>
     </section>
   </main>
@@ -551,10 +550,10 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-icons">
-        <a id="footerWhatsApp" class="footer-icon icon-wa" href="https://wa.me/923312497159" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.9a8.5 8.5 0 0 1-12.9 7.3L3 20l.9-4.2A8.5 8.5 0 1 1 20.5 11.9Z" stroke="#fff" stroke-width="1.8"/><path d="M9.2 7.9c.2-.5.4-.5.8-.5h.7c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.5 0 .8.4.8 1.4 1.9 2.3 2.5.3.2.6.2.8 0l.7-.5c.2-.2.6-.2.8-.1l2.1 1c.5.2.5.5.5.8 0 1.4-1.1 2.2-2.3 2.2-1.8 0-4.3-1.1-6.4-3.2-2.1-2.1-3.2-4.6-3.2-6.4 0-1.2.8-2.3 2.2-2.3Z" fill="#fff"/></svg></a>
-        <a id="footerInstagramIcon" class="footer-icon icon-ig" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/></svg></a>
-        <a id="footerEmailIcon" class="footer-icon" href="mailto:codexlabs.genz@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email" style="background: linear-gradient(135deg, #f7d7e2, #ffffff); color:#6d082f;"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6.8h14A1.8 1.8 0 0 1 20.8 8.6v6.8A1.8 1.8 0 0 1 19 17.2H5A1.8 1.8 0 0 1 3.2 15.4V8.6A1.8 1.8 0 0 1 5 6.8Z" stroke="currentColor" stroke-width="1.8"/><path d="m4.8 8.2 7.2 5.2 7.2-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a id="footerGoogleIcon" class="footer-icon icon-g" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noopener noreferrer" aria-label="Google Document"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.8h6.5L18 8.3V20H7z" stroke="#6d082f" stroke-width="1.8"/><path d="M13.5 3.8v4.5H18" stroke="#6d082f" stroke-width="1.8"/><path d="M9 12h6M9 15.2h6" stroke="#6d082f" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+        <a id="footerWhatsApp" class="footer-icon icon-wa" href="https://wa.me/923312497159" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.9a8.5 8.5 0 0 1-12.9 7.3L3 20l.9-4.2A8.5 8.5 0 1 1 20.5 11.9Z" stroke="#fff" stroke-width="1.8"></path><path d="M9.2 7.9c.2-.5.4-.5.8-.5h.7c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.5 0 .8.4.8 1.4 1.9 2.3 2.5.3.2.6.2.8 0l.7-.5c.2-.2.6-.2.8-.1l2.1 1c.5.2.5.5.5.8 0 1.4-1.1 2.2-2.3 2.2-1.8 0-4.3-1.1-6.4-3.2-2.1-2.1-3.2-4.6-3.2-6.4 0-1.2.8-2.3 2.2-2.3Z" fill="#fff"></path></svg></a>
+        <a id="footerInstagramIcon" class="footer-icon icon-ig" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="#fff"></circle></svg></a>
+        <a id="footerEmailIcon" class="footer-icon" href="mailto:codexlabs.genz@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email" style="background: linear-gradient(135deg, #f7d7e2, #ffffff); color:#6d082f;"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6.8h14A1.8 1.8 0 0 1 20.8 8.6v6.8A1.8 1.8 0 0 1 19 17.2H5A1.8 1.8 0 0 1 3.2 15.4V8.6A1.8 1.8 0 0 1 5 6.8Z" stroke="currentColor" stroke-width="1.8"></path><path d="m4.8 8.2 7.2 5.2 7.2-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        <a id="footerGoogleIcon" class="footer-icon icon-g" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" aria-label="Google Document"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.8h6.5L18 8.3V20H7z" stroke="#6d082f" stroke-width="1.8"></path><path d="M13.5 3.8v4.5H18" stroke="#6d082f" stroke-width="1.8"></path><path d="M9 12h6M9 15.2h6" stroke="#6d082f" stroke-width="1.8" stroke-linecap="round"></path></svg></a>
       </div>
       <div class="footer-copy">© 2026 Web Development. All rights reserved.</div>
     </div>
@@ -564,50 +563,95 @@
     <div class="admin-panel">
       <div class="admin-top">
         <div><div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:28px">Admin Panel</div><div class="small">Edit the course details, levels, live course, and contact info.</div></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn primary" onclick="saveAdmin()">Save Changes</button><span id="saveMsgInline" class="save-inline"></span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn secondary" type="button" onclick="connectSourceFile()">Connect Source File</button><button class="btn primary" type="button" onclick="saveAdmin()">Save Changes to Source</button><span id="saveMsgInline" class="save-inline"></span></div>
       </div>
 
-      <div id="loginBox" class="card" style="max-width:420px;margin:0 auto 16px;background:#fff;color:#261016;">
+      <div id="loginBox" class="card hidden" style="max-width:420px;margin:0 auto 16px;background:#fff;color:#261016;">
         <div style="font-weight:900;font-size:20px;margin-bottom:10px">Admin Login</div>
         <form id="loginForm">
-          <div class="field"><label style="color:#261016;">Password</label><input id="adminPass" type="password" placeholder="Enter password" autocomplete="current-password" /></div>
+          <div class="field"><label style="color:#261016;">Password</label><input id="adminPass" type="password" placeholder="Enter password" autocomplete="current-password"></div>
           <div class="admin-actions"><button class="btn primary" type="submit">Login</button></div>
         </form>
         <div class="small" style="margin-top:8px;color:#5d636a;">A fresh login is required every time the panel opens.</div>
         <div id="loginMsg" class="notice" style="color:#15915d;"></div>
       </div>
 
-      <div id="editorBox" class="hidden">
+      <div id="editorBox" class="">
         <div class="admin-grid">
-          <div class="field"><label>Academy Name</label><input id="brand" /></div>
-          <div class="field"><label>Sub Heading</label><input id="subHeading" /></div>
-          <div class="field"><label>Course Fee</label><input id="fee" /></div>
-          <div class="field"><label>Contact Number</label><input id="contactNo" /></div>
-          <div class="field"><label>Join Now Text</label><input id="joinTextInput" /></div>
-          <div class="field"><label>Join Link</label><input id="joinLink" /></div>
-          <div class="field"><label>Google Document Link</label><input id="googleFormLink" /></div>
-          <div class="field"><label>Instagram Link</label><input id="instagramLink" /></div>
-          <div class="field"><label>Email Handle</label><input id="emailHandle" placeholder="codexlabs.genz@gmail.com" /></div>
+          <div class="field"><label>Academy Name</label><input id="brand"></div>
+          <div class="field"><label>Sub Heading</label><input id="subHeading"></div>
+          <div class="field"><label>Course Fee</label><input id="fee"></div>
+          <div class="field"><label>Contact Number</label><input id="contactNo"></div>
+          <div class="field"><label>Join Now Text</label><input id="joinTextInput"></div>
+          <div class="field"><label>Join Link</label><input id="joinLink"></div>
+          <div class="field"><label>Google Document Link</label><input id="googleFormLink"></div>
+          <div class="field"><label>Instagram Link</label><input id="instagramLink"></div>
+          <div class="field"><label>Email Handle</label><input id="emailHandle" placeholder="codexlabs.genz@gmail.com"></div>
           <div class="field"><label>Live Course</label><select id="liveCourse"><option value="Basic">Basic</option><option value="Intermediate">Intermediate</option><option value="Advance">Advance</option></select></div>
         </div>
 
         <div class="admin-grid-3">
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Basic</div><button class="btn secondary" type="button" onclick="addLevelItem('basic')">Add item</button></div><div id="basicEditor" style="margin-top:10px"></div></div>
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Intermediate</div><button class="btn secondary" type="button" onclick="addLevelItem('intermediate')">Add item</button></div><div id="intermediateEditor" style="margin-top:10px"></div></div>
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Advance</div><button class="btn secondary" type="button" onclick="addLevelItem('advance')">Add item</button></div><div id="advanceEditor" style="margin-top:10px"></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Basic</div><button class="btn secondary" type="button" onclick="addLevelItem('basic')">Add item</button></div><div id="basicEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="What websites are and how they work" oninput="updateItem('basic', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Introduction to web development" oninput="updateItem('basic', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="How to create a web page" oninput="updateItem('basic', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="HTML basics (headings, paragraphs, images, links, lists)" oninput="updateItem('basic', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Creating simple web pages" oninput="updateItem('basic', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Forms and buttons" oninput="updateItem('basic', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 5)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Website structure and layouts" oninput="updateItem('basic', 6, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 6)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Intermediate</div><button class="btn secondary" type="button" onclick="addLevelItem('intermediate')">Add item</button></div><div id="intermediateEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Layout planning" oninput="updateItem('intermediate', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="CSS styling basics" oninput="updateItem('intermediate', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Flexbox and responsive design" oninput="updateItem('intermediate', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Navigation bars and cards" oninput="updateItem('intermediate', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 3)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Advance</div><button class="btn secondary" type="button" onclick="addLevelItem('advance')">Add item</button></div><div id="advanceEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Interactive page design" oninput="updateItem('advance', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Modern layout techniques" oninput="updateItem('advance', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Form styling and validation" oninput="updateItem('advance', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Project-based website building" oninput="updateItem('advance', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 3)">Delete</button></div></div></div></div>
         </div>
 
         <div class="admin-grid" style="margin-top:14px;">
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"></div></div>
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="6 classes" oninput="updateItem('info', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="3 classes per week" oninput="updateItem('info', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Monday, Wednesday and Thursday" oninput="updateItem('info', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Time: 5 p.m" oninput="updateItem('info', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="E-certificate will be provided" oninput="updateItem('info', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Starting from: June 29, 2026" oninput="updateItem('info', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 5)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Age group: 10+" oninput="updateItem('requirements', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Laptop" oninput="updateItem('requirements', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 1)">Delete</button></div></div></div></div>
         </div>
       </div>
     </div>
   </div>
 
+  <script id="course-data" type="application/json">{
+  "brand": "Codex Labs",
+  "subHeading": "Gen Z Programming Labs",
+  "fee": "Rs. 500",
+  "contactNo": "+92 331 2497159",
+  "joinText": "Join Now",
+  "joinLink": "https://forms.gle/uPd1nqqh4qkrQKP69",
+  "googleFormLink": "https://forms.gle/uPd1nqqh4qkrQKP69",
+  "instagramLink": "https://instagram.com/codexlabs_genz",
+  "emailHandle": "codexlabs.genz@gmail.com",
+  "liveCourse": "Basic",
+  "basic": [
+    "What websites are and how they work",
+    "Introduction to web development",
+    "How to create a web page",
+    "HTML basics (headings, paragraphs, images, links, lists)",
+    "Creating simple web pages",
+    "Forms and buttons",
+    "Website structure and layouts"
+  ],
+  "intermediate": [
+    "Layout planning",
+    "CSS styling basics",
+    "Flexbox and responsive design",
+    "Navigation bars and cards"
+  ],
+  "advance": [
+    "Interactive page design",
+    "Modern layout techniques",
+    "Form styling and validation",
+    "Project-based website building"
+  ],
+  "info": [
+    "6 classes",
+    "3 classes per week",
+    "Monday, Wednesday and Thursday",
+    "Time: 5 p.m",
+    "E-certificate will be provided",
+    "Starting from: June 29, 2026"
+  ],
+  "requirements": [
+    "Age group: 10+",
+    "Laptop"
+  ]
+}</script>
   <script>
-    const STORAGE_KEY = 'codex_labs_course_v4';
     const PASS_HASH = '816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7';
+    const DATA_SCRIPT_ID = 'course-data';
 
     const defaultData = {
       brand: 'Codex Labs',
@@ -629,14 +673,96 @@
 
     let data = loadData();
     let loggedIn = false;
+    let sourceFileHandle = null;
     const adminOverlay = document.getElementById('adminOverlay');
     const loginBox = document.getElementById('loginBox');
     const editorBox = document.getElementById('editorBox');
     const mobileMenu = document.getElementById('mobileMenu');
     const adminPass = document.getElementById('adminPass');
 
-    function loadData(){ try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? { ...defaultData, ...JSON.parse(raw) } : structuredClone(defaultData); } catch { return structuredClone(defaultData); } }
-    function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    function loadData(){
+      try {
+        const raw = document.getElementById(DATA_SCRIPT_ID)?.textContent?.trim();
+        return raw ? { ...defaultData, ...JSON.parse(raw) } : structuredClone(defaultData);
+      } catch {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function setSourceDataScript(){
+      const script = document.getElementById(DATA_SCRIPT_ID);
+      if (!script) return;
+      script.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function connectSourceFile(){
+      try {
+        if (!('showOpenFilePicker' in window)) {
+          document.getElementById('saveMsgInline').textContent = 'File picker not supported here';
+          return;
+        }
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
+        });
+        sourceFileHandle = handle;
+        if (sourceFileHandle?.requestPermission) {
+          await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+        }
+        document.getElementById('saveMsgInline').textContent = 'source connected';
+        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
+      } catch (err) {
+        document.getElementById('saveMsgInline').textContent = 'Connection cancelled';
+        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
+      }
+    }
+
+    function buildUpdatedHtml(){
+      setSourceDataScript();
+      const overlay = document.getElementById('adminOverlay');
+      const mobile = document.getElementById('mobileMenu');
+      const overlayWasOpen = overlay?.classList.contains('open');
+      const overlayAria = overlay?.getAttribute('aria-hidden');
+      const mobileWasOpen = mobile?.classList.contains('open');
+
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+      if (mobile) mobile.classList.remove('open');
+
+      const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+      if (overlayWasOpen && overlay) {
+        overlay.classList.add('open');
+        if (overlayAria !== null) overlay.setAttribute('aria-hidden', overlayAria);
+      }
+      if (mobileWasOpen && mobile) mobile.classList.add('open');
+
+      return html;
+    }
+
+    async function downloadUpdatedHtml(html){
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index-updated.html';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    async function writeHtmlToFile(html){
+      if (!sourceFileHandle) return false;
+      if (sourceFileHandle.requestPermission) {
+        const perm = await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+        if (perm !== 'granted') return false;
+      }
+      const writable = await sourceFileHandle.createWritable();
+      await writable.write(html);
+      await writable.close();
+      return true;
+    }
     function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
     function goTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); mobileMenu.classList.remove('open'); }
     function levelDisplayName(key){ return key === 'Basic' ? 'Basic' : key === 'Intermediate' ? 'Intermediate' : 'Advance'; }
@@ -772,7 +898,51 @@
     function deleteItem(section, index){ data[section].splice(index, 1); renderAdmin(); renderMain(); }
     function addLevelItem(section){ const defaults = { basic:'New basic point', intermediate:'New intermediate point', advance:'New advance point', info:'New information', requirements:'New requirement' }; data[section].push(defaults[section]); renderAdmin(); renderMain(); }
 
-    function saveAdmin(){ if (!loggedIn) return; data.brand = document.getElementById('brand').value.trim() || data.brand; data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading; data.fee = document.getElementById('fee').value.trim() || data.fee; data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo; data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText; data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink; data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink; data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink; data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle; data.liveCourse = document.getElementById('liveCourse').value; if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7'; saveData(); renderMain(); renderAdmin(); const msg = document.getElementById('saveMsgInline'); msg.textContent = 'saved'; setTimeout(() => { msg.textContent = ''; }, 1600); }
+    async function saveAdmin(){
+      if (!loggedIn) return;
+      data.brand = document.getElementById('brand').value.trim() || data.brand;
+      data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading;
+      data.fee = document.getElementById('fee').value.trim() || data.fee;
+      data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo;
+      data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText;
+      data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink;
+      data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink;
+      data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink;
+      data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle;
+      data.liveCourse = document.getElementById('liveCourse').value;
+      if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+      renderMain();
+      renderAdmin();
+
+      const msg = document.getElementById('saveMsgInline');
+      const html = buildUpdatedHtml();
+
+      try {
+        let saved = await writeHtmlToFile(html);
+        if (!saved) {
+          if ('showSaveFilePicker' in window) {
+            const handle = await window.showSaveFilePicker({
+              suggestedName: 'index.html',
+              types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
+            });
+            sourceFileHandle = handle;
+            if (sourceFileHandle?.requestPermission) {
+              await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+            }
+            await writeHtmlToFile(html);
+            saved = true;
+          } else {
+            await downloadUpdatedHtml(html);
+            saved = true;
+          }
+        }
+        msg.textContent = saved ? 'saved to source' : 'saved';
+      } catch (err) {
+        await downloadUpdatedHtml(html);
+        msg.textContent = 'downloaded copy';
+      }
+      setTimeout(() => { msg.textContent = ''; }, 1600);
+    }
 
     document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.toggle('open'));
     document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
@@ -794,5 +964,5 @@
 
     renderMain();
   </script>
-</body>
-</html>
+
+</body></html>
