@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web Development Online Course</title>
+  <title>Codex Labs — Web Development Online Course</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap');
 
@@ -11,16 +11,13 @@
       --bg: #6d082f;
       --bg2: #5a0626;
       --panel: rgba(255,255,255,.08);
-      --panel-strong: rgba(255,255,255,.13);
       --border: rgba(255,255,255,.16);
       --text: #fff8f8;
       --muted: rgba(255,248,248,.78);
-      --accent: #f7f7f7;
       --graybox: #5d636a;
       --shadow: 0 20px 50px rgba(0,0,0,.28);
       --radius: 28px;
-      --red: #cd1f1f;
-      --blue: #173ca8;
+      --red: #ff2b2b;
     }
 
     * { box-sizing: border-box; }
@@ -72,7 +69,9 @@
       font-family: 'Luckiest Guy', cursive;
       font-size: 24px;
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
+    .brand-mark img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .brand h1 {
       margin: 0;
       font-size: 14px;
@@ -223,22 +222,11 @@
       background: rgba(205,31,31,.28);
     }
 
-    .stack {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: 18px;
-    }
-    .fee-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+    .stack { position: relative; z-index: 1; display: grid; gap: 18px; }
+    .fee-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
     .fee-box,
-    .contact-box,
-    .join-box {
+    .join-box,
+    .live-box {
       position: relative;
       background: var(--graybox);
       color: white;
@@ -250,8 +238,8 @@
       text-align: center;
     }
     .fee-box::before,
-    .contact-box::before,
-    .join-box::before {
+    .join-box::before,
+    .live-box::before {
       content: "";
       position: absolute;
       inset: 10px;
@@ -266,12 +254,8 @@
       font-family: 'Bebas Neue', sans-serif;
       letter-spacing: .04em;
     }
-    .box-value {
-      margin-top: 6px;
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
+    .box-value { margin-top: 6px; font-size: 28px; font-weight: 800; line-height: 1.1; }
+    .live-info { margin-top: 10px; color: #fff; font-size: 15px; font-weight: 700; }
 
     .section { padding: 28px 0; }
     .section-head { margin-bottom: 18px; }
@@ -288,17 +272,8 @@
       font-size: 12px;
       color: #ffe8ef;
     }
-    .section-head h3 {
-      margin: 14px 0 0;
-      font-size: clamp(30px, 4vw, 54px);
-      line-height: 1.02;
-    }
-    .section-head p {
-      margin: 10px 0 0;
-      max-width: 760px;
-      color: var(--muted);
-      line-height: 1.8;
-    }
+    .section-head h3 { margin: 14px 0 0; font-size: clamp(30px, 4vw, 54px); line-height: 1.02; }
+    .section-head p { margin: 10px 0 0; max-width: 760px; color: var(--muted); line-height: 1.8; }
 
     .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -309,30 +284,29 @@
       box-shadow: var(--shadow);
       padding: 22px;
     }
-
-    .list {
-      margin: 14px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .list li {
+    .level-card.live { outline: 2px solid rgba(255,43,43,.7); box-shadow: 0 0 0 1px rgba(255,43,43,.2), var(--shadow); }
+    .level-head {
       display: flex;
+      align-items: center;
       gap: 10px;
-      align-items: flex-start;
-      margin: 12px 0;
-      color: rgba(255,255,255,.93);
-      line-height: 1.5;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
     }
-    .list li::before {
-      content: "•";
-      color: #fff;
-      font-size: 20px;
-      line-height: 1;
+    .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); animation: blink 1s infinite; box-shadow: 0 0 0 0 rgba(255,43,43,.8); }
+    @keyframes blink {
+      0%,100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255,43,43,.8); }
+      50% { opacity: .35; transform: scale(.86); box-shadow: 0 0 0 12px rgba(255,43,43,0); }
     }
+    .live-label { color: #ff8e8e; font-size: 12px; letter-spacing: .18em; }
+    .level-list { margin: 14px 0 0; padding: 0; list-style: none; }
+    .level-list li { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; color: rgba(255,255,255,.93); line-height: 1.5; }
+    .level-list li::before { content: "•"; color: #fff; font-size: 20px; line-height: 1; }
 
-    .bullet-box {
-      width: 14px; height: 14px; border-radius: 50%; background: white; flex: 0 0 auto; margin-top: 8px;
-    }
+    .list { margin: 14px 0 0; padding: 0; list-style: none; }
+    .list li { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; color: rgba(255,255,255,.93); line-height: 1.5; }
+    .list li::before { content: "•"; color: #fff; font-size: 20px; line-height: 1; }
 
     .footer {
       width: 100%;
@@ -350,10 +324,7 @@
       text-align: center;
     }
     .footer-icons { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-    .footer-icon {
-      width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center;
-      border: 1px solid rgba(255,255,255,.14);
-    }
+    .footer-icon { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.14); }
     .footer-icon svg { width: 17px; height: 17px; }
     .icon-wa { background: #25d366; }
     .icon-ig { background: linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
@@ -395,15 +366,7 @@
     .admin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .admin-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
     .field label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 800; }
-    .field input,.field textarea,.field select {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 18px;
-      border: 1px solid #ab8390;
-      background: #fff;
-      color: #261016;
-      outline: none;
-    }
+    .field input,.field textarea,.field select { width: 100%; padding: 13px 14px; border-radius: 18px; border: 1px solid #ab8390; background: #fff; color: #261016; outline: none; }
     .field select option { background: white; color: #261016; }
     .field textarea { min-height: 86px; resize: vertical; }
     .small { font-size: 12px; color: var(--muted); }
@@ -411,51 +374,12 @@
     .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
     .notice { color: #9ef1c4; font-weight: 700; }
 
-    .admin-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      justify-content: space-between;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-    }
-    .item-text {
-      flex: 1;
-      min-width: 0;
-      border: 1px solid #c5a0ab;
-      background: #fff;
-      color: #251018;
-      border-radius: 14px;
-      padding: 12px 14px;
-      outline: none;
-    }
-    .dots-btn,
-    .delete-btn {
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 900;
-      color: white;
-      padding: 8px 10px;
-      background: rgba(255,255,255,.1);
-    }
+    .admin-item { display: flex; align-items: center; gap: 10px; justify-content: space-between; padding: 10px; margin-bottom: 10px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+    .item-text { flex: 1; min-width: 0; border: 1px solid #c5a0ab; background: #fff; color: #251018; border-radius: 14px; padding: 12px 14px; outline: none; }
+    .dots-btn,.delete-btn { border: none; border-radius: 12px; cursor: pointer; font-weight: 900; color: white; padding: 8px 10px; background: rgba(255,255,255,.1); }
     .delete-btn { background: rgba(255, 76, 76, .2); display: none; }
     .delete-btn.show { display: inline-flex; }
     .group-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
-
-    .live-dot {
-      width: 10px; height: 10px; border-radius: 50%; background: #ff2b2b; display:inline-block;
-      box-shadow: 0 0 0 0 rgba(255,43,43,.75); animation: blink 1s infinite;
-    }
-    @keyframes blink {
-      0%,100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255,43,43,.8); }
-      50% { opacity: .35; transform: scale(.86); box-shadow: 0 0 0 12px rgba(255,43,43,0); }
-    }
-    .live-label { margin-left: 8px; font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: #ff8686; }
-
     .save-inline { min-width: 56px; color: #9ef1c4; font-weight: 800; }
 
     @media (max-width: 920px) {
@@ -475,25 +399,23 @@
     <div class="wrap">
       <div class="nav-inner">
         <div class="brand" id="brandTrigger" title="Double click to open admin">
-          <div class="brand-mark">W</div>
+          <div class="brand-mark"><img src="logo.png" alt="Codex Labs logo" onerror="this.remove(); this.parentElement.textContent='C'" /></div>
           <div>
-            <h1 id="brandName">WEB DEVELOPMENT</h1>
-            <p id="brandSub">Online course</p>
+            <h1 id="brandName">Codex Labs</h1>
+            <p id="brandSub">gen z programing labs</p>
           </div>
         </div>
-
         <nav class="nav-links">
           <button type="button" data-target="home">Home</button>
-          <button type="button" data-target="levels">Level</button>
+          <button type="button" data-target="levels">Levels</button>
           <button type="button" data-target="info">Info</button>
           <button type="button" data-target="contact">Contact</button>
         </nav>
-
         <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span></button>
       </div>
       <div class="mobile-menu" id="mobileMenu">
         <button type="button" data-target="home">Home</button>
-        <button type="button" data-target="levels">Level</button>
+        <button type="button" data-target="levels">Levels</button>
         <button type="button" data-target="info">Info</button>
         <button type="button" data-target="contact">Contact</button>
       </div>
@@ -503,21 +425,16 @@
   <main class="wrap" id="home">
     <section class="hero hero-grid">
       <div>
-        <h2 class="big-title" id="heroTitle">WEB DEVELOPMENT</h2>
-        <div class="sub-title" id="heroSubtitle">Online course</div>
-        <p class="hero-copy" id="heroCopy">
-          Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.
-        </p>
-
+        <h2 class="big-title" id="heroTitle">Codex Labs</h2>
+        <div class="sub-title" id="heroSubtitle">gen z programing labs</div>
+        <p class="hero-copy" id="heroCopy">Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.</p>
         <div class="chips">
           <span class="chip">Beginner friendly</span>
           <span class="chip">3 classes per week</span>
           <span class="chip">E-certificate</span>
         </div>
-
         <div class="btn-row">
-          <a class="btn primary" id="joinBtn" href="#contact">Join Now</a>
-          <button class="btn secondary" id="adminOpenBtn">Admin Panel</button>
+          <a class="btn primary" id="joinBtn" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noreferrer">Join Now</a>
         </div>
       </div>
 
@@ -528,9 +445,10 @@
               <div class="box-title">Course Fees</div>
               <div class="box-value" id="feeValue">Rs. 500</div>
             </div>
-            <div class="contact-box">
-              <div class="box-title">Contact no.</div>
-              <div class="box-value" id="contactValue">+92 331 2497159</div>
+            <div class="live-box">
+              <div class="box-title">Live course</div>
+              <div class="box-value" id="liveBubbleTitle">Basic</div>
+              <div class="live-info" id="liveBubbleInfo">Basic course is now live !!</div>
             </div>
           </div>
 
@@ -539,12 +457,39 @@
             <div class="box-value" id="joinText">Registration Open</div>
           </div>
 
-          <div class="card" id="levels">
-            <div class="section-head" style="margin-bottom: 0;">
-              <div class="eyebrow">Beginner level</div>
+          <div class="card">
+            <div style="font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#ffe8ef;font-size:12px">Live course details</div>
+            <div style="margin-top:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span class="live-dot"></span>
+              <span class="live-label" id="liveCourseLabel">BASIC COURSE IS NOW LIVE !!</span>
             </div>
-            <ul class="list" id="beginnerList"></ul>
+            <ul class="level-list" id="liveDetailList"></ul>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="levels">
+      <div class="section-head">
+        <div class="eyebrow">Learning paths</div>
+        <h3>Foundation, Growth, and Mastery</h3>
+        <p>Pick a level that matches the learner's starting point. The active live level is highlighted automatically.</p>
+      </div>
+      <div class="grid3">
+        <div class="card level-card" id="basicCard">
+          <div class="level-head"><span>Basic</span></div>
+          <div id="basicLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="basicList"></ul>
+        </div>
+        <div class="card level-card" id="intermediateCard">
+          <div class="level-head"><span>Intermediate</span></div>
+          <div id="intermediateLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">INTERMEDIATE COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="intermediateList"></ul>
+        </div>
+        <div class="card level-card" id="advanceCard">
+          <div class="level-head"><span>Advance</span></div>
+          <div id="advanceLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">ADVANCE COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="advanceList"></ul>
         </div>
       </div>
     </section>
@@ -556,36 +501,21 @@
         <p>The layout keeps the original poster feel, with the details organized into easy-to-edit sections.</p>
       </div>
       <div class="grid2">
-        <div class="card">
-          <div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div>
-          <ul class="list" id="infoList"></ul>
-        </div>
-        <div class="card">
-          <div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div>
-          <ul class="list" id="requirementsList"></ul>
-        </div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"></ul></div>
       </div>
     </section>
 
     <section class="section" id="contact">
       <div class="section-head">
-        <div class="eyebrow">Contact</div>
+        <div class="eyebrow">Contact and Register</div>
         <h3>Connect and register</h3>
-        <p>Use the contact buttons below or open the registration form directly.</p>
+        <p>Use the contact bubbles below or open the registration form directly.</p>
       </div>
       <div class="grid3">
-        <a class="card" id="feeCard" href="#" target="_blank" rel="noreferrer" style="text-align:center;">
-          <div class="box-title">Course Fees</div>
-          <div class="box-value" id="feeCardValue">Rs. 500</div>
-        </a>
-        <a class="card" id="contactCard" href="#" target="_blank" rel="noreferrer" style="text-align:center;">
-          <div class="box-title">Contact no.</div>
-          <div class="box-value" id="contactCardValue">+92 331 2497159</div>
-        </a>
-        <a class="card" id="joinCard" href="#" target="_blank" rel="noreferrer" style="text-align:center;">
-          <div class="box-title">Join Now</div>
-          <div class="box-value" id="joinCardValue">Register</div>
-        </a>
+        <div class="card" style="text-align:center;"><div class="box-title">Contact number</div><div class="box-value" id="contactCardValue">+92 331 2497159</div></div>
+        <div class="card" style="text-align:center;"><div class="box-title">Instagram & Email</div><div class="box-value" style="font-size:18px; line-height:1.5;" id="socialCardValue">@g_genius_official<br/>codexlabs.genz</div></div>
+        <a class="card" id="googleCard" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noreferrer" style="text-align:center;"><div class="box-title">Link for registration</div><div class="box-value" id="googleCardValue">Open Link</div></a>
       </div>
     </section>
   </main>
@@ -593,44 +523,26 @@
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-icons">
-        <a class="footer-icon icon-wa" href="https://wa.me/923312497159" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.9a8.5 8.5 0 0 1-12.9 7.3L3 20l.9-4.2A8.5 8.5 0 1 1 20.5 11.9Z" stroke="#fff" stroke-width="1.8"/><path d="M9.2 7.9c.2-.5.4-.5.8-.5h.7c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.5 0 .8.4.8 1.4 1.9 2.3 2.5.3.2.6.2.8 0l.7-.5c.2-.2.6-.2.8-.1l2.1 1c.5.2.5.5.5.8 0 1.4-1.1 2.2-2.3 2.2-1.8 0-4.3-1.1-6.4-3.2-2.1-2.1-3.2-4.6-3.2-6.4 0-1.2.8-2.3 2.2-2.3Z" fill="#fff"/></svg>
-        </a>
-        <a class="footer-icon icon-ig" href="https://instagram.com/g_genius_official" target="_blank" rel="noreferrer" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/></svg>
-        </a>
-        <a class="footer-icon icon-g" href="#contact" aria-label="Website">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h16M4 12h16M4 16.5h16" stroke="#6d082f" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </a>
+        <a class="footer-icon icon-wa" href="https://wa.me/923312497159" target="_blank" rel="noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.9a8.5 8.5 0 0 1-12.9 7.3L3 20l.9-4.2A8.5 8.5 0 1 1 20.5 11.9Z" stroke="#fff" stroke-width="1.8"/><path d="M9.2 7.9c.2-.5.4-.5.8-.5h.7c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.5 0 .8.4.8 1.4 1.9 2.3 2.5.3.2.6.2.8 0l.7-.5c.2-.2.6-.2.8-.1l2.1 1c.5.2.5.5.5.8 0 1.4-1.1 2.2-2.3 2.2-1.8 0-4.3-1.1-6.4-3.2-2.1-2.1-3.2-4.6-3.2-6.4 0-1.2.8-2.3 2.2-2.3Z" fill="#fff"/></svg></a>
+        <a class="footer-icon icon-ig" href="https://instagram.com/g_genius_official" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff"/></svg></a>
+        <a class="footer-icon icon-g" href="https://forms.gle/eQ8Kf9whCsTspmCA7" target="_blank" rel="noreferrer" aria-label="Google Document"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.8h6.5L18 8.3V20H7z" stroke="#6d082f" stroke-width="1.8"/><path d="M13.5 3.8v4.5H18" stroke="#6d082f" stroke-width="1.8"/><path d="M9 12h6M9 15.2h6" stroke="#6d082f" stroke-width="1.8" stroke-linecap="round"/></svg></a>
       </div>
-      <div class="footer-copy">© 2026 G_Genius. All rights reserved.</div>
+      <div class="footer-copy">© 2026 Web Development. All rights reserved.</div>
     </div>
   </footer>
 
   <div class="admin-overlay" id="adminOverlay" aria-hidden="true">
     <div class="admin-panel">
       <div class="admin-top">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:28px">Admin Panel</div>
-          <div class="small">Edit the course details, sections, and contact info.</div>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-          <button class="btn secondary" onclick="closeAdmin()">Close</button>
-          <button class="btn primary" onclick="saveAdmin()">Save Changes</button>
-          <span id="saveMsgInline" class="save-inline"></span>
-        </div>
+        <div><div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:28px">Admin Panel</div><div class="small">Edit the course details, levels, live course, and contact info.</div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn primary" onclick="saveAdmin()">Save Changes</button><span id="saveMsgInline" class="save-inline"></span></div>
       </div>
 
       <div id="loginBox" class="card" style="max-width:420px;margin:0 auto 16px;background:#fff;color:#261016;">
         <div style="font-weight:900;font-size:20px;margin-bottom:10px">Admin Login</div>
         <form id="loginForm">
-          <div class="field">
-            <label style="color:#261016;">Password</label>
-            <input id="adminPass" type="password" placeholder="Enter password" autocomplete="current-password" />
-          </div>
-          <div class="admin-actions">
-            <button class="btn primary" type="submit">Login</button>
-          </div>
+          <div class="field"><label style="color:#261016;">Password</label><input id="adminPass" type="password" placeholder="Enter password" autocomplete="current-password" /></div>
+          <div class="admin-actions"><button class="btn primary" type="submit">Login</button></div>
         </form>
         <div class="small" style="margin-top:8px;color:#5d636a;">A fresh login is required every time the panel opens.</div>
         <div id="loginMsg" class="notice" style="color:#15915d;"></div>
@@ -638,194 +550,110 @@
 
       <div id="editorBox" class="hidden">
         <div class="admin-grid">
-          <div class="field"><label>Course Heading</label><input id="brand" /></div>
+          <div class="field"><label>Academy Name</label><input id="brand" /></div>
           <div class="field"><label>Sub Heading</label><input id="subHeading" /></div>
           <div class="field"><label>Course Fee</label><input id="fee" /></div>
           <div class="field"><label>Contact Number</label><input id="contactNo" /></div>
           <div class="field"><label>Join Now Text</label><input id="joinTextInput" /></div>
           <div class="field"><label>Join Link</label><input id="joinLink" /></div>
-          <div class="field"><label>WhatsApp Link</label><input id="waLink" /></div>
-          <div class="field"><label>Instagram Link</label><input id="igLink" /></div>
+          <div class="field"><label>Google Document Link</label><input id="googleFormLink" /></div>
+          <div class="field"><label>Instagram Link</label><input id="instagramLink" /></div>
+          <div class="field"><label>Email Handle</label><input id="emailHandle" placeholder="codexlabs.genz" /></div>
+          <div class="field"><label>Live Course</label><select id="liveCourse"><option value="Basic">Basic</option><option value="Intermediate">Intermediate</option><option value="Advance">Advance</option></select></div>
         </div>
 
         <div class="admin-grid-3">
-          <div class="card">
-            <div class="group-head"><div style="font-weight:900;">Beginner level</div><button class="btn secondary" type="button" onclick="addLevelItem('beginner')">Add item</button></div>
-            <div id="beginnerEditor" style="margin-top:10px"></div>
-          </div>
-          <div class="card">
-            <div class="group-head"><div style="font-weight:900;">More information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div>
-            <div id="infoEditor" style="margin-top:10px"></div>
-          </div>
-          <div class="card">
-            <div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div>
-            <div id="requirementsEditor" style="margin-top:10px"></div>
-          </div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Basic</div><button class="btn secondary" type="button" onclick="addLevelItem('basic')">Add item</button></div><div id="basicEditor" style="margin-top:10px"></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Intermediate</div><button class="btn secondary" type="button" onclick="addLevelItem('intermediate')">Add item</button></div><div id="intermediateEditor" style="margin-top:10px"></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Advance</div><button class="btn secondary" type="button" onclick="addLevelItem('advance')">Add item</button></div><div id="advanceEditor" style="margin-top:10px"></div></div>
+        </div>
+
+        <div class="admin-grid" style="margin-top:14px;">
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"></div></div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const STORAGE_KEY = 'ggenius_webdev_course_v1';
+    const STORAGE_KEY = 'codex_labs_course_v4';
     const PASS_HASH = '816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7';
 
     const defaultData = {
-      brand: 'WEB DEVELOPMENT',
-      subHeading: 'Online course',
+      brand: 'Codex Labs',
+      subHeading: 'gen z programing labs',
       fee: 'Rs. 500',
       contactNo: '+92 331 2497159',
       joinText: 'Join Now',
-      joinLink: '#contact',
-      waLink: 'https://wa.me/923312497159',
-      igLink: 'https://instagram.com/g_genius_official',
-      beginner: [
-        'What websites are and how they work',
-        'Introduction to web development',
-        'How to create a web page',
-        'HTML basics (headings, paragraphs, images, links, lists)',
-        'Creating simple web pages',
-        'Forms and buttons',
-        'Website structure and layouts'
-      ],
-      info: [
-        '6 classes',
-        '3 classes per week',
-        'Monday, Wednesday and Thursday',
-        'Time: 5 p.m',
-        'E-certificate will be provided',
-        'Starting from: June 29, 2026'
-      ],
-      requirements: [
-        'Age group: 10+',
-        'Laptop'
-      ]
+      joinLink: 'https://forms.gle/eQ8Kf9whCsTspmCA7',
+      googleFormLink: 'https://forms.gle/eQ8Kf9whCsTspmCA7',
+      instagramLink: 'https://instagram.com/g_genius_official',
+      emailHandle: 'codexlabs.genz',
+      liveCourse: 'Basic',
+      basic: ['What websites are and how they work','Introduction to web development','How to create a web page','HTML basics (headings, paragraphs, images, links, lists)','Creating simple web pages','Forms and buttons','Website structure and layouts'],
+      intermediate: ['Layout planning','CSS styling basics','Flexbox and responsive design','Navigation bars and cards'],
+      advance: ['Interactive page design','Modern layout techniques','Form styling and validation','Project-based website building'],
+      info: ['6 classes','3 classes per week','Monday, Wednesday and Thursday','Time: 5 p.m','E-certificate will be provided','Starting from: June 29, 2026'],
+      requirements: ['Age group: 10+','Laptop']
     };
 
     let data = loadData();
     let loggedIn = false;
-    let menuOpen = false;
-
     const adminOverlay = document.getElementById('adminOverlay');
     const loginBox = document.getElementById('loginBox');
     const editorBox = document.getElementById('editorBox');
     const mobileMenu = document.getElementById('mobileMenu');
     const adminPass = document.getElementById('adminPass');
 
-    function loadData() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? { ...defaultData, ...JSON.parse(raw) } : structuredClone(defaultData);
-      } catch {
-        return structuredClone(defaultData);
-      }
-    }
+    function loadData(){ try { const raw = localStorage.getItem(STORAGE_KEY); return raw ? { ...defaultData, ...JSON.parse(raw) } : structuredClone(defaultData); } catch { return structuredClone(defaultData); } }
+    function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+    function goTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); mobileMenu.classList.remove('open'); }
+    function levelDisplayName(key){ return key === 'Basic' ? 'Basic' : key === 'Intermediate' ? 'Intermediate' : 'Advance'; }
 
-    function saveData() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
+    function openAdmin(){ loggedIn=false; adminPass.value=''; document.getElementById('loginMsg').textContent=''; document.getElementById('saveMsgInline').textContent=''; adminOverlay.classList.add('open'); adminOverlay.setAttribute('aria-hidden','false'); loginBox.classList.remove('hidden'); editorBox.classList.add('hidden'); renderAdmin(); setTimeout(() => { adminOverlay.scrollTop = 0; adminPass.focus(); adminPass.select(); }, 0); }
+    function closeAdmin(){ const active = document.activeElement; if (active && active.blur) active.blur(); adminOverlay.classList.remove('open'); adminOverlay.setAttribute('aria-hidden','true'); loggedIn=false; adminPass.value=''; }
+    async function sha256(text){ const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)); return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
+    async function loginAdmin(){ const msg = document.getElementById('loginMsg'); const hash = await sha256(adminPass.value.trim()); if (hash === PASS_HASH) { loggedIn=true; loginBox.classList.add('hidden'); editorBox.classList.remove('hidden'); msg.textContent=''; renderAdmin(); } else { msg.textContent='Wrong password'; } }
 
-    function esc(s) {
-      return String(s)
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;');
-    }
-
-    function goTo(id) {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      mobileMenu.classList.remove('open');
-    }
-
-    function openAdmin() {
-      loggedIn = false;
-      adminPass.value = '';
-      document.getElementById('loginMsg').textContent = '';
-      document.getElementById('saveMsgInline').textContent = '';
-      adminOverlay.classList.add('open');
-      adminOverlay.setAttribute('aria-hidden', 'false');
-      loginBox.classList.remove('hidden');
-      editorBox.classList.add('hidden');
-      renderAdmin();
-      setTimeout(() => {
-        adminOverlay.scrollTop = 0;
-        adminPass.focus();
-        adminPass.select();
-      }, 0);
-    }
-
-    function closeAdmin() {
-      const active = document.activeElement;
-      if (active && active.blur) active.blur();
-      adminOverlay.classList.remove('open');
-      adminOverlay.setAttribute('aria-hidden', 'true');
-      loggedIn = false;
-      adminPass.value = '';
-    }
-
-    async function sha256(text) {
-      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-      return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    async function loginAdmin() {
-      const msg = document.getElementById('loginMsg');
-      const hash = await sha256(adminPass.value.trim());
-      if (hash === PASS_HASH) {
-        loggedIn = true;
-        loginBox.classList.add('hidden');
-        editorBox.classList.remove('hidden');
-        msg.textContent = '';
-        renderAdmin();
-      } else {
-        msg.textContent = 'Wrong password';
-      }
-    }
-
-    function renderMain() {
+    function renderMain(){
       document.getElementById('brandName').textContent = data.brand;
       document.getElementById('brandSub').textContent = data.subHeading;
       document.getElementById('heroTitle').textContent = data.brand;
       document.getElementById('heroSubtitle').textContent = data.subHeading;
       document.getElementById('heroCopy').textContent = 'Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.';
       document.getElementById('feeValue').textContent = data.fee;
-      document.getElementById('contactValue').textContent = data.contactNo;
       document.getElementById('joinText').textContent = data.joinText;
-
-      document.getElementById('beginnerList').innerHTML = data.beginner.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('basicCard').classList.toggle('live', data.liveCourse === 'Basic');
+      document.getElementById('intermediateCard').classList.toggle('live', data.liveCourse === 'Intermediate');
+      document.getElementById('advanceCard').classList.toggle('live', data.liveCourse === 'Advance');
+      document.getElementById('basicLiveRow').style.display = data.liveCourse === 'Basic' ? 'flex' : 'none';
+      document.getElementById('intermediateLiveRow').style.display = data.liveCourse === 'Intermediate' ? 'flex' : 'none';
+      document.getElementById('advanceLiveRow').style.display = data.liveCourse === 'Advance' ? 'flex' : 'none';
+      document.getElementById('basicList').innerHTML = data.basic.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('intermediateList').innerHTML = data.intermediate.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('advanceList').innerHTML = data.advance.map(item => `<li>${esc(item)}</li>`).join('');
       document.getElementById('infoList').innerHTML = data.info.map(item => `<li>${esc(item)}</li>`).join('');
       document.getElementById('requirementsList').innerHTML = data.requirements.map(item => `<li>${esc(item)}</li>`).join('');
-
-      document.getElementById('feeCardValue').textContent = data.fee;
+      const liveMap = { Basic: data.basic, Intermediate: data.intermediate, Advance: data.advance };
+      document.getElementById('liveBubbleTitle').textContent = levelDisplayName(data.liveCourse);
+      document.getElementById('liveBubbleInfo').textContent = `${levelDisplayName(data.liveCourse)} course is now live !!`;
+      document.getElementById('liveCourseLabel').textContent = `${levelDisplayName(data.liveCourse).toUpperCase()} COURSE IS NOW LIVE !!`;
+      document.getElementById('liveDetailList').innerHTML = (liveMap[data.liveCourse] || []).map(item => `<li>${esc(item)}</li>`).join('');
       document.getElementById('contactCardValue').textContent = data.contactNo;
-      document.getElementById('joinCardValue').textContent = data.joinText;
-
-      document.getElementById('joinBtn').href = data.joinLink;
-      document.getElementById('feeCard').href = data.joinLink;
-      document.getElementById('contactCard').href = data.waLink;
-      document.getElementById('joinCard').href = data.joinLink;
+      document.getElementById('socialCardValue').innerHTML = `@g_genius_official<br/>${esc(data.emailHandle)}`;
+      document.getElementById('googleCardValue').textContent = 'Open Link';
+      const formUrl = data.googleFormLink || 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+      document.getElementById('joinBtn').href = formUrl;
+      document.getElementById('joinBtn').textContent = data.joinText;
+      document.getElementById('googleCard').href = formUrl;
     }
 
-    function listItem(text, oninputCode, deleteCode) {
-      return `
-        <div class="admin-item">
-          <input class="item-text" value="${esc(text)}" oninput="${oninputCode}" />
-          <div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0">
-            <button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button>
-            <button type="button" class="delete-btn" onclick="${deleteCode}">Delete</button>
-          </div>
-        </div>
-      `;
-    }
+    function listItem(text, oninputCode, deleteCode){ return `<div class="admin-item"><input class="item-text" value="${esc(text)}" oninput="${oninputCode}" /><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="${deleteCode}">Delete</button></div></div>`; }
+    function toggleDelete(btn){ const del = btn.parentElement.querySelector('.delete-btn'); if (del) del.classList.toggle('show'); }
 
-    function toggleDelete(btn) {
-      const del = btn.parentElement.querySelector('.delete-btn');
-      if (del) del.classList.toggle('show');
-    }
-
-    function renderAdmin() {
+    function renderAdmin(){
       if (!loggedIn) return;
       document.getElementById('brand').value = data.brand;
       document.getElementById('subHeading').value = data.subHeading;
@@ -833,77 +661,29 @@
       document.getElementById('contactNo').value = data.contactNo;
       document.getElementById('joinTextInput').value = data.joinText;
       document.getElementById('joinLink').value = data.joinLink;
-      document.getElementById('waLink').value = data.waLink;
-      document.getElementById('igLink').value = data.igLink;
-
-      document.getElementById('beginnerEditor').innerHTML = data.beginner.map((item, i) => listItem(item, `updateItem('beginner', ${i}, this.value)`, `deleteItem('beginner', ${i})`)).join('');
+      document.getElementById('googleFormLink').value = data.googleFormLink;
+      document.getElementById('instagramLink').value = data.instagramLink;
+      document.getElementById('emailHandle').value = data.emailHandle;
+      document.getElementById('liveCourse').value = data.liveCourse;
+      document.getElementById('basicEditor').innerHTML = data.basic.map((item, i) => listItem(item, `updateItem('basic', ${i}, this.value)`, `deleteItem('basic', ${i})`)).join('');
+      document.getElementById('intermediateEditor').innerHTML = data.intermediate.map((item, i) => listItem(item, `updateItem('intermediate', ${i}, this.value)`, `deleteItem('intermediate', ${i})`)).join('');
+      document.getElementById('advanceEditor').innerHTML = data.advance.map((item, i) => listItem(item, `updateItem('advance', ${i}, this.value)`, `deleteItem('advance', ${i})`)).join('');
       document.getElementById('infoEditor').innerHTML = data.info.map((item, i) => listItem(item, `updateItem('info', ${i}, this.value)`, `deleteItem('info', ${i})`)).join('');
       document.getElementById('requirementsEditor').innerHTML = data.requirements.map((item, i) => listItem(item, `updateItem('requirements', ${i}, this.value)`, `deleteItem('requirements', ${i})`)).join('');
     }
 
-    function updateItem(section, index, value) {
-      data[section][index] = value;
-      renderMain();
-    }
+    function updateItem(section, index, value){ data[section][index] = value; renderMain(); }
+    function deleteItem(section, index){ data[section].splice(index, 1); renderAdmin(); renderMain(); }
+    function addLevelItem(section){ const defaults = { basic:'New basic point', intermediate:'New intermediate point', advance:'New advance point', info:'New information', requirements:'New requirement' }; data[section].push(defaults[section]); renderAdmin(); renderMain(); }
 
-    function deleteItem(section, index) {
-      data[section].splice(index, 1);
-      renderAdmin();
-      renderMain();
-    }
+    function saveAdmin(){ if (!loggedIn) return; data.brand = document.getElementById('brand').value.trim() || data.brand; data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading; data.fee = document.getElementById('fee').value.trim() || data.fee; data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo; data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText; data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink; data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink; data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink; data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle; data.liveCourse = document.getElementById('liveCourse').value; if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7'; saveData(); renderMain(); renderAdmin(); const msg = document.getElementById('saveMsgInline'); msg.textContent = 'saved'; setTimeout(() => { msg.textContent = ''; }, 1600); }
 
-    function addLevelItem(section) {
-      const defaults = {
-        beginner: 'New beginner point',
-        info: 'New information',
-        requirements: 'New requirement'
-      };
-      data[section].push(defaults[section]);
-      renderAdmin();
-      renderMain();
-    }
-
-    function saveAdmin() {
-      if (!loggedIn) return;
-      data.brand = document.getElementById('brand').value.trim() || data.brand;
-      data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading;
-      data.fee = document.getElementById('fee').value.trim() || data.fee;
-      data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo;
-      data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText;
-      data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink;
-      data.waLink = document.getElementById('waLink').value.trim() || data.waLink;
-      data.igLink = document.getElementById('igLink').value.trim() || data.igLink;
-      saveData();
-      renderMain();
-      renderAdmin();
-      const msg = document.getElementById('saveMsgInline');
-      msg.textContent = 'saved';
-      setTimeout(() => { msg.textContent = ''; }, 1600);
-    }
-
-    document.getElementById('menuBtn').addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
+    document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.toggle('open'));
     document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
-    document.getElementById('adminOpenBtn').addEventListener('click', openAdmin);
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      loginAdmin();
-    });
-    document.querySelectorAll('[data-target]').forEach(btn => {
-      btn.addEventListener('click', () => goTo(btn.getAttribute('data-target')));
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') {
-        e.preventDefault();
-        openAdmin();
-      }
-      if (e.key === 'Escape') closeAdmin();
-    });
-    adminOverlay.addEventListener('click', (e) => {
-      if (e.target === adminOverlay) closeAdmin();
-    });
-
+    document.querySelectorAll('[data-target]').forEach(btn => btn.addEventListener('click', () => goTo(btn.getAttribute('data-target'))));
+    document.getElementById('loginForm').addEventListener('submit', (e) => { e.preventDefault(); loginAdmin(); });
+    document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') { e.preventDefault(); openAdmin(); } if (e.key === 'Escape') closeAdmin(); });
+    adminOverlay.addEventListener('click', (e) => { if (e.target === adminOverlay) closeAdmin(); });
     renderMain();
   </script>
 </body>
