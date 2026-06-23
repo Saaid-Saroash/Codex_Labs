@@ -2,7 +2,11 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codex Labs — Web Development Online Course</title>
+  <title>Codex Labs _ Gen Z programming</title>
+  <link rel="icon" href="./logo.png" type="image/png" sizes="any">
+  <link rel="shortcut icon" href="./logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="theme-color" content="#6d082f">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap');
 
@@ -25,6 +29,7 @@
       margin: 0;
       font-family: Fredoka, Arial, sans-serif;
       color: var(--text);
+      min-height: 100vh;
       background:
         radial-gradient(circle at top right, rgba(255,255,255,.08), transparent 18%),
         radial-gradient(circle at bottom left, rgba(23,60,168,.18), transparent 28%),
@@ -356,7 +361,7 @@
       align-items: flex-start;
       justify-content: center;
       padding: 18px;
-      background: rgba(10,10,10,.84);
+      background: rgba(10,10,10,.26);
       backdrop-filter: blur(12px);
       overflow-y: auto;
     }
@@ -409,14 +414,266 @@
     .source-status { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
     @media (max-width: 920px) {
-      .hero-grid, .grid2, .grid3, .admin-grid, .admin-grid-3 { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav {
+        position: sticky;
+        top: 0;
+        background: rgba(90, 6, 38, .90);
+        border-bottom: 1px solid var(--border);
+        z-index: 80;
+      }
+      .nav-inner {
+        padding: 0;
+        min-height: 0;
+      }
+      .brand {
+        display: flex !important;
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        left: auto;
+        z-index: 10003;
+        padding: 6px;
+        border-radius: 16px;
+        background: rgba(255,255,255,.08);
+        border: 1px solid var(--border);
+      }
+      .brand > div {
+        display: none;
+      }
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .menu-btn {
+        display: grid;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        width: 54px;
+        height: 54px;
+        z-index: 10002;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        pointer-events: auto;
+        transform: translateZ(0);
+      }
+      .wrap { width: min(100%, calc(100% - 28px)); }
+      .hero {
+        padding: 18px 0 10px;
+      }
+      .hero-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        gap: 16px;
+      }
+      .hero-grid > div:first-child {
+        order: 1;
+      }
+      .hero-grid > .hero-card {
+        order: 2;
+      }
       .big-title { font-size: clamp(40px, 12vw, 68px); }
+      .sub-title,
+      .hero-copy,
+      .chips,
+      .btn-row {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+      }
+      .hero-copy {
+        max-width: 36rem;
+      }
+      .hero-card {
+        width: 100%;
+        max-width: 560px;
+        margin-top: 6px;
+      }
+      .stack { gap: 12px; }
+      .fee-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .fee-box,
+      .join-box,
+      .live-box {
+        min-width: 0;
+        width: 100%;
+      }
+      .join-box { padding: 14px 18px; }
+      .box-value { font-size: 22px; }
+      .section { padding: 18px 0; }
+      .section-head {
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .section-head h3,
+      .section-head p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .grid3,
+      .admin-grid,
+      .admin-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .grid2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .card {
+        padding: 16px;
+        border-radius: 22px;
+      }
+      .level-card {
+        position: relative;
+        padding: 14px 16px 46px;
+        min-height: 122px;
+        overflow: hidden;
+      }
+      .level-head { justify-content: center; }
+      .level-list {
+        margin-top: 10px;
+      }
+      .level-card:not(.expanded) .level-list li:nth-child(n+4) {
+        display: none;
+      }
+      .level-list li { font-size: 14px; margin: 8px 0; }
+      .level-toggle {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background-color: rgba(255,255,255,.10);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 14px 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5l4 4 4-4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        color: transparent;
+        font-size: 0;
+        line-height: 1;
+        text-align: center;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .level-card.expanded .level-toggle {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 9l4-4 4 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+      .info-toggle-wrap {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        grid-column: 1 / -1;
+        margin-top: 12px;
+      }
+      .info-toggle {
+        display: grid;
+        place-items: center;
+        width: 92px;
+        height: 36px;
+        padding: 0;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background-color: rgba(255,255,255,.10);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 14px 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5l4 4 4-4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        color: transparent;
+        font-size: 0;
+        line-height: 1;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+      }
+      .info-expanded .info-toggle {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 9l4-4 4 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+      #info:not(.info-expanded) .list li:nth-child(n+4) {
+        display: none;
+      }
+      .grid2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(82vw, 320px);
+        height: 100vh;
+        padding: 78px 14px 18px;
+        background: #5a0626;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-right: 1px solid var(--border);
+        box-shadow: 18px 0 50px rgba(0,0,0,.32);
+        transform: translateX(-102%);
+        transition: transform .28s ease;
+        display: block;
+        z-index: 65;
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        display: block;
+        transform: translateX(0);
+      }
+      .menu-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 10px 14px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,.16);
+        cursor: pointer;
+        user-select: none;
+      }
+      .menu-brand .brand-logo { width: 38px; height: 38px; }
+      .menu-brand h1 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: #ffe8ef;
+      }
+      .menu-brand p { margin: 3px 0 0; font-size: 11px; color: var(--muted); }
+      .mobile-menu button {
+        border-radius: 18px;
+      }
+      .menu-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.46);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: 60;
+      }
+      .menu-backdrop.open {
+        display: block;
+      }
+      body.menu-open { overflow: hidden; }
     }
     @media (min-width: 921px) {
       .menu-btn { display: none; }
       .nav-links { display: flex; }
       .mobile-menu { display: none !important; }
+      .menu-backdrop { display: none !important; }
+      .level-toggle { display: none; }
     }
   </style>
 </head>
@@ -438,9 +695,10 @@
           <button type="button" data-target="info">Info</button>
           <button type="button" data-target="contact">Contact</button>
         </nav>
-        <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span></button>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu(event)"><span></span></button>
       </div>
       <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-brand" id="menuBrandTrigger" tabindex="0" role="button" aria-label="Open admin panel" style="pointer-events:auto;"><img class="brand-logo" src="logo.png" alt="Codex Labs logo"><div><h1 id="menuBrandName">Codex Labs</h1><p id="menuBrandSub">Gen Z Programming Labs</p></div></div>
         <button type="button" data-target="home">Home</button>
         <button type="button" data-target="levels">Levels</button>
         <button type="button" data-target="info">Info</button>
@@ -448,6 +706,8 @@
       </div>
     </div>
   </header>
+
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
 
   <main class="wrap" id="home">
     <section class="hero hero-grid">
@@ -507,16 +767,19 @@
           <div class="level-head"><span>Basic</span></div>
           <div id="basicLiveRow" style="display: flex; margin-top: 10px; gap: 10px; align-items: center; flex-wrap: wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="basicList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand Basic level" data-level-toggle></button>
         </div>
         <div class="card level-card" id="intermediateCard">
           <div class="level-head"><span>Intermediate</span></div>
           <div id="intermediateLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">INTERMEDIATE COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="intermediateList"><li>Layout planning</li><li>CSS styling basics</li><li>Flexbox and responsive design</li><li>Navigation bars and cards</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand Intermediate level" data-level-toggle></button>
         </div>
         <div class="card level-card" id="advanceCard">
           <div class="level-head"><span>Advance</span></div>
           <div id="advanceLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">ADVANCE COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="advanceList"><li>Interactive page design</li><li>Modern layout techniques</li><li>Form styling and validation</li><li>Project-based website building</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand Advance level" data-level-toggle></button>
         </div>
       </div>
     </section>
@@ -529,8 +792,9 @@
       </div>
       <div class="grid2">
         <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"><li>6 classes</li><li>3 classes per week</li><li>Monday, Wednesday and Thursday</li><li>Time: 5 p.m</li><li>E-certificate will be provided</li><li>Starting from: June 29, 2026</li></ul></div>
-        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age group: 10+</li><li>Laptop</li></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age group: 10+</li><li>Laptop</li><li>Internet connection</li></ul></div>
       </div>
+      <div class="info-toggle-wrap"><button type="button" class="info-toggle" id="infoToggle" aria-label="Expand or collapse more information" aria-expanded="false"></button></div>
     </section>
 
     <section class="section" id="contact">
@@ -646,7 +910,8 @@
   ],
   "requirements": [
     "Age group: 10+",
-    "Laptop"
+    "Laptop",
+    "Laptop charger"
   ]
 }</script>
   <script>
@@ -668,7 +933,7 @@
       intermediate: ['Layout planning','CSS styling basics','Flexbox and responsive design','Navigation bars and cards'],
       advance: ['Interactive page design','Modern layout techniques','Form styling and validation','Project-based website building'],
       info: ['6 classes','3 classes per week','Monday, Wednesday and Thursday','Time: 5 p.m','E-certificate will be provided','Starting from: June 29, 2026'],
-      requirements: ['Age group: 10+','Laptop']
+      requirements: ['Age group: 10+','Laptop','Laptop charger']
     };
 
     let data = loadData();
@@ -678,7 +943,10 @@
     const loginBox = document.getElementById('loginBox');
     const editorBox = document.getElementById('editorBox');
     const mobileMenu = document.getElementById('mobileMenu');
+    const menuBackdrop = document.getElementById('menuBackdrop');
     const adminPass = document.getElementById('adminPass');
+    const infoSection = document.getElementById('info');
+    const infoToggle = document.getElementById('infoToggle');
 
     function loadData(){
       try {
@@ -764,7 +1032,43 @@
       return true;
     }
     function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
-    function goTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); mobileMenu.classList.remove('open'); }
+    function toggleMobileMenu(event) {
+      if (event) {
+        event.preventDefault();
+        if (typeof event.stopPropagation === 'function') event.stopPropagation();
+      }
+      if (mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      menuBackdrop?.classList.add('open');
+      menuBackdrop?.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+      const btn = document.getElementById('menuBtn');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      menuBackdrop?.classList.remove('open');
+      menuBackdrop?.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+      const btn = document.getElementById('menuBtn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleInfoSection() {
+      if (!infoSection) return;
+      const expanded = infoSection.classList.toggle('info-expanded');
+      if (infoToggle) infoToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    function goTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); closeMobileMenu(); }
     function levelDisplayName(key){ return key === 'Basic' ? 'Basic' : key === 'Intermediate' ? 'Intermediate' : 'Advance'; }
 
     function openAdmin(){ loggedIn=false; adminPass.value=''; document.getElementById('loginMsg').textContent=''; document.getElementById('saveMsgInline').textContent=''; adminOverlay.classList.add('open'); adminOverlay.setAttribute('aria-hidden','false'); loginBox.classList.remove('hidden'); editorBox.classList.add('hidden'); renderAdmin(); setTimeout(() => { adminOverlay.scrollTop = 0; adminPass.focus(); adminPass.select(); }, 0); }
@@ -833,6 +1137,7 @@
       if (footerInstagramIcon) footerInstagramIcon.href = instagramUrl;
       if (footerEmailIcon) footerEmailIcon.href = `mailto:${data.emailHandle}`;
       if (footerGoogleIcon) footerGoogleIcon.href = formUrl;
+      syncLevelToggleButtons();
     }
 
 
@@ -843,8 +1148,26 @@
       el.addEventListener(eventName, () => {
         data[key] = transform(el.value);
         renderMain();
+        syncLevelToggleButtons();
       });
     }
+
+    function syncLevelToggleButtons() {
+      document.querySelectorAll('[data-level-toggle]').forEach((btn) => {
+        const expanded = btn.closest('.level-card')?.classList.contains('expanded');
+        btn.setAttribute('aria-label', expanded ? 'Collapse level' : 'Expand level');
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('[data-level-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.level-card');
+        if (!card) return;
+        card.classList.toggle('expanded');
+        syncLevelToggleButtons();
+      });
+    });
 
     document.addEventListener('click', (e) => {
       const link = e.target.closest('a[href]');
@@ -912,6 +1235,7 @@
       data.liveCourse = document.getElementById('liveCourse').value;
       if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7';
       renderMain();
+      syncLevelToggleButtons();
       renderAdmin();
 
       const msg = document.getElementById('saveMsgInline');
@@ -943,12 +1267,16 @@
       }
       setTimeout(() => { msg.textContent = ''; }, 1600);
     }
-
-    document.getElementById('menuBtn').addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    menuBackdrop?.addEventListener('click', closeMobileMenu);
+    document.getElementById('infoToggle')?.addEventListener('click', toggleInfoSection);
     document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
-    document.querySelectorAll('[data-target]').forEach(btn => btn.addEventListener('click', () => goTo(btn.getAttribute('data-target'))));
+    document.getElementById('menuBrandTrigger')?.addEventListener('dblclick', openAdmin);
+    document.getElementById('menuBrandTrigger')?.addEventListener('click', () => { closeMobileMenu(); });
+    document.querySelectorAll('[data-target]').forEach(btn => btn.addEventListener('click', () => {
+      goTo(btn.getAttribute('data-target'));
+    }));
     document.getElementById('loginForm').addEventListener('submit', (e) => { e.preventDefault(); loginAdmin(); });
-    document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') { e.preventDefault(); openAdmin(); } if (e.key === 'Escape') closeAdmin(); });
+    document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') { e.preventDefault(); openAdmin(); } if (e.key === 'Escape') { closeAdmin(); closeMobileMenu(); } });
     adminOverlay.addEventListener('click', (e) => { if (e.target === adminOverlay) closeAdmin(); });
 
     bindLiveField('brand', 'brand');
@@ -963,6 +1291,7 @@
     bindLiveField('liveCourse', 'liveCourse');
 
     renderMain();
+    syncLevelToggleButtons();
   </script>
 
 </body></html>
