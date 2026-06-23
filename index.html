@@ -677,7 +677,7 @@
     }
   </style>
 </head>
-<body>
+<body class="">
   <div class="page-glow" aria-hidden="true"></div>
   <header class="nav">
     <div class="wrap">
@@ -767,19 +767,19 @@
           <div class="level-head"><span>Basic</span></div>
           <div id="basicLiveRow" style="display: flex; margin-top: 10px; gap: 10px; align-items: center; flex-wrap: wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="basicList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
-          <button type="button" class="level-toggle" aria-label="Expand Basic level" data-level-toggle></button>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
         </div>
         <div class="card level-card" id="intermediateCard">
           <div class="level-head"><span>Intermediate</span></div>
           <div id="intermediateLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">INTERMEDIATE COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="intermediateList"><li>Layout planning</li><li>CSS styling basics</li><li>Flexbox and responsive design</li><li>Navigation bars and cards</li></ul>
-          <button type="button" class="level-toggle" aria-label="Expand Intermediate level" data-level-toggle></button>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
         </div>
         <div class="card level-card" id="advanceCard">
           <div class="level-head"><span>Advance</span></div>
           <div id="advanceLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">ADVANCE COURSE IS NOW LIVE !!</span></div>
           <ul class="level-list" id="advanceList"><li>Interactive page design</li><li>Modern layout techniques</li><li>Form styling and validation</li><li>Project-based website building</li></ul>
-          <button type="button" class="level-toggle" aria-label="Expand Advance level" data-level-toggle></button>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
         </div>
       </div>
     </section>
@@ -791,8 +791,8 @@
         <p>The layout keeps the original poster feel, with the details organized into easy-to-edit sections.</p>
       </div>
       <div class="grid2">
-        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"><li>6 classes</li><li>3 classes per week</li><li>Monday, Wednesday and Thursday</li><li>Time: 5 p.m</li><li>E-certificate will be provided</li><li>Starting from: June 29, 2026</li></ul></div>
-        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age group: 10+</li><li>Laptop</li><li>Internet connection</li></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"><li>6 classes</li><li>3 classes per week</li><li>Monday, Wednesday and Thursday</li><li>Time: 5 p.m till 6 p.m</li><li>E-certificate will be provided</li><li>Starting from: June 29, 2026</li></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age: 10+</li><li>Laptop</li><li>Windows 10+</li></ul></div>
       </div>
       <div class="info-toggle-wrap"><button type="button" class="info-toggle" id="infoToggle" aria-label="Expand or collapse more information" aria-expanded="false"></button></div>
     </section>
@@ -861,8 +861,8 @@
         </div>
 
         <div class="admin-grid" style="margin-top:14px;">
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="6 classes" oninput="updateItem('info', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="3 classes per week" oninput="updateItem('info', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Monday, Wednesday and Thursday" oninput="updateItem('info', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Time: 5 p.m" oninput="updateItem('info', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="E-certificate will be provided" oninput="updateItem('info', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Starting from: June 29, 2026" oninput="updateItem('info', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 5)">Delete</button></div></div></div></div>
-          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Age group: 10+" oninput="updateItem('requirements', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Laptop" oninput="updateItem('requirements', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 1)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="6 classes" oninput="updateItem('info', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="3 classes per week" oninput="updateItem('info', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Monday, Wednesday and Thursday" oninput="updateItem('info', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Time: 5 p.m till 6 p.m" oninput="updateItem('info', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="E-certificate will be provided" oninput="updateItem('info', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Starting from: June 29, 2026" oninput="updateItem('info', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 5)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Age: 10+" oninput="updateItem('requirements', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Laptop" oninput="updateItem('requirements', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Windows 10+" oninput="updateItem('requirements', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 2)">Delete</button></div></div></div></div>
         </div>
       </div>
     </div>
@@ -904,14 +904,14 @@
     "6 classes",
     "3 classes per week",
     "Monday, Wednesday and Thursday",
-    "Time: 5 p.m",
+    "Time: 5 p.m till 6 p.m",
     "E-certificate will be provided",
     "Starting from: June 29, 2026"
   ],
   "requirements": [
-    "Age group: 10+",
+    "Age: 10+",
     "Laptop",
-    "Laptop charger"
+    "Windows 10+"
   ]
 }</script>
   <script>
