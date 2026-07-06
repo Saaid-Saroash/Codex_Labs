@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Students portal</title>
+  <meta name="theme-color" content="#6d082f" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&display=swap');
+    :root {
+      --bg: #6d082f;
+      --bg2: #4c041f;
+      --panel: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.16);
+      --text: #fff7f7;
+      --muted: rgba(255,247,247,.76);
+      --shadow: 0 20px 50px rgba(0,0,0,.28);
+      --radius: 28px;
+      --accent: #f6d8d8;
+      --accent2: #f2f2f2;
+      --good: #a9f3c9;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Fredoka, Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.08), transparent 18%),
+        radial-gradient(circle at bottom left, rgba(23,60,168,.18), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(1200px, calc(100% - 28px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(90,6,38,.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 8px 18px rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+    .brand h1 {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: #ffe8ef;
+    }
+    .brand p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      color: white;
+      font-size: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links button {
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .nav-links button:hover { background: rgba(255,255,255,.12); }
+
+    .drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(6px);
+      z-index: 40;
+    }
+    .drawer-backdrop.open { display: block; }
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(86vw, 340px);
+      height: 100vh;
+      padding: 18px;
+      background: #5a0626;
+      border-left: 1px solid var(--border);
+      box-shadow: -18px 0 50px rgba(0,0,0,.32);
+      transform: translateX(102%);
+      transition: transform .25s ease;
+      z-index: 45;
+      overflow-y: auto;
+      display: block;
+    }
+    .drawer.open { transform: translateX(0); }
+    .drawer-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.14);
+    }
+    .drawer-head h3 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .drawer-list {
+      display: grid;
+      gap: 10px;
+    }
+    .drawer-list button {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hero { padding: 28px 0 18px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .title {
+      margin: 0;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: .9;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 680px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .field input, .field textarea, .field select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid #caa7b2;
+      outline: none;
+      background: #fff;
+      color: #261016;
+    }
+    .input-wrap {
+      position: relative;
+    }
+    .input-wrap input { padding-right: 52px; }
+    .peek-btn {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(38,16,22,.12);
+      background: rgba(0,0,0,.04);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .btn {
+      border: none;
+      border-radius: 18px;
+      padding: 13px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.08);
+      color: white;
+      border: 1px solid var(--border);
+    }
+    .btn:hover { background: rgba(255,255,255,.12); }
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      color: #5a0626;
+      border: none;
+    }
+    .notice {
+      min-height: 20px;
+      color: var(--good);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .portal {
+      display: none;
+      padding: 8px 0 34px;
+    }
+    .portal.open { display: block; }
+    .section-head {
+      margin-bottom: 16px;
+    }
+    .section-head .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      font-size: 12px;
+      color: #ffe8ef;
+    }
+    .section-head h2 {
+      margin: 12px 0 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+    }
+    .section-head p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 760px;
+    }
+
+    .assignments { margin-top: 10px; }
+    .accordion { display: grid; gap: 12px; }
+    .assignment-card {
+      overflow: hidden;
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .assignment-head {
+      width: 100%;
+      border: none;
+      background: transparent;
+      color: white;
+      padding: 16px 16px 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    .assignment-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .assignment-title span {
+      font-size: 18px;
+      letter-spacing: .02em;
+    }
+    .assignment-title small {
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: 11px;
+    }
+    .arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .18s ease;
+      flex: 0 0 40px;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .assignment-card.open .arrow { transform: rotate(90deg); }
+    .assignment-body {
+      display: none;
+      padding: 0 18px 18px;
+    }
+    .assignment-card.open .assignment-body { display: block; }
+    .assignment-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .meta-box {
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    .meta-box .label {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .meta-box .value {
+      font-weight: 800;
+      line-height: 1.45;
+    }
+    .assignment-text {
+      background: rgba(0,0,0,.14);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .video-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .16s ease, background .16s ease;
+      padding: 0;
+      color: inherit;
+      text-align: left;
+    }
+    .video-card:hover { transform: translateY(-2px); background: rgba(255,255,255,.11); }
+    .video-preview {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.04));
+    }
+    .video-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.04) contrast(1.02);
+    }
+    .video-preview .play-badge {
+      position: absolute;
+      inset: auto 12px 12px auto;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.2);
+      font-size: 16px;
+    }
+    .video-card h3 {
+      margin: 0;
+      padding: 12px 14px 14px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .helper {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(12px);
+      z-index: 30;
+    }
+    .modal.open { display: grid; }
+    .modal-panel {
+      width: min(1040px, 100%);
+      background: #3b0419;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+    }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .modal-title {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 900;
+    }
+    .close {
+      border: none;
+      border-radius: 14px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 900;
+      background: rgba(255,255,255,.08);
+      color: white;
+      border: 1px solid var(--border);
+    }
+    .player-wrap {
+      background: #000;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      position: relative;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: #000;
+    }
+    .controls {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+    }
+    .controls-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .control-btn, .control-select {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      color: white;
+      padding: 10px 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .control-btn:hover, .control-select:hover { background: rgba(255,255,255,.12); }
+    .control-select option { color: #261016; }
+    .range {
+      width: 100%;
+      accent-color: #f6d8d8;
+    }
+    .time {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      min-width: 88px;
+    }
+    .grow { flex: 1 1 220px; }
+    .small-note {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.6;
+    }
+
+    .admin-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.48);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+    .admin-backdrop.open { display: block; }
+    .admin-modal {
+      position: fixed;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: min(1100px, calc(100% - 24px));
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+      background: #3b0419;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      z-index: 51;
+      display: none;
+    }
+    .admin-modal.open { display: block; }
+    .tab-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 12px 0 16px;
+    }
+    .tab-btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: white;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+    .tab-btn.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #5a0626; border: none; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .admin-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .editor-list { display: grid; gap: 10px; }
+    .editor-item {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+    }
+    .editor-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+    }
+    .editor-item-head button {
+      border: none;
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor: pointer;
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-weight: 900;
+    }
+    .mini-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .inline-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .save-msg {
+      min-height: 18px;
+      font-weight: 800;
+      color: var(--good);
+      font-size: 13px;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .modal-panel, .admin-modal { padding: 12px; }
+      .controls { padding: 12px; }
+      .admin-grid, .admin-grid-3 { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 901px) {
+      .menu-btn { display: none; }
+      .drawer { display: none; }
+      .drawer-backdrop { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="brand" id="brandHomeTrigger">
+          <img class="brand-logo" id="brandLogo" src="logo.png" alt="Codex Labs logo" />
+          <div>
+            <h1 id="brandName">Codex Labs</h1>
+            <p id="brandSub">Gen Z Programming Labs</p>
+          </div>
+        </div>
+
+        <nav class="nav-links" id="desktopNav">
+          <button type="button" onclick="goHome()">Home</button>
+        </nav>
+
+        <div class="nav-links hidden" id="portalNav">
+          <button type="button" onclick="goTo('levels')">Levels</button>
+          <button type="button" onclick="goTo('info')">Info</button>
+          <button type="button" onclick="goTo('contact')">Contact</button>
+          <button type="button" onclick="goTo('assignmentsSection')">Portal</button>
+          <button type="button" id="logoutDesktopBtn" onclick="logoutPortal()">Logout</button>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu" onclick="toggleDrawer()">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true" onclick="closeDrawer()"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <h3>Menu</h3>
+      <button class="btn" type="button" onclick="closeDrawer()">Close</button>
+    </div>
+    <div class="drawer-list" id="drawerList">
+      <button type="button" onclick="goHome()">Home</button>
+      <button type="button" id="drawerLevelsBtn" class="hidden" onclick="goTo('levels')">Levels</button>
+      <button type="button" id="drawerInfoBtn" class="hidden" onclick="goTo('info')">Info</button>
+      <button type="button" id="drawerContactBtn" class="hidden" onclick="goTo('contact')">Contact</button>
+      <button type="button" id="drawerPortalBtn" class="hidden" onclick="goTo('assignmentsSection')">Portal</button>
+      <button type="button" id="drawerLogoutBtn" class="hidden" onclick="logoutPortal()">Logout</button>
+    </div>
+  </aside>
+
+  <main class="wrap" id="home">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1 class="title" id="portalTitle">Students portal</h1>
+          <p class="subtitle" id="portalSubtitle">
+            Enter the username and password to access class recordings and assignments.
+            Videos appear as thumbnails in square boxes, and clicking one opens a normal mp4 player with controls.
+          </p>
+        </div>
+        <div class="card" id="loginCard">
+          <div class="field">
+            <label for="portalUser">Username</label>
+            <input id="portalUser" type="text" placeholder="Enter username" autocomplete="username" />
+          </div>
+          <div class="field" style="margin-top: 12px;">
+            <label for="portalPass">Password</label>
+            <div class="input-wrap">
+              <input id="portalPass" type="password" placeholder="Enter password" autocomplete="current-password" />
+              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"></button>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn primary" id="loginBtn" type="button" onclick="loginPortal()">Login</button>
+          </div>
+          <div class="notice" id="loginMsg"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portal" id="portalArea" aria-hidden="true">
+      <section class="assignments" id="assignmentsSection">
+        <div class="section-head">
+          <div class="eyebrow">Assignments</div>
+          <h2>Class tasks</h2>
+          <p>Open any assignment bubble to see its details. Only logged-in users can view this content.</p>
+        </div>
+        <div class="accordion" id="assignmentList"></div>
+      </section>
+
+      <section id="videosSection" style="margin-top: 24px;">
+        <div class="section-head">
+          <div class="eyebrow">Recordings</div>
+          <h2>Video library</h2>
+          <p>Thumbnails are shown on the page, and clicking a card opens the player. Access stays hidden until login.</p>
+        </div>
+        <div class="grid" id="videoGrid"></div>
+        <div class="helper">
+          Tip: keep your files in a folder like <strong>videos/</strong> and rename them clearly, for example <strong>recording-1.mp4</strong>, <strong>lesson-2.mp4</strong>, or similar.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal" id="videoModal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-top">
+        <h3 class="modal-title" id="modalTitle">Video</h3>
+        <button class="close" type="button" onclick="closeVideo()">Close</button>
+      </div>
+
+      <div class="player-wrap">
+        <video id="modalVideo" playsinline preload="metadata" controls></video>
+      </div>
+
+      <div class="controls">
+        <div class="controls-row">
+          <button class="control-btn" type="button" id="playBtn" onclick="togglePlay()">Play</button>
+          <button class="control-btn" type="button" onclick="skipBy(-10)">-10s</button>
+          <button class="control-btn" type="button" onclick="skipBy(10)">+10s</button>
+          <button class="control-btn" type="button" id="muteBtn" onclick="toggleMute()">Mute</button>
+          <button class="control-btn" type="button" onclick="toggleFullscreen()">Fullscreen</button>
+          <label class="time" for="speedSelect">Speed</label>
+          <select class="control-select" id="speedSelect" onchange="setSpeed(this.value)">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </div>
+
+        <div class="controls-row">
+          <span class="time" id="currentTime">00:00</span>
+          <input class="range grow" id="seekBar" type="range" min="0" max="1000" value="0" step="1" oninput="seekFromBar(this.value)" />
+          <span class="time" id="durationTime">00:00</span>
+        </div>
+
+        <div class="controls-row">
+          <span class="time">Volume</span>
+          <input class="range grow" id="volumeBar" type="range" min="0" max="100" value="100" step="1" oninput="setVolume(this.value)" />
+        </div>
+      </div>
+
+      <div class="small-note">
+        Native mp4 controls are active, with extra shortcuts below for easy control.
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-backdrop" id="adminBackdrop" aria-hidden="true" onclick="closeAdmin()"></div>
+  <section class="admin-modal" id="adminModal" aria-hidden="true">
+    <div class="modal-top">
+      <h3 class="modal-title">Admin panel</h3>
+      <button class="close" type="button" onclick="closeAdmin()">Close</button>
+    </div>
+
+    <div id="adminLoginBox" class="card" style="background: rgba(255,255,255,.05); max-width: 420px;">
+      <div class="field">
+        <label for="adminPin">PIN code</label>
+        <div class="input-wrap">
+          <input id="adminPin" type="password" placeholder="Enter PIN code" autocomplete="current-password" />
+          <button class="peek-btn" id="adminPeekBtn" type="button" onclick="toggleAdminPin()" aria-label="Show or hide admin pin"></button>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn primary" type="button" onclick="loginAdmin()">Open admin</button>
+      </div>
+      <div class="notice" id="adminMsg"></div>
+    </div>
+
+    <div id="adminEditor" class="hidden">
+      <div class="mini-actions" style="margin-bottom: 10px;">
+        <button class="btn" type="button" onclick="connectSourceFile()">Connect source file</button>
+        <button class="btn primary" type="button" onclick="saveAll()">Save everything</button>
+        <span class="save-msg" id="saveMsg"></span>
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
+        <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
+        <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
+        <button class="tab-btn" id="tabSecurity" type="button" onclick="switchAdminTab('security')">Security</button>
+      </div>
+
+      <div class="tab-panel active" id="panelPortal">
+        <div class="admin-grid">
+          <div class="field">
+            <label>Portal title</label>
+            <input id="editPortalTitle" />
+          </div>
+          <div class="field">
+            <label>Portal subtitle</label>
+            <input id="editPortalSubtitle" />
+          </div>
+          <div class="field">
+            <label>Login username</label>
+            <input id="editUsername" />
+          </div>
+          <div class="field">
+            <label>New password</label>
+            <input id="editPassword" type="password" placeholder="Leave blank to keep current" />
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label>Intro note</label>
+            <textarea id="editIntro" rows="4"></textarea>
+          </div>
+        </div>
+        <div class="mini-actions">
+          <button class="btn primary" type="button" onclick="savePortalSettings()">Save portal settings</button>
+          <span class="save-msg" id="portalSaveMsg"></span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panelVideos">
+        <div class="admin-grid-3" id="videoEditor"></div>
+        <div class="mini-actions">
+          <button class="btn" type="button" onclick="addVideo()">Add video</button>
+          <button class="btn primary" type="button" onclick="saveVideoSettings()">Save videos</button>
+          <span class="save-msg" id="videoSaveMsg"></span>
+        </div>
+        <p class="inline-note">Edit video title and file path here. Thumbnails are generated from the actual files after login.</p>
+      </div>
+
+      <div class="tab-panel" id="panelAssignments">
+        <div class="editor-list" id="assignmentEditor"></div>
+        <div class="mini-actions">
+          <button class="btn" type="button" onclick="addAssignment()">Add assignment</button>
+          <button class="btn primary" type="button" onclick="saveAssignmentSettings()">Save assignments</button>
+          <span class="save-msg" id="assignmentSaveMsg"></span>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panelSecurity">
+        <div class="card" style="background: rgba(255,255,255,.05);">
+          <div class="section-head" style="margin-bottom: 0;">
+            <div class="eyebrow">Security</div>
+            <h2 style="font-size: 28px; margin-top: 12px;">Protection notes</h2>
+            <p>
+              The login uses a SHA-256 hash in the page and the protected sections stay hidden until authentication.
+              A fully unbreakable lock is not possible in a pure front-end page, because the browser can still inspect the source and assets.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script id="portal-data" type="application/json">{
+  "brand": "Codex Labs",
+  "subHeading": "Gen Z Programming Labs",
+  "portalTitle": "Students portal",
+  "portalSubtitle": "Video recordings",
+  "introText": "Enter the username and password to access class recordings and assignments. Videos appear as thumbnails in square boxes, and clicking one opens a normal mp4 player with controls.",
+  "username": "sc-2026",
+  "passHash": "7eb8b2b4aba23822d0ccc15635ee494191ff6e4ad29001a37311db367b598876",
+  "adminPinHash": "816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7",
+  "videos": [
+    {
+      "title": "Recording 1",
+      "src": "videos/recording-1.mp4"
+    },
+    {
+      "title": "Recording 2",
+      "src": "videos/recording-2.mp4"
+    },
+    {
+      "title": "Recording 3",
+      "src": "videos/recording-3.mp4"
+    },
+    {
+      "title": "Recording 4",
+      "src": "videos/recording-4.mp4"
+    }
+  ],
+  "assignments": [
+    {
+      "title": "Assignment 1",
+      "date": "July 1, 2026",
+      "course": "Web Development Basics",
+      "deadline": "July 3, 2026",
+      "score": "10",
+      "text": "Assignment .........."
+    },
+    {
+      "title": "Assignment 2",
+      "date": "July 8, 2026",
+      "course": "HTML and CSS",
+      "deadline": "July 10, 2026",
+      "score": "15",
+      "text": "Assignment .........."
+    },
+    {
+      "title": "Assignment 3",
+      "date": "July 15, 2026",
+      "course": "Layout Practice",
+      "deadline": "July 17, 2026",
+      "score": "20",
+      "text": "Assignment .........."
+    }
+  ]
+}</script>
+  <script>
+    const STORAGE_KEY = "studentsPortalConfig";
+    const AUTH_KEY = "studentsPortalAuth";
+    const ADMIN_KEY = "studentsPortalAdmin";
+    const DATA_SCRIPT_ID = "portal-data";
+
+    let defaultData = JSON.parse(document.getElementById(DATA_SCRIPT_ID).textContent);
+    let state = loadState();
+    let currentIndex = -1;
+    let currentAdminTab = "portal";
+    let sourceFileHandle = null;
+
+    const portalArea = document.getElementById("portalArea");
+    const loginMsg = document.getElementById("loginMsg");
+    const loginCard = document.getElementById("loginCard");
+    const portalUser = document.getElementById("portalUser");
+    const portalPass = document.getElementById("portalPass");
+    const peekBtn = document.getElementById("peekBtn");
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+    const modalTitle = document.getElementById("modalTitle");
+    const playBtn = document.getElementById("playBtn");
+    const muteBtn = document.getElementById("muteBtn");
+    const seekBar = document.getElementById("seekBar");
+    const currentTimeEl = document.getElementById("currentTime");
+    const durationTimeEl = document.getElementById("durationTime");
+    const speedSelect = document.getElementById("speedSelect");
+    const volumeBar = document.getElementById("volumeBar");
+    const logoutDesktopBtn = document.getElementById("logoutDesktopBtn");
+    const drawerLevelsBtn = document.getElementById("drawerLevelsBtn");
+    const drawerInfoBtn = document.getElementById("drawerInfoBtn");
+    const drawerContactBtn = document.getElementById("drawerContactBtn");
+    const drawerPortalBtn = document.getElementById("drawerPortalBtn");
+    const drawerLogoutBtn = document.getElementById("drawerLogoutBtn");
+    const portalNav = document.getElementById("portalNav");
+    const drawer = document.getElementById("drawer");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const adminModal = document.getElementById("adminModal");
+    const adminBackdrop = document.getElementById("adminBackdrop");
+    const adminLoginBox = document.getElementById("adminLoginBox");
+    const adminEditor = document.getElementById("adminEditor");
+    const adminMsg = document.getElementById("adminMsg");
+    const adminPin = document.getElementById("adminPin");
+    const adminPeekBtn = document.getElementById("adminPeekBtn");
+    const brandHomeTrigger = document.getElementById("brandHomeTrigger");
+    const brandLogo = document.getElementById("brandLogo");
+
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        return saved ? mergeState(defaultData, saved) : structuredClone(defaultData);
+      } catch {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function mergeState(base, saved) {
+      return {
+        ...base,
+        ...saved,
+        adminPinHash: base.adminPinHash,
+        videos: Array.isArray(saved.videos) && saved.videos.length ? saved.videos : structuredClone(base.videos),
+        assignments: Array.isArray(saved.assignments) && saved.assignments.length ? saved.assignments : structuredClone(base.assignments)
+      };
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function isAuthed() {
+      return sessionStorage.getItem(AUTH_KEY) === "1";
+    }
+
+    function isAdminAuthed() {
+      return sessionStorage.getItem(ADMIN_KEY) === "1";
+    }
+
+    async function sha256(text) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function setEyeIcon(btn, hidden) {
+      if (!btn) return;
+      btn.innerHTML = hidden
+        ? '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"/><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+        : '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"/></svg>';
+    }
+
+
+    function goTo(id) {
+      if (!isAuthed() && (id === "portalSection" || id === "assignmentsSection" || id === "videosSection")) {
+        loginMsg.textContent = "Login first to view protected sections.";
+        focusLogin();
+        return;
+      }
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      closeDrawer();
+    }
+
+    function focusLogin() {
+      portalUser.focus();
+    }
+
+    function toggleDrawer() {
+      const open = drawer.classList.contains("open");
+      if (open) closeDrawer(); else openDrawer();
+    }
+
+    function openDrawer() {
+      drawer.classList.add("open");
+      drawerBackdrop.classList.add("open");
+      drawer.setAttribute("aria-hidden", "false");
+      drawerBackdrop.setAttribute("aria-hidden", "false");
+      updateAuthButtons();
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      drawerBackdrop.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
+      drawerBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    function updateAuthButtons() {
+      const auth = isAuthed();
+      portalNav.classList.toggle("hidden", !auth);
+      logoutDesktopBtn.classList.toggle("hidden", !auth);
+      drawerLevelsBtn.classList.toggle("hidden", !auth);
+      drawerInfoBtn.classList.toggle("hidden", !auth);
+      drawerContactBtn.classList.toggle("hidden", !auth);
+      drawerPortalBtn.classList.toggle("hidden", !auth);
+      drawerLogoutBtn.classList.toggle("hidden", !auth);
+    }
+
+    function togglePassword() {
+      const hidden = portalPass.type === "text";
+      portalPass.type = hidden ? "password" : "text";
+      setEyeIcon(peekBtn, portalPass.type === "password");
+    }
+
+    function toggleAdminPin() {
+      const hidden = adminPin.type === "text";
+      adminPin.type = hidden ? "password" : "text";
+      setEyeIcon(adminPeekBtn, adminPin.type === "password");
+    }
+
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    let brandClickTimer = null;
+    function brandSingleClick() {
+      if (brandClickTimer) return;
+      brandClickTimer = setTimeout(() => {
+        brandClickTimer = null;
+        goHome();
+      }, 220);
+    }
+    function brandDoubleClick(e) {
+      if (brandClickTimer) {
+        clearTimeout(brandClickTimer);
+        brandClickTimer = null;
+      }
+      e.preventDefault();
+      e.stopPropagation();
+      openAdmin();
+    }
+
+    function renderAssignments() {
+      const list = document.getElementById("assignmentList");
+      list.innerHTML = state.assignments.map((a, idx) => `
+        <div class="assignment-card" data-assignment="${idx}">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(${idx})" aria-expanded="false">
+            <div class="assignment-title">
+              <small>${escapeHtml(a.title)}</small>
+              <span>${escapeHtml(a.course)}</span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">${escapeHtml(a.date)}</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">${escapeHtml(a.course)}</div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">${escapeHtml(a.deadline)}</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value">${escapeHtml(a.score)}</div></div>
+            </div>
+            <div class="assignment-text">${escapeHtml(a.text)}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function toggleAssignment(index) {
+      const card = document.querySelector(`.assignment-card[data-assignment="${index}"]`);
+      if (!card) return;
+      card.classList.toggle("open");
+      const btn = card.querySelector(".assignment-head");
+      if (btn) btn.setAttribute("aria-expanded", card.classList.contains("open") ? "true" : "false");
+    }
+
+    function placeholderThumb(title) {
+      const safe = String(title).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="640" height="640" viewBox="0 0 640 640">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f6d8d8"/>
+              <stop offset="100%" stop-color="#5a0626"/>
+            </linearGradient>
+          </defs>
+          <rect width="640" height="640" fill="url(#g)"/>
+          <circle cx="520" cy="120" r="130" fill="rgba(255,255,255,.14)"/>
+          <circle cx="120" cy="520" r="150" fill="rgba(0,0,0,.12)"/>
+          <text x="50%" y="46%" text-anchor="middle" fill="white" font-size="44" font-family="Arial, sans-serif" font-weight="700">Students Portal</text>
+          <text x="50%" y="60%" text-anchor="middle" fill="white" font-size="52" font-family="Arial, sans-serif" font-weight="900">${safe}</text>
+        </svg>`;
+      return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+    }
+
+    async function captureThumbnail(src) {
+      return new Promise((resolve) => {
+        const video = document.createElement("video");
+        video.crossOrigin = "anonymous";
+        video.preload = "metadata";
+        video.muted = true;
+        video.src = src;
+
+        const cleanup = () => {
+          video.removeAttribute("src");
+          video.load?.();
+        };
+
+        video.addEventListener("loadedmetadata", () => {
+          const targetTime = Math.min(1, Math.max(0, (video.duration || 1) * 0.05));
+          try { video.currentTime = targetTime; } catch { resolve(null); }
+        });
+
+        video.addEventListener("seeked", () => {
+          try {
+            const canvas = document.createElement("canvas");
+            canvas.width = 640;
+            canvas.height = 640;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) throw new Error("No context");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            cleanup();
+            resolve(canvas.toDataURL("image/jpeg", 0.82));
+          } catch {
+            cleanup();
+            resolve(null);
+          }
+        });
+
+        video.addEventListener("error", () => {
+          cleanup();
+          resolve(null);
+        });
+
+        setTimeout(() => {
+          cleanup();
+          resolve(null);
+        }, 6000);
+      });
+    }
+
+    function renderVideos() {
+      const grid = document.getElementById("videoGrid");
+      grid.innerHTML = state.videos.map((video, index) => `
+        <button class="video-card" type="button" onclick="openVideo(${index})" aria-label="Open ${escapeHtml(video.title)}">
+          <div class="video-preview">
+            <img id="thumb-${index}" alt="${escapeHtml(video.title)} thumbnail" src="${placeholderThumb(video.title)}">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>${escapeHtml(video.title)}</h3>
+        </button>
+      `).join("");
+
+      state.videos.forEach(async (video, index) => {
+        const img = document.getElementById(`thumb-${index}`);
+        const thumb = await captureThumbnail(video.src);
+        if (img && thumb) img.src = thumb;
+      });
+    }
+
+    function showPortal() {
+      loginCard.classList.add("hidden");
+      portalArea.classList.add("open");
+      portalArea.setAttribute("aria-hidden", "false");
+      updateAuthButtons();
+      renderAssignments();
+      renderVideos();
+      document.getElementById("portalTitle").textContent = state.portalTitle;
+      document.getElementById("portalSubtitle").textContent = state.introText;
+      document.getElementById("brandName").textContent = state.brand;
+      document.getElementById("brandSub").textContent = state.subHeading;
+      goTo("home");
+    }
+
+    function hidePortal() {
+      loginCard.classList.remove("hidden");
+      portalArea.classList.remove("open");
+      portalArea.setAttribute("aria-hidden", "true");
+      updateAuthButtons();
+    }
+
+    async function loginPortal() {
+      const enteredUser = portalUser.value.trim();
+      const enteredPass = portalPass.value.trim();
+      if (!enteredUser || !enteredPass) {
+        loginMsg.textContent = "Enter the username and password.";
+        return;
+      }
+      if (enteredUser !== state.username) {
+        loginMsg.textContent = "Wrong username.";
+        return;
+      }
+      const hash = await sha256(enteredPass);
+      if (hash !== state.passHash) {
+        loginMsg.textContent = "Wrong password.";
+        return;
+      }
+      sessionStorage.setItem(AUTH_KEY, "1");
+      loginMsg.textContent = "";
+      showPortal();
+      updateAuthButtons();
+    }
+
+    function logoutPortal() {
+      sessionStorage.removeItem(AUTH_KEY);
+      sessionStorage.removeItem(ADMIN_KEY);
+      closeVideo();
+      closeAdmin();
+      hidePortal();
+      portalPass.value = "";
+      loginMsg.textContent = "Logged out.";
+      currentIndex = -1;
+      adminPin.value = "";
+      adminLoginBox.classList.remove("hidden");
+      adminEditor.classList.add("hidden");
+      updateAuthButtons();
+      goHome();
+    }
+
+    function requireAuthForOpen() {
+      if (!isAuthed()) {
+        loginMsg.textContent = "Login first to view recordings.";
+        focusLogin();
+        return false;
+      }
+      return true;
+    }
+
+    function openVideo(index) {
+      if (!requireAuthForOpen()) return;
+      const video = state.videos[index];
+      if (!video) return;
+      currentIndex = index;
+      modalTitle.textContent = video.title;
+      modalVideo.src = video.src;
+      modalVideo.currentTime = 0;
+      modalVideo.playbackRate = Number(speedSelect.value) || 1;
+      modalVideo.volume = Number(volumeBar.value) / 100;
+      modalVideo.muted = false;
+      modalVideo.load();
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      modalVideo.play().catch(() => {});
+      syncButtons();
+    }
+
+    function closeVideo() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      modalVideo.pause();
+      modalVideo.removeAttribute("src");
+      modalVideo.load();
+      currentIndex = -1;
+      seekBar.value = 0;
+      currentTimeEl.textContent = "00:00";
+      durationTimeEl.textContent = "00:00";
+      syncButtons();
+    }
+
+    function togglePlay() {
+      if (modalVideo.paused) modalVideo.play().catch(() => {}); else modalVideo.pause();
+      syncButtons();
+    }
+
+    function skipBy(seconds) {
+      if (!Number.isFinite(modalVideo.duration)) return;
+      modalVideo.currentTime = Math.max(0, Math.min(modalVideo.duration, modalVideo.currentTime + seconds));
+      syncSeekBar();
+    }
+
+    function toggleMute() {
+      modalVideo.muted = !modalVideo.muted;
+      syncButtons();
+    }
+
+    function setSpeed(value) {
+      modalVideo.playbackRate = Number(value) || 1;
+    }
+
+    function setVolume(value) {
+      const vol = Math.max(0, Math.min(100, Number(value) || 0)) / 100;
+      modalVideo.volume = vol;
+      if (vol > 0 && modalVideo.muted) modalVideo.muted = false;
+      syncButtons();
+    }
+
+    function seekFromBar(value) {
+      if (!Number.isFinite(modalVideo.duration)) return;
+      const percent = Number(value) / 1000;
+      modalVideo.currentTime = modalVideo.duration * percent;
+    }
+
+    function toggleFullscreen() {
+      const target = document.querySelector(".player-wrap");
+      if (!target) return;
+      if (document.fullscreenElement) document.exitFullscreen?.(); else target.requestFullscreen?.();
+    }
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds) || seconds < 0) return "00:00";
+      const total = Math.floor(seconds);
+      const mins = Math.floor(total / 60);
+      const secs = total % 60;
+      return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function syncSeekBar() {
+      if (!Number.isFinite(modalVideo.duration) || modalVideo.duration <= 0) return;
+      seekBar.value = Math.round((modalVideo.currentTime / modalVideo.duration) * 1000);
+      currentTimeEl.textContent = formatTime(modalVideo.currentTime);
+      durationTimeEl.textContent = formatTime(modalVideo.duration);
+    }
+
+    function syncButtons() {
+      playBtn.textContent = modalVideo.paused ? "Play" : "Pause";
+      muteBtn.textContent = modalVideo.muted ? "Unmute" : "Mute";
+    }
+
+    modalVideo.addEventListener("loadedmetadata", syncSeekBar);
+    modalVideo.addEventListener("timeupdate", syncSeekBar);
+    modalVideo.addEventListener("play", syncButtons);
+    modalVideo.addEventListener("pause", syncButtons);
+    modalVideo.addEventListener("volumechange", syncButtons);
+    modalVideo.addEventListener("ended", syncButtons);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeVideo();
+    });
+
+    function switchAdminTab(tab) {
+      currentAdminTab = tab;
+      document.getElementById("tabPortal").classList.toggle("active", tab === "portal");
+      document.getElementById("tabVideos").classList.toggle("active", tab === "videos");
+      document.getElementById("tabAssignments").classList.toggle("active", tab === "assignments");
+      document.getElementById("tabSecurity").classList.toggle("active", tab === "security");
+      document.getElementById("panelPortal").classList.toggle("active", tab === "portal");
+      document.getElementById("panelVideos").classList.toggle("active", tab === "videos");
+      document.getElementById("panelAssignments").classList.toggle("active", tab === "assignments");
+      document.getElementById("panelSecurity").classList.toggle("active", tab === "security");
+      if (tab === "videos") renderVideoEditor();
+      if (tab === "assignments") renderAssignmentEditor();
+      if (tab === "portal") fillPortalEditor();
+    }
+
+    function fillPortalEditor() {
+      document.getElementById("editPortalTitle").value = state.portalTitle;
+      document.getElementById("editPortalSubtitle").value = state.portalSubtitle;
+      document.getElementById("editUsername").value = state.username;
+      document.getElementById("editPassword").value = "";
+      document.getElementById("editIntro").value = state.introText;
+    }
+
+    function openAdmin() {
+      if (!isAuthed()) {
+        loginMsg.textContent = "Login first before opening admin.";
+        focusLogin();
+        return;
+      }
+      adminModal.classList.add("open");
+      adminBackdrop.classList.add("open");
+      adminModal.setAttribute("aria-hidden", "false");
+      adminBackdrop.setAttribute("aria-hidden", "false");
+      if (!isAdminAuthed()) {
+        adminLoginBox.classList.remove("hidden");
+        adminEditor.classList.add("hidden");
+      } else {
+        adminLoginBox.classList.add("hidden");
+        adminEditor.classList.remove("hidden");
+      }
+      adminMsg.textContent = "";
+      adminPin.value = "";
+      setEyeIcon(adminPeekBtn, adminPin.type === "password");
+      switchAdminTab(currentAdminTab);
+      closeDrawer();
+    }
+
+    function closeAdmin() {
+      adminModal.classList.remove("open");
+      adminBackdrop.classList.remove("open");
+      adminModal.setAttribute("aria-hidden", "true");
+      adminBackdrop.setAttribute("aria-hidden", "true");
+    }
+
+    async function loginAdmin() {
+      const pin = adminPin.value.trim();
+      if (!pin) {
+        adminMsg.textContent = "Enter the PIN code.";
+        return;
+      }
+      const hash = await sha256(pin);
+      if (hash !== state.adminPinHash) {
+        adminMsg.textContent = "Wrong PIN code.";
+        return;
+      }
+      sessionStorage.setItem(ADMIN_KEY, "1");
+      adminLoginBox.classList.add("hidden");
+      adminEditor.classList.remove("hidden");
+      adminMsg.textContent = "";
+      fillPortalEditor();
+      renderVideoEditor();
+      renderAssignmentEditor();
+      switchAdminTab(currentAdminTab);
+    }
+
+    async function connectSourceFile() {
+      try {
+        if (!("showOpenFilePicker" in window)) {
+          document.getElementById("saveMsg").textContent = "File picker not supported here.";
+          return;
+        }
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [
+            {
+              description: "HTML file",
+              accept: { "text/html": [".html", ".htm"] }
+            }
+          ]
+        });
+        sourceFileHandle = handle;
+        if (sourceFileHandle.requestPermission) {
+          await sourceFileHandle.requestPermission({ mode: "readwrite" });
+        }
+        document.getElementById("saveMsg").textContent = "Source file connected.";
+        setTimeout(() => document.getElementById("saveMsg").textContent = "", 1600);
+      } catch {
+        document.getElementById("saveMsg").textContent = "Source file connection cancelled.";
+        setTimeout(() => document.getElementById("saveMsg").textContent = "", 1600);
+      }
+    }
+
+    function updatePortalHeader() {
+      document.getElementById("portalTitle").textContent = state.portalTitle;
+      document.getElementById("portalSubtitle").textContent = state.introText;
+      document.getElementById("brandName").textContent = state.brand;
+      document.getElementById("brandSub").textContent = state.subHeading;
+    }
+
+    function savePortalSettings() {
+      state.portalTitle = document.getElementById("editPortalTitle").value.trim() || "Students portal";
+      state.portalSubtitle = document.getElementById("editPortalSubtitle").value.trim() || "Video recordings";
+      state.username = document.getElementById("editUsername").value.trim() || "sc-2026";
+      state.introText = document.getElementById("editIntro").value.trim() || defaultData.introText;
+      const newPass = document.getElementById("editPassword").value.trim();
+      const after = () => {
+        saveState();
+        updatePortalHeader();
+        document.getElementById("portalSaveMsg").textContent = "Portal settings saved.";
+        setTimeout(() => document.getElementById("portalSaveMsg").textContent = "", 1600);
+      };
+      if (newPass) {
+        sha256(newPass).then(hash => {
+          state.passHash = hash;
+          after();
+        });
+      } else {
+        after();
+      }
+    }
+
+    function renderVideoEditor() {
+      const box = document.getElementById("videoEditor");
+      box.innerHTML = state.videos.map((v, idx) => `
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video ${idx + 1}</span>
+            <button type="button" onclick="removeVideo(${idx})">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="${escapeHtml(v.title)}" oninput="state.videos[${idx}].title = this.value; saveState();"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="${escapeHtml(v.src)}" oninput="state.videos[${idx}].src = this.value; saveState();"></div>
+        </div>
+      `).join("");
+    }
+
+    function addVideo() {
+      state.videos.push({ title: `Recording ${state.videos.length + 1}`, src: `videos/recording-${state.videos.length + 1}.mp4` });
+      saveState();
+      renderVideoEditor();
+    }
+
+    function removeVideo(idx) {
+      state.videos.splice(idx, 1);
+      saveState();
+      renderVideoEditor();
+    }
+
+    function saveVideoSettings() {
+      saveState();
+      renderVideos();
+      document.getElementById("videoSaveMsg").textContent = "Video list saved.";
+      setTimeout(() => document.getElementById("videoSaveMsg").textContent = "", 1600);
+    }
+
+    function renderAssignmentEditor() {
+      const box = document.getElementById("assignmentEditor");
+      box.innerHTML = state.assignments.map((a, idx) => `
+        <div class="card">
+          <div class="editor-item-head">
+            <span>${escapeHtml(a.title)}</span>
+            <button type="button" onclick="removeAssignment(${idx})">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="${escapeHtml(a.title)}" oninput="state.assignments[${idx}].title = this.value; saveState();"></div>
+            <div class="field"><label>Assignment date</label><input value="${escapeHtml(a.date)}" oninput="state.assignments[${idx}].date = this.value; saveState();"></div>
+            <div class="field"><label>Course name</label><input value="${escapeHtml(a.course)}" oninput="state.assignments[${idx}].course = this.value; saveState();"></div>
+            <div class="field"><label>Dead line</label><input value="${escapeHtml(a.deadline)}" oninput="state.assignments[${idx}].deadline = this.value; saveState();"></div>
+            <div class="field"><label>Score points</label><input value="${escapeHtml(a.score)}" oninput="state.assignments[${idx}].score = this.value; saveState();"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[${idx}].text = this.value; saveState();">${escapeHtml(a.text)}</textarea></div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function addAssignment() {
+      state.assignments.push({
+        title: `Assignment ${state.assignments.length + 1}`,
+        date: "",
+        course: "",
+        deadline: "",
+        score: "",
+        text: "Assignment .........."
+      });
+      saveState();
+      renderAssignmentEditor();
+    }
+
+    function removeAssignment(idx) {
+      state.assignments.splice(idx, 1);
+      saveState();
+      renderAssignmentEditor();
+    }
+
+    function saveAssignmentSettings() {
+      saveState();
+      renderAssignments();
+      document.getElementById("assignmentSaveMsg").textContent = "Assignments saved.";
+      setTimeout(() => document.getElementById("assignmentSaveMsg").textContent = "", 1600);
+    }
+
+    async function saveCurrentHtmlToFile() {
+      if (!sourceFileHandle) return false;
+      if (sourceFileHandle.requestPermission) {
+        const perm = await sourceFileHandle.requestPermission({ mode: "readwrite" });
+        if (perm !== "granted") return false;
+      }
+      const cloned = document.getElementById(DATA_SCRIPT_ID);
+      cloned.textContent = JSON.stringify(state, null, 2);
+      const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+      const writable = await sourceFileHandle.createWritable();
+      await writable.write(html);
+      await writable.close();
+      return true;
+    }
+
+    async function saveAll() {
+      saveState();
+      updatePortalHeader();
+      renderAssignments();
+      renderVideos();
+      renderVideoEditor();
+      renderAssignmentEditor();
+      let msg = "Saved to local storage.";
+      try {
+        const savedToFile = await saveCurrentHtmlToFile();
+        if (savedToFile) msg = "Saved to connected source file.";
+      } catch (e) {
+        msg = "Saved locally. File save failed.";
+      }
+      document.getElementById("saveMsg").textContent = msg;
+      setTimeout(() => document.getElementById("saveMsg").textContent = "", 1800);
+    }
+
+    function openPortalWhenLoggedIn() {
+      if (isAuthed()) {
+        showPortal();
+      } else {
+        hidePortal();
+      }
+      updateAuthButtons();
+      if (isAdminAuthed()) {
+        adminLoginBox.classList.add("hidden");
+        adminEditor.classList.remove("hidden");
+      }
+    }
+
+    portalUser.addEventListener("keydown", (e) => { if (e.key === "Enter") loginPortal(); });
+    portalPass.addEventListener("keydown", (e) => { if (e.key === "Enter") loginPortal(); });
+    adminPin.addEventListener("keydown", (e) => { if (e.key === "Enter") loginAdmin(); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeVideo();
+        closeDrawer();
+        closeAdmin();
+      }
+      if (e.ctrlKey && e.shiftKey && (e.key === "A" || e.key === "a")) {
+        e.preventDefault();
+        if (isAuthed()) openAdmin();
+      }
+      if (isAuthed() && currentIndex !== -1) {
+        if (e.key === "ArrowLeft") skipBy(-10);
+        if (e.key === "ArrowRight") skipBy(10);
+      }
+    });
+
+    window.addEventListener("load", () => {
+      updatePortalHeader();
+      openPortalWhenLoggedIn();
+      if (!isAuthed()) hidePortal();
+      setEyeIcon(peekBtn, portalPass.type === "password");
+      setEyeIcon(adminPeekBtn, adminPin.type === "password");
+      if (brandHomeTrigger) {
+        brandHomeTrigger.addEventListener("click", brandSingleClick);
+        brandHomeTrigger.addEventListener("dblclick", brandDoubleClick);
+      }
+      if (brandLogo) {
+        brandLogo.addEventListener("click", brandSingleClick);
+        brandLogo.addEventListener("dblclick", brandDoubleClick);
+      }
+    });
+  </script>
+</body>
+</html>
