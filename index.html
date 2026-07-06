@@ -417,52 +417,56 @@
       .nav {
         position: sticky;
         top: 0;
-        background: rgba(90, 6, 38, .90);
+        background: rgba(90, 6, 38, .92);
         border-bottom: 1px solid var(--border);
         z-index: 80;
       }
       .nav-inner {
-        padding: 0;
-        min-height: 0;
+        padding: 10px 0;
+        min-height: 64px;
+        flex-direction: row-reverse;
       }
       .brand {
         display: flex !important;
-        position: fixed;
-        top: 12px;
-        right: 12px;
-        left: auto;
-        z-index: 10003;
-        padding: 6px;
-        border-radius: 16px;
-        background: rgba(255,255,255,.08);
-        border: 1px solid var(--border);
+        position: static;
+        z-index: auto;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        margin-left: auto;
+        flex-direction: row-reverse;
+        gap: 10px;
       }
       .brand > div {
-        display: none;
+        display: block;
+        text-align: right;
       }
       .brand-logo {
         width: 40px;
         height: 40px;
+        flex: 0 0 40px;
       }
       .nav-links {
         display: none !important;
       }
       .menu-btn {
         display: grid;
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        width: 54px;
-        height: 54px;
+        position: static;
+        width: 50px;
+        height: 50px;
         z-index: 10002;
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
         pointer-events: auto;
         transform: translateZ(0);
       }
+      .menu-open .menu-btn {
+        display: none !important;
+      }
       .wrap { width: min(100%, calc(100% - 28px)); }
       .hero {
-        padding: 18px 0 10px;
+        padding: 16px 0 10px;
       }
       .hero-grid {
         display: flex;
@@ -476,7 +480,7 @@
         order: 1;
       }
       .hero-grid > .hero-card {
-        order: 2;
+        display: none;
       }
       .big-title { font-size: clamp(40px, 12vw, 68px); }
       .sub-title,
@@ -490,10 +494,25 @@
       .hero-copy {
         max-width: 36rem;
       }
-      .hero-card {
+      .chips {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
         width: 100%;
-        max-width: 560px;
-        margin-top: 6px;
+      }
+      .chip {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .btn-row {
+        width: 100%;
+      }
+      .hero-card {
+        display: none;
       }
       .stack { gap: 12px; }
       .fee-row {
@@ -606,17 +625,13 @@
       #info:not(.info-expanded) .list li:nth-child(n+4) {
         display: none;
       }
-      .grid2 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-      }
       .mobile-menu {
         position: fixed;
         top: 0;
         left: 0;
         width: min(82vw, 320px);
         height: 100vh;
-        padding: 78px 14px 18px;
+        padding: 16px 14px 18px;
         background: #5a0626;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
@@ -633,14 +648,20 @@
         transform: translateX(0);
       }
       .menu-brand {
+        position: sticky;
+        top: 0;
         display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
         align-items: center;
         gap: 10px;
         padding: 10px 10px 14px;
         margin-bottom: 10px;
         border-bottom: 1px solid rgba(255,255,255,.16);
+        background: #5a0626;
         cursor: pointer;
         user-select: none;
+        z-index: 1;
       }
       .menu-brand .brand-logo { width: 38px; height: 38px; }
       .menu-brand h1 {
@@ -649,8 +670,9 @@
         letter-spacing: .2em;
         text-transform: uppercase;
         color: #ffe8ef;
+        text-align: right;
       }
-      .menu-brand p { margin: 3px 0 0; font-size: 11px; color: var(--muted); }
+      .menu-brand p { margin: 3px 0 0; font-size: 11px; color: var(--muted); text-align: right; }
       .mobile-menu button {
         border-radius: 18px;
       }
@@ -674,6 +696,9 @@
       .mobile-menu { display: none !important; }
       .menu-backdrop { display: none !important; }
       .level-toggle { display: none; }
+      .info-toggle-wrap,
+      .info-toggle { display: none !important; }
+      #info .list li:nth-child(n+4) { display: flex !important; }
     }
   </style>
 </head>
@@ -694,7 +719,6 @@
           <button type="button" data-target="levels">Levels</button>
           <button type="button" data-target="info">Info</button>
           <button type="button" data-target="contact">Contact</button>
-          <button type="button" onclick="openStudentsPortal()">Students portal</button>
         </nav>
         <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu(event)"><span></span></button>
       </div>
@@ -704,7 +728,6 @@
         <button type="button" data-target="levels">Levels</button>
         <button type="button" data-target="info">Info</button>
         <button type="button" data-target="contact">Contact</button>
-        <button type="button" onclick="openStudentsPortal()">Students portal</button>
       </div>
     </div>
   </header>
@@ -721,6 +744,8 @@
           <span class="chip">Beginner friendly</span>
           <span class="chip">3 classes per week</span>
           <span class="chip">E-certificate</span>
+          <span class="chip">Course fees: Rs. 500</span>
+          <span class="chip">Online course</span>
         </div>
         <div class="btn-row">
           <a class="btn primary" id="joinBtn" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">Join Now</a>
@@ -1091,11 +1116,6 @@
       } catch (err) {
         return true;
       }
-    }
-
-
-    function openStudentsPortal() {
-      window.open('students-portal.html', '_blank', 'noopener,noreferrer');
     }
 
     function renderMain(){
