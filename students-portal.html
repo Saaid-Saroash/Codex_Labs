@@ -1,18 +1,9 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Portal</title>
   <meta name="theme-color" content="#6d082f">
-=======
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student Portal</title>
-  <meta name="theme-color" content="#6d082f" />
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&display=swap');
     :root {
@@ -692,19 +683,11 @@
           <button type="button" onclick="goHome()">Home</button>
         </nav>
 
-<<<<<<< HEAD
         <div class="nav-links" id="portalNav">
           <button type="button" onclick="goHome()">Home</button>
           <button type="button" onclick="goTo('assignmentsSection')">Assignments</button>
           <button type="button" onclick="goTo('videosSection')">Recordings</button>
           <button type="button" id="logoutDesktopBtn" onclick="logoutPortal()" class="">Logout</button>
-=======
-        <div class="nav-links hidden" id="portalNav">
-          <button type="button" onclick="goTo('assignmentsSection')">Assignments</button>
-          <button type="button" onclick="goTo('videosSection')">Recordings</button>
-          <button type="button" onclick="openAdmin()">Admin</button>
-          <button type="button" id="logoutDesktopBtn" onclick="logoutPortal()">Logout</button>
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
         </div>
 
         <button class="menu-btn" type="button" aria-label="Open menu" onclick="toggleDrawer()">☰</button>
@@ -720,16 +703,9 @@
     </div>
     <div class="drawer-list" id="drawerList">
       <button type="button" onclick="goHome()">Home</button>
-<<<<<<< HEAD
       <button type="button" id="drawerAssignmentsBtn" class="" onclick="goTo('assignmentsSection')">Assignments</button>
       <button type="button" id="drawerVideosBtn" class="" onclick="goTo('videosSection')">Recordings</button>
       <button type="button" id="drawerLogoutBtn" class="" onclick="logoutPortal()">Logout</button>
-=======
-      <button type="button" id="drawerAssignmentsBtn" class="hidden" onclick="goTo('assignmentsSection')">Assignments</button>
-      <button type="button" id="drawerVideosBtn" class="hidden" onclick="goTo('videosSection')">Recordings</button>
-      <button type="button" id="drawerAdminBtn" class="hidden" onclick="openAdmin()">Admin</button>
-      <button type="button" id="drawerLogoutBtn" class="hidden" onclick="logoutPortal()">Logout</button>
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     </div>
   </aside>
 
@@ -738,11 +714,7 @@
       <div class="hero-grid">
         <div>
           <h1 class="title" id="portalTitle">Student Portal</h1>
-<<<<<<< HEAD
           <p class="subtitle" id="portalSubtitle">Use the assigned credentials to access class recordings and assignments. Lessons are displayed as thumbnail cards, and selecting a card opens the MP4 player with standard controls.</p>
-=======
-          <p class="subtitle" id="portalSubtitle">Use the assigned credentials to access class recordings and assignments. Lessons are presented as thumbnail cards, and each selection opens the MP4 player with standard controls.</p>
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
         </div>
         <div class="card hidden" id="loginCard">
           <div class="field">
@@ -856,7 +828,6 @@
           <h2>Lesson recordings</h2>
           <p>Recorded lessons are displayed as thumbnail cards. Selecting a card opens the player in a modal window.</p>
         </div>
-<<<<<<< HEAD
         <div class="grid" id="videoGrid">
         <button class="video-card" type="button" onclick="openVideo(0)" aria-label="Open Recording 1">
           <div class="video-preview">
@@ -906,9 +877,6 @@
           <h3>Recording 6</h3>
         </button>
       </div>
-=======
-        <div class="grid" id="videoGrid"></div>
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
         
       </section>
     </section>
@@ -1051,7 +1019,6 @@
       </div>
 
       <div class="tab-panel" id="panelAssignments">
-<<<<<<< HEAD
         <div class="editor-list" id="assignmentEditor">
         <div class="card">
           <div class="editor-item-head">
@@ -1110,22 +1077,6 @@
             <div class="field"><label>Dead line</label><input value="" oninput="state.assignments[3].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="" oninput="state.assignments[3].score = this.value;"></div>
             <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;">Assignment details will appear here.</textarea></div>
-=======
-        <div class="editor-list" id="assignmentEditor"></div>
-        <div class="mini-actions">
-          <button class="btn" type="button" onclick="addAssignment()">Add assignment</button>
-        </div>
-      </div>
-
-      <div class="tab-panel" id="panelSecurity">
-        <div class="card" style="background: rgba(255,255,255,.05);">
-          <div class="section-head" style="margin-bottom: 0;">
-            <div class="eyebrow">Security</div>
-            <h2 style="font-size: 28px; margin-top: 12px;">Protection notes</h2>
-            <p>
-              Access is controlled through browser-side authentication. Front-end files can still be inspected in the browser, so this page is intended for convenience rather than strong security.
-            </p>
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
           </div>
         </div>
       </div>
@@ -1143,13 +1094,8 @@
   "portalTitle": "Student Portal",
   "portalSubtitle": "Lesson recordings",
   "introText": "Use the assigned credentials to access class recordings and assignments. Lessons are displayed as thumbnail cards, and selecting a card opens the MP4 player with standard controls.",
-<<<<<<< HEAD
   "username": "web-dev",
   "passHash": "58bf62e65034219acf59a32dc4ddfa414a6a9fc369d2f1b72c0cdf1244c18561",
-=======
-  "username": "sc-2026",
-  "passHash": "7eb8b2b4aba23822d0ccc15635ee494191ff6e4ad29001a37311db367b598876",
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
   "adminPinHash": "816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7",
   "videos": [
     {
@@ -1201,7 +1147,6 @@
       "deadline": "July 17, 2026",
       "score": "20",
       "text": "Assignment details will appear here."
-<<<<<<< HEAD
     },
     {
       "title": "Assignment 4",
@@ -1210,8 +1155,6 @@
       "deadline": "",
       "score": "",
       "text": "Assignment details will appear here."
-=======
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     }
   ]
 }</script>
@@ -1242,14 +1185,7 @@
     const modalVideo = document.getElementById("modalVideo");
     const modalTitle = document.getElementById("modalTitle");
     const logoutDesktopBtn = document.getElementById("logoutDesktopBtn");
-<<<<<<< HEAD
     const desktopNav = document.getElementById("desktopNav");
-=======
-    const drawerAssignmentsBtn = document.getElementById("drawerAssignmentsBtn");
-    const drawerVideosBtn = document.getElementById("drawerVideosBtn");
-    const drawerAdminBtn = document.getElementById("drawerAdminBtn");
-    const drawerLogoutBtn = document.getElementById("drawerLogoutBtn");
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     const portalNav = document.getElementById("portalNav");
     const drawer = document.getElementById("drawer");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
@@ -1334,11 +1270,7 @@
     }
 
     function goTo(id) {
-<<<<<<< HEAD
       if (!isAuthed() && (id === "assignmentsSection" || id === "videosSection")) {
-=======
-      if (!isAuthed() && (id === "portalSection" || id === "assignmentsSection" || id === "videosSection")) {
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
         loginMsg.textContent = "Sign in first to view protected sections.";
         focusLogin();
         return;
@@ -1380,19 +1312,6 @@
       drawerBackdrop.setAttribute("aria-hidden", "true");
     }
 
-<<<<<<< HEAD
-=======
-    function updateAuthButtons() {
-      const auth = isAuthed();
-      portalNav.classList.toggle("hidden", !auth);
-      logoutDesktopBtn.classList.toggle("hidden", !auth);
-      drawerAssignmentsBtn.classList.toggle("hidden", !auth);
-      drawerVideosBtn.classList.toggle("hidden", !auth);
-      drawerAdminBtn.classList.toggle("hidden", !auth);
-      drawerLogoutBtn.classList.toggle("hidden", !auth);
-    }
-
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     function togglePassword() {
       const hidden = portalPass.type === "text";
       portalPass.type = hidden ? "password" : "text";
@@ -1405,7 +1324,6 @@
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
     }
 
-<<<<<<< HEAD
     function startSession() {
       currentSessionId = crypto.randomUUID();
       sessionStorage.setItem(SESSION_ID_KEY, currentSessionId);
@@ -1440,20 +1358,6 @@
       }
     }
 
-=======
-    function goHome() {
-      try {
-        if (window.opener && !window.opener.closed) {
-          window.opener.location.href = "index.html";
-          window.opener.focus();
-          window.close();
-          return;
-        }
-      } catch {}
-      history.back();
-    }
-
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     function openBrandAdmin(e) {
       if (e) {
         e.preventDefault();
@@ -1585,14 +1489,7 @@
       updateAuthButtons();
       renderAssignments();
       renderVideos();
-<<<<<<< HEAD
       updatePortalHeader();
-=======
-      document.getElementById("portalTitle").textContent = state.portalTitle;
-      document.getElementById("portalSubtitle").textContent = state.introText;
-      document.getElementById("brandName").textContent = state.brand;
-      document.getElementById("brandSub").textContent = state.subHeading;
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -1826,42 +1723,8 @@
         saveMsgEl.textContent = "Source file connected.";
         setTimeout(() => saveMsgEl.textContent = "", 1600);
       } catch {
-<<<<<<< HEAD
         saveMsgEl.textContent = "Source file connection cancelled.";
         setTimeout(() => saveMsgEl.textContent = "", 1600);
-=======
-        document.getElementById("saveMsg").textContent = "Source file connection cancelled.";
-        setTimeout(() => document.getElementById("saveMsg").textContent = "", 1600);
-      }
-    }
-
-    function updatePortalHeader() {
-      document.getElementById("portalTitle").textContent = state.portalTitle;
-      document.getElementById("portalSubtitle").textContent = state.introText;
-      document.getElementById("brandName").textContent = state.brand;
-      document.getElementById("brandSub").textContent = state.subHeading;
-    }
-
-    function savePortalSettings() {
-      state.portalTitle = document.getElementById("editPortalTitle").value.trim() || "Student Portal";
-      state.portalSubtitle = document.getElementById("editPortalSubtitle").value.trim() || "Lesson recordings";
-      state.username = document.getElementById("editUsername").value.trim() || "sc-2026";
-      state.introText = document.getElementById("editIntro").value.trim() || defaultData.introText;
-      const newPass = document.getElementById("editPassword").value.trim();
-      const after = () => {
-        saveState();
-        updatePortalHeader();
-        document.getElementById("portalSaveMsg").textContent = "Portal settings saved.";
-        setTimeout(() => document.getElementById("portalSaveMsg").textContent = "", 1600);
-      };
-      if (newPass) {
-        sha256(newPass).then(hash => {
-          state.passHash = hash;
-          after();
-        });
-      } else {
-        after();
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
       }
     }
 
@@ -1889,15 +1752,6 @@
       renderVideoEditor();
     }
 
-<<<<<<< HEAD
-=======
-    function saveVideoSettings() {
-      renderVideos();
-      document.getElementById("videoSaveMsg").textContent = "Video list saved.";
-      setTimeout(() => document.getElementById("videoSaveMsg").textContent = "", 1600);
-    }
-
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     function renderAssignmentEditor() {
       const box = document.getElementById("assignmentEditor");
       box.innerHTML = state.assignments.map((a, idx) => `
@@ -1935,7 +1789,6 @@
       renderAssignmentEditor();
     }
 
-<<<<<<< HEAD
     async function applyPortalEditorToState() {
       state.portalTitle = titleInput().value.trim() || defaultData.portalTitle;
       state.portalSubtitle = subtitleInput().value.trim() || defaultData.portalSubtitle;
@@ -1945,12 +1798,6 @@
       if (newPass) {
         state.passHash = await sha256(newPass);
       }
-=======
-    function saveAssignmentSettings() {
-      renderAssignments();
-      document.getElementById("assignmentSaveMsg").textContent = "Assignments saved.";
-      setTimeout(() => document.getElementById("assignmentSaveMsg").textContent = "", 1600);
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
     }
 
     async function saveCurrentHtmlToFile() {
@@ -1977,15 +1824,9 @@
         renderVideoEditor();
         renderAssignmentEditor();
         const savedToFile = await saveCurrentHtmlToFile();
-<<<<<<< HEAD
         saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
       } catch {
         saveMsgEl.textContent = "Save failed.";
-=======
-        if (savedToFile) msg = "Saved to source file.";
-      } catch (e) {
-        msg = "Saved locally. File save failed.";
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
       }
       setTimeout(() => saveMsgEl.textContent = "", 1800);
     }
@@ -2051,7 +1892,6 @@
       openPortalWhenLoggedIn();
       setEyeIcon(peekBtn, portalPass.type === "password");
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
-<<<<<<< HEAD
       if (brandHomeTrigger) brandHomeTrigger.addEventListener("dblclick", openBrandAdmin);
       if (brandLogo) brandLogo.addEventListener("dblclick", openBrandAdmin);
       updateAuthButtons();
@@ -2059,15 +1899,3 @@
   </script>
 
 </body></html>
-=======
-      if (brandHomeTrigger) {
-        brandHomeTrigger.addEventListener("click", openBrandAdmin);
-      }
-      if (brandLogo) {
-        brandLogo.addEventListener("click", openBrandAdmin);
-      }
-    });
-  </script>
-</body>
-</html
->>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
