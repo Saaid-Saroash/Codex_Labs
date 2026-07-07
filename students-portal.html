@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Students portal</title>
-  <meta name="theme-color" content="#6d082f" />
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal</title>
+  <meta name="theme-color" content="#6d082f">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&display=swap');
     :root {
@@ -204,10 +203,13 @@
       width: 100%;
       padding: 14px 16px;
       border-radius: 18px;
-      border: 1px solid #caa7b2;
+      border: 1px solid #595959;
       outline: none;
-      background: #fff;
-      color: #261016;
+      background: #000;
+      color: #b7b7b7;
+    }
+    .field input::placeholder, .field textarea::placeholder, .field select::placeholder {
+      color: #8a8a8a;
     }
     .input-wrap {
       position: relative;
@@ -396,12 +398,19 @@
       box-shadow: var(--shadow);
       overflow: hidden;
       cursor: pointer;
-      transition: transform .16s ease, background .16s ease;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
       padding: 0;
       color: inherit;
       text-align: left;
+      will-change: transform;
     }
-    .video-card:hover { transform: translateY(-2px); background: rgba(255,255,255,.11); }
+    .video-card:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.12);
+      box-shadow: 0 26px 60px rgba(0,0,0,.34);
+    }
+    .video-card:hover .video-preview img { transform: scale(1.05); }
+    .video-card:hover .play-badge { transform: translateY(-2px) scale(1.05); }
     .video-preview {
       position: relative;
       width: 100%;
@@ -415,6 +424,7 @@
       object-fit: cover;
       display: block;
       filter: saturate(1.04) contrast(1.02);
+      transition: transform .25s ease, filter .25s ease;
     }
     .video-preview .play-badge {
       position: absolute;
@@ -662,23 +672,22 @@
     <div class="wrap">
       <div class="nav-inner">
         <div class="brand" id="brandHomeTrigger">
-          <img class="brand-logo" id="brandLogo" src="logo.png" alt="Codex Labs logo" />
+          <img class="brand-logo" id="brandLogo" src="logo.png" alt="Codex Labs logo">
           <div>
             <h1 id="brandName">Codex Labs</h1>
-            <p id="brandSub">Gen Z Programming Labs</p>
+            <p id="brandSub">Student Learning Portal</p>
           </div>
         </div>
 
-        <nav class="nav-links" id="desktopNav">
+        <nav class="nav-links hidden" id="desktopNav">
           <button type="button" onclick="goHome()">Home</button>
         </nav>
 
-        <div class="nav-links hidden" id="portalNav">
-          <button type="button" onclick="goTo('levels')">Levels</button>
-          <button type="button" onclick="goTo('info')">Info</button>
-          <button type="button" onclick="goTo('contact')">Contact</button>
-          <button type="button" onclick="goTo('assignmentsSection')">Portal</button>
-          <button type="button" id="logoutDesktopBtn" onclick="logoutPortal()">Logout</button>
+        <div class="nav-links" id="portalNav">
+          <button type="button" onclick="goHome()">Home</button>
+          <button type="button" onclick="goTo('assignmentsSection')">Assignments</button>
+          <button type="button" onclick="goTo('videosSection')">Recordings</button>
+          <button type="button" id="logoutDesktopBtn" onclick="logoutPortal()" class="">Logout</button>
         </div>
 
         <button class="menu-btn" type="button" aria-label="Open menu" onclick="toggleDrawer()">☰</button>
@@ -694,11 +703,9 @@
     </div>
     <div class="drawer-list" id="drawerList">
       <button type="button" onclick="goHome()">Home</button>
-      <button type="button" id="drawerLevelsBtn" class="hidden" onclick="goTo('levels')">Levels</button>
-      <button type="button" id="drawerInfoBtn" class="hidden" onclick="goTo('info')">Info</button>
-      <button type="button" id="drawerContactBtn" class="hidden" onclick="goTo('contact')">Contact</button>
-      <button type="button" id="drawerPortalBtn" class="hidden" onclick="goTo('assignmentsSection')">Portal</button>
-      <button type="button" id="drawerLogoutBtn" class="hidden" onclick="logoutPortal()">Logout</button>
+      <button type="button" id="drawerAssignmentsBtn" class="" onclick="goTo('assignmentsSection')">Assignments</button>
+      <button type="button" id="drawerVideosBtn" class="" onclick="goTo('videosSection')">Recordings</button>
+      <button type="button" id="drawerLogoutBtn" class="" onclick="logoutPortal()">Logout</button>
     </div>
   </aside>
 
@@ -706,22 +713,19 @@
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <h1 class="title" id="portalTitle">Students portal</h1>
-          <p class="subtitle" id="portalSubtitle">
-            Enter the username and password to access class recordings and assignments.
-            Videos appear as thumbnails in square boxes, and clicking one opens a normal mp4 player with controls.
-          </p>
+          <h1 class="title" id="portalTitle">Student Portal</h1>
+          <p class="subtitle" id="portalSubtitle">Use the assigned credentials to access class recordings and assignments. Lessons are displayed as thumbnail cards, and selecting a card opens the MP4 player with standard controls.</p>
         </div>
-        <div class="card" id="loginCard">
+        <div class="card hidden" id="loginCard">
           <div class="field">
             <label for="portalUser">Username</label>
-            <input id="portalUser" type="text" placeholder="Enter username" autocomplete="username" />
+            <input id="portalUser" type="text" placeholder="Enter username" autocomplete="username">
           </div>
           <div class="field" style="margin-top: 12px;">
             <label for="portalPass">Password</label>
             <div class="input-wrap">
-              <input id="portalPass" type="password" placeholder="Enter password" autocomplete="current-password" />
-              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"></button>
+              <input id="portalPass" type="text" placeholder="Enter password" autocomplete="current-password">
+              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path></svg></button>
             </div>
           </div>
           <div class="actions">
@@ -732,26 +736,148 @@
       </div>
     </section>
 
-    <section class="portal" id="portalArea" aria-hidden="true">
+    <section class="portal open" id="portalArea" aria-hidden="false">
       <section class="assignments" id="assignmentsSection">
         <div class="section-head">
           <div class="eyebrow">Assignments</div>
-          <h2>Class tasks</h2>
-          <p>Open any assignment bubble to see its details. Only logged-in users can view this content.</p>
+          <h2>Course assignments</h2>
+          <p>Review each assignment for its date, course name, deadline, and scoring details after signing in.</p>
         </div>
-        <div class="accordion" id="assignmentList"></div>
+        <div class="accordion" id="assignmentList">
+        <div class="assignment-card" data-assignment="0">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(0)" aria-expanded="false">
+            <div class="assignment-title">
+              <small>Assignment 1</small>
+              <span>Web Development Basics</span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">July 1, 2026</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">Web Development Basics</div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 3, 2026</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value">10</div></div>
+            </div>
+            <div class="assignment-text">Assignment details will appear here.</div>
+          </div>
+        </div>
+      
+        <div class="assignment-card" data-assignment="1">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(1)" aria-expanded="false">
+            <div class="assignment-title">
+              <small>Assignment 2</small>
+              <span>HTML and CSS</span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">July 8, 2026</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">HTML and CSS</div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 10, 2026</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value">15</div></div>
+            </div>
+            <div class="assignment-text">Assignment details will appear here.</div>
+          </div>
+        </div>
+      
+        <div class="assignment-card" data-assignment="2">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(2)" aria-expanded="false">
+            <div class="assignment-title">
+              <small>Assignment 3</small>
+              <span>Layout Practice</span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">July 15, 2026</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">Layout Practice</div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 17, 2026</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value">20</div></div>
+            </div>
+            <div class="assignment-text">Assignment details will appear here.</div>
+          </div>
+        </div>
+      
+        <div class="assignment-card" data-assignment="3">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(3)" aria-expanded="false">
+            <div class="assignment-title">
+              <small>Assignment 4</small>
+              <span></span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value"></div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value"></div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value"></div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value"></div></div>
+            </div>
+            <div class="assignment-text">Assignment details will appear here.</div>
+          </div>
+        </div>
+      </div>
       </section>
 
       <section id="videosSection" style="margin-top: 24px;">
         <div class="section-head">
           <div class="eyebrow">Recordings</div>
-          <h2>Video library</h2>
-          <p>Thumbnails are shown on the page, and clicking a card opens the player. Access stays hidden until login.</p>
+          <h2>Lesson recordings</h2>
+          <p>Recorded lessons are displayed as thumbnail cards. Selecting a card opens the player in a modal window.</p>
         </div>
-        <div class="grid" id="videoGrid"></div>
-        <div class="helper">
-          Tip: keep your files in a folder like <strong>videos/</strong> and rename them clearly, for example <strong>recording-1.mp4</strong>, <strong>lesson-2.mp4</strong>, or similar.
-        </div>
+        <div class="grid" id="videoGrid">
+        <button class="video-card" type="button" onclick="openVideo(0)" aria-label="Open Recording 1">
+          <div class="video-preview">
+            <img id="thumb-0" alt="Recording 1 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%201%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 1</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(1)" aria-label="Open Recording 2">
+          <div class="video-preview">
+            <img id="thumb-1" alt="Recording 2 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%202%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 2</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(2)" aria-label="Open Recording 3">
+          <div class="video-preview">
+            <img id="thumb-2" alt="Recording 3 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%203%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 3</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(3)" aria-label="Open Recording 6">
+          <div class="video-preview">
+            <img id="thumb-3" alt="Recording 6 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%206%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 6</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(4)" aria-label="Open Recording 5">
+          <div class="video-preview">
+            <img id="thumb-4" alt="Recording 5 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%205%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 5</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(5)" aria-label="Open Recording 6">
+          <div class="video-preview">
+            <img id="thumb-5" alt="Recording 6 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%206%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 6</h3>
+        </button>
+      </div>
+        
       </section>
     </section>
   </main>
@@ -764,58 +890,25 @@
       </div>
 
       <div class="player-wrap">
-        <video id="modalVideo" playsinline preload="metadata" controls></video>
+        <video id="modalVideo" playsinline="" preload="metadata" controls=""></video>
       </div>
 
-      <div class="controls">
-        <div class="controls-row">
-          <button class="control-btn" type="button" id="playBtn" onclick="togglePlay()">Play</button>
-          <button class="control-btn" type="button" onclick="skipBy(-10)">-10s</button>
-          <button class="control-btn" type="button" onclick="skipBy(10)">+10s</button>
-          <button class="control-btn" type="button" id="muteBtn" onclick="toggleMute()">Mute</button>
-          <button class="control-btn" type="button" onclick="toggleFullscreen()">Fullscreen</button>
-          <label class="time" for="speedSelect">Speed</label>
-          <select class="control-select" id="speedSelect" onchange="setSpeed(this.value)">
-            <option value="0.5">0.5x</option>
-            <option value="0.75">0.75x</option>
-            <option value="1" selected>1x</option>
-            <option value="1.25">1.25x</option>
-            <option value="1.5">1.5x</option>
-            <option value="2">2x</option>
-          </select>
-        </div>
-
-        <div class="controls-row">
-          <span class="time" id="currentTime">00:00</span>
-          <input class="range grow" id="seekBar" type="range" min="0" max="1000" value="0" step="1" oninput="seekFromBar(this.value)" />
-          <span class="time" id="durationTime">00:00</span>
-        </div>
-
-        <div class="controls-row">
-          <span class="time">Volume</span>
-          <input class="range grow" id="volumeBar" type="range" min="0" max="100" value="100" step="1" oninput="setVolume(this.value)" />
-        </div>
-      </div>
-
-      <div class="small-note">
-        Native mp4 controls are active, with extra shortcuts below for easy control.
-      </div>
     </div>
   </div>
 
-  <div class="admin-backdrop" id="adminBackdrop" aria-hidden="true" onclick="closeAdmin()"></div>
-  <section class="admin-modal" id="adminModal" aria-hidden="true">
+  <div class="admin-backdrop open" id="adminBackdrop" aria-hidden="false" onclick="closeAdmin()"></div>
+  <section class="admin-modal open" id="adminModal" aria-hidden="false">
     <div class="modal-top">
       <h3 class="modal-title">Admin panel</h3>
       <button class="close" type="button" onclick="closeAdmin()">Close</button>
     </div>
 
-    <div id="adminLoginBox" class="card" style="background: rgba(255,255,255,.05); max-width: 420px;">
+    <div id="adminLoginBox" class="card hidden" style="background: rgba(255,255,255,.05); max-width: 420px;">
       <div class="field">
         <label for="adminPin">PIN code</label>
         <div class="input-wrap">
-          <input id="adminPin" type="password" placeholder="Enter PIN code" autocomplete="current-password" />
-          <button class="peek-btn" id="adminPeekBtn" type="button" onclick="toggleAdminPin()" aria-label="Show or hide admin pin"></button>
+          <input id="adminPin" type="password" placeholder="Enter PIN code" autocomplete="current-password">
+          <button class="peek-btn" id="adminPeekBtn" type="button" onclick="toggleAdminPin()" aria-label="Show or hide admin pin"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
         </div>
       </div>
       <div class="actions">
@@ -824,10 +917,10 @@
       <div class="notice" id="adminMsg"></div>
     </div>
 
-    <div id="adminEditor" class="hidden">
+    <div id="adminEditor" class="">
       <div class="mini-actions" style="margin-bottom: 10px;">
         <button class="btn" type="button" onclick="connectSourceFile()">Connect source file</button>
-        <button class="btn primary" type="button" onclick="saveAll()">Save everything</button>
+        <button class="btn primary" type="button" onclick="saveAll()">Save to source</button>
         <span class="save-msg" id="saveMsg"></span>
       </div>
 
@@ -835,80 +928,174 @@
         <button class="tab-btn active" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
         <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
-        <button class="tab-btn" id="tabSecurity" type="button" onclick="switchAdminTab('security')">Security</button>
+
       </div>
 
       <div class="tab-panel active" id="panelPortal">
         <div class="admin-grid">
           <div class="field">
             <label>Portal title</label>
-            <input id="editPortalTitle" />
+            <input id="editPortalTitle">
           </div>
           <div class="field">
             <label>Portal subtitle</label>
-            <input id="editPortalSubtitle" />
+            <input id="editPortalSubtitle">
           </div>
           <div class="field">
             <label>Login username</label>
-            <input id="editUsername" />
+            <input id="editUsername">
           </div>
           <div class="field">
             <label>New password</label>
-            <input id="editPassword" type="password" placeholder="Leave blank to keep current" />
+            <input id="editPassword" type="password" placeholder="Leave blank to keep current">
           </div>
           <div class="field" style="grid-column: 1 / -1;">
             <label>Intro note</label>
             <textarea id="editIntro" rows="4"></textarea>
           </div>
         </div>
-        <div class="mini-actions">
-          <button class="btn primary" type="button" onclick="savePortalSettings()">Save portal settings</button>
-          <span class="save-msg" id="portalSaveMsg"></span>
-        </div>
       </div>
 
       <div class="tab-panel" id="panelVideos">
-        <div class="admin-grid-3" id="videoEditor"></div>
+        <div class="admin-grid-3" id="videoEditor">
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 1</span>
+            <button type="button" onclick="removeVideo(0)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 1" oninput="state.videos[0].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-1.mp4" oninput="state.videos[0].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 2</span>
+            <button type="button" onclick="removeVideo(1)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 2" oninput="state.videos[1].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-2.mp4" oninput="state.videos[1].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 3</span>
+            <button type="button" onclick="removeVideo(2)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 3" oninput="state.videos[2].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-3.mp4" oninput="state.videos[2].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 4</span>
+            <button type="button" onclick="removeVideo(3)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 6" oninput="state.videos[3].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-6.mp4" oninput="state.videos[3].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 5</span>
+            <button type="button" onclick="removeVideo(4)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 5" oninput="state.videos[4].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-5.mp4" oninput="state.videos[4].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 6</span>
+            <button type="button" onclick="removeVideo(5)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 6" oninput="state.videos[5].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-6.mp4" oninput="state.videos[5].src = this.value;"></div>
+        </div>
+      </div>
         <div class="mini-actions">
           <button class="btn" type="button" onclick="addVideo()">Add video</button>
-          <button class="btn primary" type="button" onclick="saveVideoSettings()">Save videos</button>
-          <span class="save-msg" id="videoSaveMsg"></span>
         </div>
-        <p class="inline-note">Edit video title and file path here. Thumbnails are generated from the actual files after login.</p>
+        <p class="inline-note">Edit video titles and file paths as needed. Thumbnails are generated from the actual files after sign-in.</p>
       </div>
 
       <div class="tab-panel" id="panelAssignments">
-        <div class="editor-list" id="assignmentEditor"></div>
-        <div class="mini-actions">
-          <button class="btn" type="button" onclick="addAssignment()">Add assignment</button>
-          <button class="btn primary" type="button" onclick="saveAssignmentSettings()">Save assignments</button>
-          <span class="save-msg" id="assignmentSaveMsg"></span>
+        <div class="editor-list" id="assignmentEditor">
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Assignment 1</span>
+            <button type="button" onclick="removeAssignment(0)">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Assignment 1" oninput="state.assignments[0].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="July 1, 2026" oninput="state.assignments[0].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="Web Development Basics" oninput="state.assignments[0].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="July 3, 2026" oninput="state.assignments[0].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="10" oninput="state.assignments[0].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[0].text = this.value;">Assignment details will appear here.</textarea></div>
+          </div>
         </div>
-      </div>
-
-      <div class="tab-panel" id="panelSecurity">
-        <div class="card" style="background: rgba(255,255,255,.05);">
-          <div class="section-head" style="margin-bottom: 0;">
-            <div class="eyebrow">Security</div>
-            <h2 style="font-size: 28px; margin-top: 12px;">Protection notes</h2>
-            <p>
-              The login uses a SHA-256 hash in the page and the protected sections stay hidden until authentication.
-              A fully unbreakable lock is not possible in a pure front-end page, because the browser can still inspect the source and assets.
-            </p>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Assignment 2</span>
+            <button type="button" onclick="removeAssignment(1)">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Assignment 2" oninput="state.assignments[1].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="July 8, 2026" oninput="state.assignments[1].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="HTML and CSS" oninput="state.assignments[1].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="July 10, 2026" oninput="state.assignments[1].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="15" oninput="state.assignments[1].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[1].text = this.value;">Assignment details will appear here.</textarea></div>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Assignment 3</span>
+            <button type="button" onclick="removeAssignment(2)">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Assignment 3" oninput="state.assignments[2].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="July 15, 2026" oninput="state.assignments[2].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="Layout Practice" oninput="state.assignments[2].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="July 17, 2026" oninput="state.assignments[2].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="20" oninput="state.assignments[2].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[2].text = this.value;">Assignment details will appear here.</textarea></div>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Assignment 4</span>
+            <button type="button" onclick="removeAssignment(3)">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Assignment 4" oninput="state.assignments[3].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="" oninput="state.assignments[3].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="" oninput="state.assignments[3].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="" oninput="state.assignments[3].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="" oninput="state.assignments[3].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;">Assignment details will appear here.</textarea></div>
           </div>
         </div>
       </div>
+        <div class="mini-actions">
+          <button class="btn" type="button" onclick="addAssignment()">Add assignment</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <script id="portal-data" type="application/json">{
   "brand": "Codex Labs",
-  "subHeading": "Gen Z Programming Labs",
-  "portalTitle": "Students portal",
-  "portalSubtitle": "Video recordings",
-  "introText": "Enter the username and password to access class recordings and assignments. Videos appear as thumbnails in square boxes, and clicking one opens a normal mp4 player with controls.",
-  "username": "sc-2026",
-  "passHash": "7eb8b2b4aba23822d0ccc15635ee494191ff6e4ad29001a37311db367b598876",
+  "subHeading": "Student Learning Portal",
+  "portalTitle": "Student Portal",
+  "portalSubtitle": "Lesson recordings",
+  "introText": "Use the assigned credentials to access class recordings and assignments. Lessons are displayed as thumbnail cards, and selecting a card opens the MP4 player with standard controls.",
+  "username": "web-dev",
+  "passHash": "58bf62e65034219acf59a32dc4ddfa414a6a9fc369d2f1b72c0cdf1244c18561",
   "adminPinHash": "816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7",
   "videos": [
     {
@@ -924,8 +1111,16 @@
       "src": "videos/recording-3.mp4"
     },
     {
-      "title": "Recording 4",
-      "src": "videos/recording-4.mp4"
+      "title": "Recording 6",
+      "src": "videos/recording-6.mp4"
+    },
+    {
+      "title": "Recording 5",
+      "src": "videos/recording-5.mp4"
+    },
+    {
+      "title": "Recording 6",
+      "src": "videos/recording-6.mp4"
     }
   ],
   "assignments": [
@@ -935,7 +1130,7 @@
       "course": "Web Development Basics",
       "deadline": "July 3, 2026",
       "score": "10",
-      "text": "Assignment .........."
+      "text": "Assignment details will appear here."
     },
     {
       "title": "Assignment 2",
@@ -943,7 +1138,7 @@
       "course": "HTML and CSS",
       "deadline": "July 10, 2026",
       "score": "15",
-      "text": "Assignment .........."
+      "text": "Assignment details will appear here."
     },
     {
       "title": "Assignment 3",
@@ -951,21 +1146,34 @@
       "course": "Layout Practice",
       "deadline": "July 17, 2026",
       "score": "20",
-      "text": "Assignment .........."
+      "text": "Assignment details will appear here."
+    },
+    {
+      "title": "Assignment 4",
+      "date": "",
+      "course": "",
+      "deadline": "",
+      "score": "",
+      "text": "Assignment details will appear here."
     }
   ]
 }</script>
+  
   <script>
-    const STORAGE_KEY = "studentsPortalConfig";
     const AUTH_KEY = "studentsPortalAuth";
     const ADMIN_KEY = "studentsPortalAdmin";
+    const SESSION_ID_KEY = "studentsPortalSessionId";
+    const LAST_ACTIVE_KEY = "studentsPortalLastActive";
+    const SESSION_TIMEOUT_MS = 15 * 60 * 1000;
     const DATA_SCRIPT_ID = "portal-data";
 
-    let defaultData = JSON.parse(document.getElementById(DATA_SCRIPT_ID).textContent);
-    let state = loadState();
+    const defaultData = JSON.parse(document.getElementById(DATA_SCRIPT_ID).textContent);
+    let state = structuredClone(defaultData);
     let currentIndex = -1;
     let currentAdminTab = "portal";
     let sourceFileHandle = null;
+    let currentSessionId = null;
+    let sessionTimer = null;
 
     const portalArea = document.getElementById("portalArea");
     const loginMsg = document.getElementById("loginMsg");
@@ -976,22 +1184,14 @@
     const modal = document.getElementById("videoModal");
     const modalVideo = document.getElementById("modalVideo");
     const modalTitle = document.getElementById("modalTitle");
-    const playBtn = document.getElementById("playBtn");
-    const muteBtn = document.getElementById("muteBtn");
-    const seekBar = document.getElementById("seekBar");
-    const currentTimeEl = document.getElementById("currentTime");
-    const durationTimeEl = document.getElementById("durationTime");
-    const speedSelect = document.getElementById("speedSelect");
-    const volumeBar = document.getElementById("volumeBar");
     const logoutDesktopBtn = document.getElementById("logoutDesktopBtn");
-    const drawerLevelsBtn = document.getElementById("drawerLevelsBtn");
-    const drawerInfoBtn = document.getElementById("drawerInfoBtn");
-    const drawerContactBtn = document.getElementById("drawerContactBtn");
-    const drawerPortalBtn = document.getElementById("drawerPortalBtn");
-    const drawerLogoutBtn = document.getElementById("drawerLogoutBtn");
+    const desktopNav = document.getElementById("desktopNav");
     const portalNav = document.getElementById("portalNav");
     const drawer = document.getElementById("drawer");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const drawerAssignmentsBtn = document.getElementById("drawerAssignmentsBtn");
+    const drawerVideosBtn = document.getElementById("drawerVideosBtn");
+    const drawerLogoutBtn = document.getElementById("drawerLogoutBtn");
     const adminModal = document.getElementById("adminModal");
     const adminBackdrop = document.getElementById("adminBackdrop");
     const adminLoginBox = document.getElementById("adminLoginBox");
@@ -1001,28 +1201,23 @@
     const adminPeekBtn = document.getElementById("adminPeekBtn");
     const brandHomeTrigger = document.getElementById("brandHomeTrigger");
     const brandLogo = document.getElementById("brandLogo");
+    const portalTitleEl = document.getElementById("portalTitle");
+    const portalSubtitleEl = document.getElementById("portalSubtitle");
+    const brandNameEl = document.getElementById("brandName");
+    const brandSubEl = document.getElementById("brandSub");
+    const saveMsgEl = document.getElementById("saveMsg");
+    const titleInput = () => document.getElementById("editPortalTitle");
+    const subtitleInput = () => document.getElementById("editPortalSubtitle");
+    const usernameInput = () => document.getElementById("editUsername");
+    const passwordInput = () => document.getElementById("editPassword");
+    const introInput = () => document.getElementById("editIntro");
 
     function loadState() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-        return saved ? mergeState(defaultData, saved) : structuredClone(defaultData);
-      } catch {
-        return structuredClone(defaultData);
-      }
-    }
-
-    function mergeState(base, saved) {
-      return {
-        ...base,
-        ...saved,
-        adminPinHash: base.adminPinHash,
-        videos: Array.isArray(saved.videos) && saved.videos.length ? saved.videos : structuredClone(base.videos),
-        assignments: Array.isArray(saved.assignments) && saved.assignments.length ? saved.assignments : structuredClone(base.assignments)
-      };
+      return structuredClone(defaultData);
     }
 
     function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      return true;
     }
 
     function isAuthed() {
@@ -1053,10 +1248,30 @@
         : '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"/></svg>';
     }
 
+    function updatePortalHeader() {
+      portalTitleEl.textContent = state.portalTitle || defaultData.portalTitle;
+      portalSubtitleEl.textContent = state.introText || defaultData.introText;
+      brandNameEl.textContent = state.brand || defaultData.brand;
+      brandSubEl.textContent = state.subHeading || defaultData.subHeading;
+    }
+
+    function updateAuthButtons() {
+      const auth = isAuthed();
+      desktopNav.classList.toggle("hidden", auth);
+      portalNav.classList.toggle("hidden", !auth);
+      logoutDesktopBtn.classList.toggle("hidden", !auth);
+      drawerAssignmentsBtn.classList.toggle("hidden", !auth);
+      drawerVideosBtn.classList.toggle("hidden", !auth);
+      drawerLogoutBtn.classList.toggle("hidden", !auth);
+    }
+
+    function focusLogin() {
+      portalUser.focus();
+    }
 
     function goTo(id) {
-      if (!isAuthed() && (id === "portalSection" || id === "assignmentsSection" || id === "videosSection")) {
-        loginMsg.textContent = "Login first to view protected sections.";
+      if (!isAuthed() && (id === "assignmentsSection" || id === "videosSection")) {
+        loginMsg.textContent = "Sign in first to view protected sections.";
         focusLogin();
         return;
       }
@@ -1065,8 +1280,16 @@
       closeDrawer();
     }
 
-    function focusLogin() {
-      portalUser.focus();
+    function goHome() {
+      try {
+        if (window.opener && !window.opener.closed) {
+          window.opener.location.href = "index.html";
+          window.opener.focus();
+          window.close();
+          return;
+        }
+      } catch {}
+      history.back();
     }
 
     function toggleDrawer() {
@@ -1089,17 +1312,6 @@
       drawerBackdrop.setAttribute("aria-hidden", "true");
     }
 
-    function updateAuthButtons() {
-      const auth = isAuthed();
-      portalNav.classList.toggle("hidden", !auth);
-      logoutDesktopBtn.classList.toggle("hidden", !auth);
-      drawerLevelsBtn.classList.toggle("hidden", !auth);
-      drawerInfoBtn.classList.toggle("hidden", !auth);
-      drawerContactBtn.classList.toggle("hidden", !auth);
-      drawerPortalBtn.classList.toggle("hidden", !auth);
-      drawerLogoutBtn.classList.toggle("hidden", !auth);
-    }
-
     function togglePassword() {
       const hidden = portalPass.type === "text";
       portalPass.type = hidden ? "password" : "text";
@@ -1112,25 +1324,45 @@
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
     }
 
-    function goHome() {
-      window.location.href = "index.html";
+    function startSession() {
+      currentSessionId = crypto.randomUUID();
+      sessionStorage.setItem(SESSION_ID_KEY, currentSessionId);
+      sessionStorage.setItem(LAST_ACTIVE_KEY, String(Date.now()));
+      if (sessionTimer) clearInterval(sessionTimer);
+      sessionTimer = setInterval(checkSessionTimeout, 30 * 1000);
     }
 
-    let brandClickTimer = null;
-    function brandSingleClick() {
-      if (brandClickTimer) return;
-      brandClickTimer = setTimeout(() => {
-        brandClickTimer = null;
-        goHome();
-      }, 220);
+    function touchSession() {
+      if (!isAuthed()) return;
+      sessionStorage.setItem(LAST_ACTIVE_KEY, String(Date.now()));
     }
-    function brandDoubleClick(e) {
-      if (brandClickTimer) {
-        clearTimeout(brandClickTimer);
-        brandClickTimer = null;
+
+    function checkSessionTimeout() {
+      if (!isAuthed()) return;
+      const lastActive = Number(sessionStorage.getItem(LAST_ACTIVE_KEY) || "0");
+      if (!lastActive) return;
+      if (Date.now() - lastActive > SESSION_TIMEOUT_MS) {
+        logoutPortal("Session expired after 15 minutes of inactivity.");
       }
-      e.preventDefault();
-      e.stopPropagation();
+    }
+
+    function resetSessionData() {
+      sessionStorage.removeItem(AUTH_KEY);
+      sessionStorage.removeItem(ADMIN_KEY);
+      sessionStorage.removeItem(SESSION_ID_KEY);
+      sessionStorage.removeItem(LAST_ACTIVE_KEY);
+      currentSessionId = null;
+      if (sessionTimer) {
+        clearInterval(sessionTimer);
+        sessionTimer = null;
+      }
+    }
+
+    function openBrandAdmin(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       openAdmin();
     }
 
@@ -1257,11 +1489,8 @@
       updateAuthButtons();
       renderAssignments();
       renderVideos();
-      document.getElementById("portalTitle").textContent = state.portalTitle;
-      document.getElementById("portalSubtitle").textContent = state.introText;
-      document.getElementById("brandName").textContent = state.brand;
-      document.getElementById("brandSub").textContent = state.subHeading;
-      goTo("home");
+      updatePortalHeader();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function hidePortal() {
@@ -1275,46 +1504,48 @@
       const enteredUser = portalUser.value.trim();
       const enteredPass = portalPass.value.trim();
       if (!enteredUser || !enteredPass) {
-        loginMsg.textContent = "Enter the username and password.";
+        loginMsg.textContent = "Enter credentials.";
         return;
       }
       if (enteredUser !== state.username) {
-        loginMsg.textContent = "Wrong username.";
+        loginMsg.textContent = "Wrong credentials.";
         return;
       }
       const hash = await sha256(enteredPass);
       if (hash !== state.passHash) {
-        loginMsg.textContent = "Wrong password.";
+        loginMsg.textContent = "Wrong credentials.";
         return;
       }
       sessionStorage.setItem(AUTH_KEY, "1");
       loginMsg.textContent = "";
+      startSession();
       showPortal();
       updateAuthButtons();
     }
 
-    function logoutPortal() {
-      sessionStorage.removeItem(AUTH_KEY);
-      sessionStorage.removeItem(ADMIN_KEY);
+    function logoutPortal(message = "Logged out.") {
+      resetSessionData();
       closeVideo();
       closeAdmin();
       hidePortal();
       portalPass.value = "";
-      loginMsg.textContent = "Logged out.";
-      currentIndex = -1;
+      portalUser.value = "";
       adminPin.value = "";
+      currentIndex = -1;
       adminLoginBox.classList.remove("hidden");
       adminEditor.classList.add("hidden");
+      loginMsg.textContent = message;
       updateAuthButtons();
       goHome();
     }
 
     function requireAuthForOpen() {
       if (!isAuthed()) {
-        loginMsg.textContent = "Login first to view recordings.";
+        loginMsg.textContent = "Sign in first to view recordings.";
         focusLogin();
         return false;
       }
+      touchSession();
       return true;
     }
 
@@ -1326,14 +1557,13 @@
       modalTitle.textContent = video.title;
       modalVideo.src = video.src;
       modalVideo.currentTime = 0;
-      modalVideo.playbackRate = Number(speedSelect.value) || 1;
-      modalVideo.volume = Number(volumeBar.value) / 100;
+      modalVideo.volume = 1;
       modalVideo.muted = false;
+      modalVideo.playbackRate = 1;
       modalVideo.load();
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       modalVideo.play().catch(() => {});
-      syncButtons();
     }
 
     function closeVideo() {
@@ -1343,26 +1573,19 @@
       modalVideo.removeAttribute("src");
       modalVideo.load();
       currentIndex = -1;
-      seekBar.value = 0;
-      currentTimeEl.textContent = "00:00";
-      durationTimeEl.textContent = "00:00";
-      syncButtons();
     }
 
     function togglePlay() {
       if (modalVideo.paused) modalVideo.play().catch(() => {}); else modalVideo.pause();
-      syncButtons();
     }
 
     function skipBy(seconds) {
       if (!Number.isFinite(modalVideo.duration)) return;
       modalVideo.currentTime = Math.max(0, Math.min(modalVideo.duration, modalVideo.currentTime + seconds));
-      syncSeekBar();
     }
 
     function toggleMute() {
       modalVideo.muted = !modalVideo.muted;
-      syncButtons();
     }
 
     function setSpeed(value) {
@@ -1373,7 +1596,6 @@
       const vol = Math.max(0, Math.min(100, Number(value) || 0)) / 100;
       modalVideo.volume = vol;
       if (vol > 0 && modalVideo.muted) modalVideo.muted = false;
-      syncButtons();
     }
 
     function seekFromBar(value) {
@@ -1396,24 +1618,8 @@
       return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
     }
 
-    function syncSeekBar() {
-      if (!Number.isFinite(modalVideo.duration) || modalVideo.duration <= 0) return;
-      seekBar.value = Math.round((modalVideo.currentTime / modalVideo.duration) * 1000);
-      currentTimeEl.textContent = formatTime(modalVideo.currentTime);
-      durationTimeEl.textContent = formatTime(modalVideo.duration);
-    }
-
-    function syncButtons() {
-      playBtn.textContent = modalVideo.paused ? "Play" : "Pause";
-      muteBtn.textContent = modalVideo.muted ? "Unmute" : "Mute";
-    }
-
-    modalVideo.addEventListener("loadedmetadata", syncSeekBar);
-    modalVideo.addEventListener("timeupdate", syncSeekBar);
-    modalVideo.addEventListener("play", syncButtons);
-    modalVideo.addEventListener("pause", syncButtons);
-    modalVideo.addEventListener("volumechange", syncButtons);
-    modalVideo.addEventListener("ended", syncButtons);
+    function syncSeekBar() {}
+    function syncButtons() {}
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) closeVideo();
@@ -1424,27 +1630,25 @@
       document.getElementById("tabPortal").classList.toggle("active", tab === "portal");
       document.getElementById("tabVideos").classList.toggle("active", tab === "videos");
       document.getElementById("tabAssignments").classList.toggle("active", tab === "assignments");
-      document.getElementById("tabSecurity").classList.toggle("active", tab === "security");
       document.getElementById("panelPortal").classList.toggle("active", tab === "portal");
       document.getElementById("panelVideos").classList.toggle("active", tab === "videos");
       document.getElementById("panelAssignments").classList.toggle("active", tab === "assignments");
-      document.getElementById("panelSecurity").classList.toggle("active", tab === "security");
       if (tab === "videos") renderVideoEditor();
       if (tab === "assignments") renderAssignmentEditor();
       if (tab === "portal") fillPortalEditor();
     }
 
     function fillPortalEditor() {
-      document.getElementById("editPortalTitle").value = state.portalTitle;
-      document.getElementById("editPortalSubtitle").value = state.portalSubtitle;
-      document.getElementById("editUsername").value = state.username;
-      document.getElementById("editPassword").value = "";
-      document.getElementById("editIntro").value = state.introText;
+      titleInput().value = state.portalTitle;
+      subtitleInput().value = state.portalSubtitle;
+      usernameInput().value = state.username;
+      passwordInput().value = "";
+      introInput().value = state.introText;
     }
 
     function openAdmin() {
       if (!isAuthed()) {
-        loginMsg.textContent = "Login first before opening admin.";
+        loginMsg.textContent = "Sign in first to open the admin panel.";
         focusLogin();
         return;
       }
@@ -1464,6 +1668,7 @@
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
       switchAdminTab(currentAdminTab);
       closeDrawer();
+      touchSession();
     }
 
     function closeAdmin() {
@@ -1471,17 +1676,18 @@
       adminBackdrop.classList.remove("open");
       adminModal.setAttribute("aria-hidden", "true");
       adminBackdrop.setAttribute("aria-hidden", "true");
+      sessionStorage.removeItem(ADMIN_KEY);
     }
 
     async function loginAdmin() {
       const pin = adminPin.value.trim();
       if (!pin) {
-        adminMsg.textContent = "Enter the PIN code.";
+        adminMsg.textContent = "Enter credentials.";
         return;
       }
       const hash = await sha256(pin);
       if (hash !== state.adminPinHash) {
-        adminMsg.textContent = "Wrong PIN code.";
+        adminMsg.textContent = "Wrong credentials.";
         return;
       }
       sessionStorage.setItem(ADMIN_KEY, "1");
@@ -1492,12 +1698,13 @@
       renderVideoEditor();
       renderAssignmentEditor();
       switchAdminTab(currentAdminTab);
+      touchSession();
     }
 
     async function connectSourceFile() {
       try {
         if (!("showOpenFilePicker" in window)) {
-          document.getElementById("saveMsg").textContent = "File picker not supported here.";
+          saveMsgEl.textContent = "File picker not supported here.";
           return;
         }
         const [handle] = await window.showOpenFilePicker({
@@ -1513,40 +1720,11 @@
         if (sourceFileHandle.requestPermission) {
           await sourceFileHandle.requestPermission({ mode: "readwrite" });
         }
-        document.getElementById("saveMsg").textContent = "Source file connected.";
-        setTimeout(() => document.getElementById("saveMsg").textContent = "", 1600);
+        saveMsgEl.textContent = "Source file connected.";
+        setTimeout(() => saveMsgEl.textContent = "", 1600);
       } catch {
-        document.getElementById("saveMsg").textContent = "Source file connection cancelled.";
-        setTimeout(() => document.getElementById("saveMsg").textContent = "", 1600);
-      }
-    }
-
-    function updatePortalHeader() {
-      document.getElementById("portalTitle").textContent = state.portalTitle;
-      document.getElementById("portalSubtitle").textContent = state.introText;
-      document.getElementById("brandName").textContent = state.brand;
-      document.getElementById("brandSub").textContent = state.subHeading;
-    }
-
-    function savePortalSettings() {
-      state.portalTitle = document.getElementById("editPortalTitle").value.trim() || "Students portal";
-      state.portalSubtitle = document.getElementById("editPortalSubtitle").value.trim() || "Video recordings";
-      state.username = document.getElementById("editUsername").value.trim() || "sc-2026";
-      state.introText = document.getElementById("editIntro").value.trim() || defaultData.introText;
-      const newPass = document.getElementById("editPassword").value.trim();
-      const after = () => {
-        saveState();
-        updatePortalHeader();
-        document.getElementById("portalSaveMsg").textContent = "Portal settings saved.";
-        setTimeout(() => document.getElementById("portalSaveMsg").textContent = "", 1600);
-      };
-      if (newPass) {
-        sha256(newPass).then(hash => {
-          state.passHash = hash;
-          after();
-        });
-      } else {
-        after();
+        saveMsgEl.textContent = "Source file connection cancelled.";
+        setTimeout(() => saveMsgEl.textContent = "", 1600);
       }
     }
 
@@ -1558,29 +1736,20 @@
             <span>Video ${idx + 1}</span>
             <button type="button" onclick="removeVideo(${idx})">Delete</button>
           </div>
-          <div class="field" style="margin-top:10px;"><label>Title</label><input value="${escapeHtml(v.title)}" oninput="state.videos[${idx}].title = this.value; saveState();"></div>
-          <div class="field" style="margin-top:10px;"><label>File path</label><input value="${escapeHtml(v.src)}" oninput="state.videos[${idx}].src = this.value; saveState();"></div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="${escapeHtml(v.title)}" oninput="state.videos[${idx}].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="${escapeHtml(v.src)}" oninput="state.videos[${idx}].src = this.value;"></div>
         </div>
       `).join("");
     }
 
     function addVideo() {
       state.videos.push({ title: `Recording ${state.videos.length + 1}`, src: `videos/recording-${state.videos.length + 1}.mp4` });
-      saveState();
       renderVideoEditor();
     }
 
     function removeVideo(idx) {
       state.videos.splice(idx, 1);
-      saveState();
       renderVideoEditor();
-    }
-
-    function saveVideoSettings() {
-      saveState();
-      renderVideos();
-      document.getElementById("videoSaveMsg").textContent = "Video list saved.";
-      setTimeout(() => document.getElementById("videoSaveMsg").textContent = "", 1600);
     }
 
     function renderAssignmentEditor() {
@@ -1592,12 +1761,12 @@
             <button type="button" onclick="removeAssignment(${idx})">Delete</button>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
-            <div class="field"><label>Title</label><input value="${escapeHtml(a.title)}" oninput="state.assignments[${idx}].title = this.value; saveState();"></div>
-            <div class="field"><label>Assignment date</label><input value="${escapeHtml(a.date)}" oninput="state.assignments[${idx}].date = this.value; saveState();"></div>
-            <div class="field"><label>Course name</label><input value="${escapeHtml(a.course)}" oninput="state.assignments[${idx}].course = this.value; saveState();"></div>
-            <div class="field"><label>Dead line</label><input value="${escapeHtml(a.deadline)}" oninput="state.assignments[${idx}].deadline = this.value; saveState();"></div>
-            <div class="field"><label>Score points</label><input value="${escapeHtml(a.score)}" oninput="state.assignments[${idx}].score = this.value; saveState();"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[${idx}].text = this.value; saveState();">${escapeHtml(a.text)}</textarea></div>
+            <div class="field"><label>Title</label><input value="${escapeHtml(a.title)}" oninput="state.assignments[${idx}].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="${escapeHtml(a.date)}" oninput="state.assignments[${idx}].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="${escapeHtml(a.course)}" oninput="state.assignments[${idx}].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="${escapeHtml(a.deadline)}" oninput="state.assignments[${idx}].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="${escapeHtml(a.score)}" oninput="state.assignments[${idx}].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[${idx}].text = this.value;">${escapeHtml(a.text)}</textarea></div>
           </div>
         </div>
       `).join("");
@@ -1610,23 +1779,25 @@
         course: "",
         deadline: "",
         score: "",
-        text: "Assignment .........."
+        text: "Assignment details will appear here."
       });
-      saveState();
       renderAssignmentEditor();
     }
 
     function removeAssignment(idx) {
       state.assignments.splice(idx, 1);
-      saveState();
       renderAssignmentEditor();
     }
 
-    function saveAssignmentSettings() {
-      saveState();
-      renderAssignments();
-      document.getElementById("assignmentSaveMsg").textContent = "Assignments saved.";
-      setTimeout(() => document.getElementById("assignmentSaveMsg").textContent = "", 1600);
+    async function applyPortalEditorToState() {
+      state.portalTitle = titleInput().value.trim() || defaultData.portalTitle;
+      state.portalSubtitle = subtitleInput().value.trim() || defaultData.portalSubtitle;
+      state.username = usernameInput().value.trim() || defaultData.username;
+      state.introText = introInput().value.trim() || defaultData.introText;
+      const newPass = passwordInput().value.trim();
+      if (newPass) {
+        state.passHash = await sha256(newPass);
+      }
     }
 
     async function saveCurrentHtmlToFile() {
@@ -1635,8 +1806,8 @@
         const perm = await sourceFileHandle.requestPermission({ mode: "readwrite" });
         if (perm !== "granted") return false;
       }
-      const cloned = document.getElementById(DATA_SCRIPT_ID);
-      cloned.textContent = JSON.stringify(state, null, 2);
+      const dataScript = document.getElementById(DATA_SCRIPT_ID);
+      dataScript.textContent = JSON.stringify(state, null, 2);
       const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
       const writable = await sourceFileHandle.createWritable();
       await writable.write(html);
@@ -1645,39 +1816,53 @@
     }
 
     async function saveAll() {
-      saveState();
-      updatePortalHeader();
-      renderAssignments();
-      renderVideos();
-      renderVideoEditor();
-      renderAssignmentEditor();
-      let msg = "Saved to local storage.";
       try {
+        await applyPortalEditorToState();
+        updatePortalHeader();
+        renderAssignments();
+        renderVideos();
+        renderVideoEditor();
+        renderAssignmentEditor();
         const savedToFile = await saveCurrentHtmlToFile();
-        if (savedToFile) msg = "Saved to connected source file.";
-      } catch (e) {
-        msg = "Saved locally. File save failed.";
+        saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
+      } catch {
+        saveMsgEl.textContent = "Save failed.";
       }
-      document.getElementById("saveMsg").textContent = msg;
-      setTimeout(() => document.getElementById("saveMsg").textContent = "", 1800);
+      setTimeout(() => saveMsgEl.textContent = "", 1800);
     }
 
     function openPortalWhenLoggedIn() {
+      sessionStorage.removeItem(ADMIN_KEY);
       if (isAuthed()) {
         showPortal();
       } else {
         hidePortal();
       }
       updateAuthButtons();
-      if (isAdminAuthed()) {
-        adminLoginBox.classList.add("hidden");
-        adminEditor.classList.remove("hidden");
-      }
+      adminLoginBox.classList.remove("hidden");
+      adminEditor.classList.add("hidden");
+      closeAdmin();
     }
 
-    portalUser.addEventListener("keydown", (e) => { if (e.key === "Enter") loginPortal(); });
-    portalPass.addEventListener("keydown", (e) => { if (e.key === "Enter") loginPortal(); });
-    adminPin.addEventListener("keydown", (e) => { if (e.key === "Enter") loginAdmin(); });
+    portalUser.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        portalPass.focus();
+      }
+    });
+    portalPass.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        loginPortal();
+      }
+    });
+    adminPin.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        loginAdmin();
+      }
+    });
+
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closeVideo();
@@ -1694,21 +1879,23 @@
       }
     });
 
+    document.addEventListener("mousemove", touchSession, { passive: true });
+    document.addEventListener("keydown", touchSession, { passive: true });
+    document.addEventListener("click", touchSession, { passive: true });
+    document.addEventListener("scroll", touchSession, { passive: true });
+    window.addEventListener("beforeunload", resetSessionData);
+    window.addEventListener("pagehide", resetSessionData);
+
     window.addEventListener("load", () => {
+      state = loadState();
       updatePortalHeader();
       openPortalWhenLoggedIn();
-      if (!isAuthed()) hidePortal();
       setEyeIcon(peekBtn, portalPass.type === "password");
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
-      if (brandHomeTrigger) {
-        brandHomeTrigger.addEventListener("click", brandSingleClick);
-        brandHomeTrigger.addEventListener("dblclick", brandDoubleClick);
-      }
-      if (brandLogo) {
-        brandLogo.addEventListener("click", brandSingleClick);
-        brandLogo.addEventListener("dblclick", brandDoubleClick);
-      }
+      if (brandHomeTrigger) brandHomeTrigger.addEventListener("dblclick", openBrandAdmin);
+      if (brandLogo) brandLogo.addEventListener("dblclick", openBrandAdmin);
+      updateAuthButtons();
     });
   </script>
-</body>
-</html>
+
+</body></html>
