@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en"><head>
   <meta charset="UTF-8">
@@ -1329,3 +1330,1336 @@
   </script>
 
 </body></html>
+=======
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codex Labs _ Gen Z programming</title>
+  <link rel="icon" href="./logo.png" type="image/png" sizes="any">
+  <link rel="shortcut icon" href="./logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <meta name="theme-color" content="#6d082f">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fredoka:wght@400;500;600;700&family=Luckiest+Guy&display=swap');
+
+    :root {
+      --bg: #6d082f;
+      --bg2: #5a0626;
+      --panel: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.16);
+      --text: #fff8f8;
+      --muted: rgba(255,248,248,.78);
+      --graybox: #5d636a;
+      --shadow: 0 20px 50px rgba(0,0,0,.28);
+      --radius: 28px;
+      --red: #ff2b2b;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Fredoka, Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,.08), transparent 18%),
+        radial-gradient(circle at bottom left, rgba(23,60,168,.18), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    .wrap { width: min(1200px, calc(100% - 28px)); margin: 0 auto; }
+    body { position: relative; overflow-x: hidden; }
+    .page-glow {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: min(28vw, 260px);
+      height: min(78vw, 820px);
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(70, 18, 132, .40) 0%,
+        rgba(48, 10, 92, .26) 28%,
+        rgba(35, 7, 68, .12) 54%,
+        rgba(35, 7, 68, 0) 78%);
+      filter: blur(58px);
+      opacity: .78;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+    }
+    header, main, footer { position: relative; z-index: 1; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(90,6,38,.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 8px 18px rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+    }
+.brand h1 {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      color: #ffe8ef;
+    }
+    .brand p { margin: 3px 0 0; font-size: 12px; color: var(--muted); }
+
+    .menu-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+    .menu-btn span,
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: white;
+      position: relative;
+    }
+    .menu-btn span::before { position: absolute; top: -6px; }
+    .menu-btn span::after { position: absolute; top: 6px; }
+
+    .nav-links { display: none; gap: 14px; align-items: center; }
+    .nav-links button {
+      padding: 11px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .nav-links button:hover { background: rgba(255,255,255,.14); }
+
+    .mobile-menu { display: none; padding: 0 0 16px; }
+    .mobile-menu.open { display: block; }
+    .mobile-menu button {
+      width: 100%;
+      margin-top: 10px;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .hero { padding: 34px 0 14px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 24px; align-items: center; }
+
+    .big-title {
+      margin: 0;
+      font-family: 'Luckiest Guy', cursive;
+      color: white;
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .92;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .sub-title {
+      margin: 12px 0 0;
+      font-size: clamp(26px, 4vw, 48px);
+      font-style: italic;
+      font-weight: 700;
+      color: rgba(255,255,255,.96);
+    }
+    .hero-copy {
+      margin-top: 22px;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .btn {
+      border: none;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    .btn.primary {
+      background: linear-gradient(90deg, #f6d8d8, #f2f2f2);
+      color: #5a0626;
+    }
+    .btn.secondary {
+      background: rgba(255,255,255,.08);
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .hero-card {
+      position: relative;
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+    }
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-card::before {
+      width: 170px;
+      height: 170px;
+      right: -58px;
+      top: -58px;
+      background: rgba(23,60,168,.45);
+    }
+    .hero-card::after {
+      width: 190px;
+      height: 190px;
+      left: -76px;
+      bottom: -76px;
+      background: rgba(205,31,31,.26);
+    }
+
+    .stack { position: relative; z-index: 1; display: grid; gap: 18px; }
+    .fee-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .fee-box,
+    .join-box,
+    .live-box {
+      position: relative;
+      background: var(--graybox);
+      color: white;
+      border: 2px solid rgba(255,255,255,.78);
+      border-radius: 16px;
+      box-shadow: 8px 8px 0 rgba(23,60,168,.75), 14px 14px 0 rgba(205,31,31,.95);
+      padding: 18px 22px;
+      min-width: 230px;
+      text-align: center;
+    }
+    .fee-box::before,
+    .join-box::before,
+    .live-box::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 2px solid rgba(255,255,255,.75);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .box-title {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.25;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .04em;
+    }
+    .box-value { margin-top: 6px; font-size: 28px; font-weight: 800; line-height: 1.1; }
+    .live-info { margin-top: 10px; color: #fff; font-size: 15px; font-weight: 700; }
+
+    .section { padding: 28px 0; }
+    .section-head { margin-bottom: 18px; }
+    .section-head .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: .24em;
+      font-size: 12px;
+      color: #ffe8ef;
+    }
+    .section-head h3 { margin: 14px 0 0; font-size: clamp(30px, 4vw, 54px); line-height: 1.02; }
+    .section-head p { margin: 10px 0 0; max-width: 760px; color: var(--muted); line-height: 1.8; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    .level-card.live { outline: 2px solid rgba(255,43,43,.7); box-shadow: 0 0 0 1px rgba(255,43,43,.2), var(--shadow); }
+    .level-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .live-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); animation: blink 1s infinite; box-shadow: 0 0 0 0 rgba(255,43,43,.8); }
+    @keyframes blink {
+      0%,100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(255,43,43,.8); }
+      50% { opacity: .35; transform: scale(.86); box-shadow: 0 0 0 12px rgba(255,43,43,0); }
+    }
+    .live-label { color: #ff8e8e; font-size: 12px; letter-spacing: .18em; }
+    .level-list { margin: 14px 0 0; padding: 0; list-style: none; }
+    .level-list li { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; color: rgba(255,255,255,.93); line-height: 1.5; }
+    .level-list li::before { content: "•"; color: #fff; font-size: 20px; line-height: 1; }
+
+    .list { margin: 14px 0 0; padding: 0; list-style: none; }
+    .list li { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; color: rgba(255,255,255,.93); line-height: 1.5; }
+    .list li::before { content: "•"; color: #fff; font-size: 20px; line-height: 1; }
+
+    .footer {
+      width: 100%;
+      margin-top: 12px;
+      background: rgba(0,0,0,.12);
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      width: 100%;
+      padding: 6px 18px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      text-align: center;
+    }
+    .footer-icons { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .footer-icon { width: 34px; height: 34px; border-radius: 12px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.14); }
+    .footer-icon svg { width: 17px; height: 17px; }
+    .icon-wa { background: #25d366; }
+    .icon-ig { background: linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5); }
+    .icon-g { background: #fff; color: #6d082f; }
+        .footer-copy { font-size: 13px; color: var(--muted); line-height: 1.1; }
+
+    .admin-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(10,10,10,.26);
+      backdrop-filter: blur(12px);
+      overflow-y: auto;
+    }
+    .admin-overlay.open { display: flex; }
+    .admin-panel {
+      width: min(1120px, 100%);
+      margin: 20px 0;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      background: #3b0419;
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .admin-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .admin-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .admin-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
+    .field label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 800; }
+    .field input,.field textarea,.field select { width: 100%; padding: 13px 14px; border-radius: 18px; border: 1px solid #ab8390; background: #fff; color: #261016; outline: none; }
+    .field select option { background: white; color: #261016; }
+    .field textarea { min-height: 86px; resize: vertical; }
+    .small { font-size: 12px; color: var(--muted); }
+    .contact-link {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 800;
+      display: inline-block;
+      word-break: break-word;
+    }
+    .contact-link:hover { text-decoration: underline; }
+    .hidden { display: none; }
+    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+    .notice { color: #9ef1c4; font-weight: 700; }
+
+    .admin-item { display: flex; align-items: center; gap: 10px; justify-content: space-between; padding: 10px; margin-bottom: 10px; border-radius: 18px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+    .item-text { flex: 1; min-width: 0; border: 1px solid #c5a0ab; background: #fff; color: #251018; border-radius: 14px; padding: 12px 14px; outline: none; }
+    .dots-btn,.delete-btn { border: none; border-radius: 12px; cursor: pointer; font-weight: 900; color: white; padding: 8px 10px; background: rgba(255,255,255,.1); }
+    .delete-btn { background: rgba(255, 76, 76, .2); display: none; }
+    .delete-btn.show { display: inline-flex; }
+    .group-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .save-inline { min-width: 56px; color: #9ef1c4; font-weight: 800; }
+    .source-status { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    @media (max-width: 920px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        background: rgba(90, 6, 38, .92);
+        border-bottom: 1px solid var(--border);
+        z-index: 80;
+      }
+      .nav-inner {
+        padding: 10px 0;
+        min-height: 64px;
+        flex-direction: row-reverse;
+      }
+      .brand {
+        display: flex !important;
+        position: static;
+        z-index: auto;
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        margin-left: auto;
+        flex-direction: row-reverse;
+        gap: 10px;
+      }
+      .brand > div {
+        display: block;
+        text-align: right;
+      }
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .menu-btn {
+        display: grid;
+        position: static;
+        width: 50px;
+        height: 50px;
+        z-index: 10002;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        pointer-events: auto;
+        transform: translateZ(0);
+      }
+      .menu-open .menu-btn {
+        display: none !important;
+      }
+      .wrap { width: min(100%, calc(100% - 28px)); }
+      .hero {
+        padding: 16px 0 10px;
+      }
+      .hero-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        gap: 16px;
+      }
+      .hero-grid > div:first-child {
+        order: 1;
+      }
+      .hero-grid > .hero-card {
+        display: none;
+      }
+      .big-title { font-size: clamp(40px, 12vw, 68px); }
+      .sub-title,
+      .hero-copy,
+      .chips,
+      .btn-row {
+        margin-left: auto;
+        margin-right: auto;
+        justify-content: center;
+      }
+      .hero-copy {
+        max-width: 36rem;
+      }
+      .chips {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        width: 100%;
+      }
+      .chip {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .btn-row {
+        width: 100%;
+      }
+      .hero-card {
+        display: none;
+      }
+      .stack { gap: 12px; }
+      .fee-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .fee-box,
+      .join-box,
+      .live-box {
+        min-width: 0;
+        width: 100%;
+      }
+      .join-box { padding: 14px 18px; }
+      .box-value { font-size: 22px; }
+      .section { padding: 18px 0; }
+      .section-head {
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .section-head h3,
+      .section-head p {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .grid3,
+      .admin-grid,
+      .admin-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .grid2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .card {
+        padding: 16px;
+        border-radius: 22px;
+      }
+      .level-card {
+        position: relative;
+        padding: 14px 16px 46px;
+        min-height: 122px;
+        overflow: hidden;
+      }
+      .level-head { justify-content: center; }
+      .level-list {
+        margin-top: 10px;
+      }
+      .level-card:not(.expanded) .level-list li:nth-child(n+4) {
+        display: none;
+      }
+      .level-list li { font-size: 14px; margin: 8px 0; }
+      .level-toggle {
+        display: grid;
+        place-items: center;
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border-radius: 50%;
+        border: 1px solid var(--border);
+        background-color: rgba(255,255,255,.10);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 14px 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5l4 4 4-4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        color: transparent;
+        font-size: 0;
+        line-height: 1;
+        text-align: center;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .level-card.expanded .level-toggle {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 9l4-4 4 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+      .info-toggle-wrap {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        grid-column: 1 / -1;
+        margin-top: 12px;
+      }
+      .info-toggle {
+        display: grid;
+        place-items: center;
+        width: 92px;
+        height: 36px;
+        padding: 0;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background-color: rgba(255,255,255,.10);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 14px 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 5l4 4 4-4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        color: transparent;
+        font-size: 0;
+        line-height: 1;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+      }
+      .info-expanded .info-toggle {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 9l4-4 4 4' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      }
+      #info:not(.info-expanded) .list li:nth-child(n+4) {
+        display: none;
+      }
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: min(82vw, 320px);
+        height: 100vh;
+        padding: 16px 14px 18px;
+        background: #5a0626;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-right: 1px solid var(--border);
+        box-shadow: 18px 0 50px rgba(0,0,0,.32);
+        transform: translateX(-102%);
+        transition: transform .28s ease;
+        display: block;
+        z-index: 65;
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        display: block;
+        transform: translateX(0);
+      }
+      .menu-brand {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 10px 14px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255,255,255,.16);
+        background: #5a0626;
+        cursor: pointer;
+        user-select: none;
+        z-index: 1;
+      }
+      .menu-brand .brand-logo { width: 38px; height: 38px; }
+      .menu-brand h1 {
+        margin: 0;
+        font-size: 13px;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: #ffe8ef;
+        text-align: right;
+      }
+      .menu-brand p { margin: 3px 0 0; font-size: 11px; color: var(--muted); text-align: right; }
+      .mobile-menu button {
+        border-radius: 18px;
+      }
+      .menu-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.46);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: 60;
+      }
+      .menu-backdrop.open {
+        display: block;
+      }
+      body.menu-open { overflow: hidden; }
+    }
+    @media (min-width: 921px) {
+      .menu-btn { display: none; }
+      .nav-links { display: flex; }
+      .mobile-menu { display: none !important; }
+      .menu-backdrop { display: none !important; }
+      .level-toggle { display: none; }
+      .info-toggle-wrap,
+      .info-toggle { display: none !important; }
+      #info .list li:nth-child(n+4) { display: flex !important; }
+    }
+  </style>
+</head>
+<body class="">
+  <div class="page-glow" aria-hidden="true"></div>
+  <header class="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <div class="brand" id="brandTrigger">
+          <img class="brand-logo" src="logo.png" alt="Codex Labs logo">
+          <div>
+            <h1 id="brandName">Codex Labs</h1>
+            <p id="brandSub">Gen Z Programming Labs</p>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <button type="button" data-target="home">Home</button>
+          <button type="button" data-target="levels">Levels</button>
+          <button type="button" data-target="info">Info</button>
+          <button type="button" data-target="contact">Contact</button>
+          <button type="button" onclick="openStudentPortal()">Student Portal</button>
+        </nav>
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu(event)"><span></span></button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-brand" id="menuBrandTrigger" tabindex="0" role="button" aria-label="Open admin panel" style="pointer-events:auto;"><img class="brand-logo" src="logo.png" alt="Codex Labs logo"><div><h1 id="menuBrandName">Codex Labs</h1><p id="menuBrandSub">Gen Z Programming Labs</p></div></div>
+        <button type="button" data-target="home">Home</button>
+        <button type="button" data-target="levels">Levels</button>
+        <button type="button" data-target="info">Info</button>
+        <button type="button" data-target="contact">Contact</button>
+        <button type="button" onclick="openStudentPortal()">Student Portal</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+
+  <main class="wrap" id="home">
+    <section class="hero hero-grid">
+      <div>
+        <h2 class="big-title" id="heroTitle">Codex Labs</h2>
+        <div class="sub-title" id="heroSubtitle">Gen Z Programming Labs</div>
+        <p class="hero-copy" id="heroCopy">Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.</p>
+        <div class="chips">
+          <span class="chip">Beginner friendly</span>
+          <span class="chip">3 classes per week</span>
+          <span class="chip">E-certificate</span>
+          <span class="chip">Course fees: Rs. 500</span>
+          <span class="chip">Online course</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn primary" id="joinBtn" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">Join Now</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="stack">
+          <div class="fee-row">
+            <div class="fee-box">
+              <div class="box-title">Course Fees</div>
+              <div class="box-value" id="feeValue">Rs. 500</div>
+            </div>
+            <div class="live-box">
+              <div class="box-title">Live course</div>
+              <div class="box-value" id="liveBubbleTitle">Basic</div>
+              <div class="live-info" id="liveBubbleInfo"></div>
+            </div>
+          </div>
+
+          <div class="join-box" style="min-width: 100%;">
+            <div class="box-title">Join Now</div>
+            <div class="box-value" id="joinText">Join Now</div>
+          </div>
+
+          <div class="card">
+            <div style="font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#ffe8ef;font-size:12px">Live course details</div>
+            <div style="margin-top:10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+              <span class="live-dot"></span>
+              <span class="live-label" id="liveCourseLabel">BASIC COURSE IS NOW LIVE !!</span>
+            </div>
+            <ul class="level-list" id="liveDetailList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="levels">
+      <div class="section-head">
+        <div class="eyebrow">Learning paths</div>
+        <h3>Foundation, Growth, and Mastery</h3>
+        <p>Pick a level that matches the learner's starting point. The active live level is highlighted automatically.</p>
+      </div>
+      <div class="grid3">
+        <div class="card level-card live" id="basicCard">
+          <div class="level-head"><span>Basic</span></div>
+          <div id="basicLiveRow" style="display: flex; margin-top: 10px; gap: 10px; align-items: center; flex-wrap: wrap;"><span class="live-dot"></span><span class="live-label">BASIC COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="basicList"><li>What websites are and how they work</li><li>Introduction to web development</li><li>How to create a web page</li><li>HTML basics (headings, paragraphs, images, links, lists)</li><li>Creating simple web pages</li><li>Forms and buttons</li><li>Website structure and layouts</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
+        </div>
+        <div class="card level-card" id="intermediateCard">
+          <div class="level-head"><span>Intermediate</span></div>
+          <div id="intermediateLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">INTERMEDIATE COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="intermediateList"><li>Layout planning</li><li>CSS styling basics</li><li>Flexbox and responsive design</li><li>Navigation bars and cards</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
+        </div>
+        <div class="card level-card" id="advanceCard">
+          <div class="level-head"><span>Advance</span></div>
+          <div id="advanceLiveRow" style="display:none; margin-top:10px; gap:10px; align-items:center; flex-wrap:wrap;"><span class="live-dot"></span><span class="live-label">ADVANCE COURSE IS NOW LIVE !!</span></div>
+          <ul class="level-list" id="advanceList"><li>Interactive page design</li><li>Modern layout techniques</li><li>Form styling and validation</li><li>Project-based website building</li></ul>
+          <button type="button" class="level-toggle" aria-label="Expand level" data-level-toggle="" aria-expanded="false"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="info">
+      <div class="section-head">
+        <div class="eyebrow">More information</div>
+        <h3>Everything included in the course</h3>
+        <p>The layout keeps the original poster feel, with the details organized into easy-to-edit sections.</p>
+      </div>
+      <div class="grid2">
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Information</div></div><ul class="list" id="infoList"><li>6 classes</li><li>3 classes per week</li><li>Monday, Wednesday and Thursday</li><li>Time: 5 p.m till 6 p.m</li><li>E-certificate will be provided</li><li>Starting from: June 29, 2026</li></ul></div>
+        <div class="card"><div class="section-head" style="margin-bottom: 0;"><div class="eyebrow">Requirements</div></div><ul class="list" id="requirementsList"><li>Age: 10+</li><li>Laptop</li><li>Windows 10+</li></ul></div>
+      </div>
+      <div class="info-toggle-wrap"><button type="button" class="info-toggle" id="infoToggle" aria-label="Expand or collapse more information" aria-expanded="false"></button></div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-head">
+        <div class="eyebrow">Contact and Register</div>
+        <h3>Connect and register</h3>
+        <p>Use the contact bubbles below or open the registration form directly.</p>
+      </div>
+      <div class="grid3">
+        <div class="card" style="text-align:center;"><div class="box-title">Contact number</div><a class="box-value contact-link" id="contactCardValue" href="tel:+923312497159">+92 331 2497159</a></div>
+        <div class="card" style="text-align:center;"><div class="box-title">Instagram &amp; Email</div><div class="box-value" style="font-size:18px; line-height:1.5;" id="socialCardValue"><a class="contact-link" id="instagramCardLink" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" onclick="return openExternal(this.href);">@codexlabs_genz</a><br><a class="contact-link" id="emailCardLink" href="mailto:codexlabs.genz@gmail.com">codexlabs.genz@gmail.com</a></div></div>
+        <a class="card" id="googleCard" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" style="text-align:center;" onclick="return openExternal(this.href);"><div class="box-title">Link for registration</div><div class="box-value" id="googleCardValue">Register Now</div></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-icons">
+        <a id="footerWhatsApp" class="footer-icon icon-wa" href="https://wa.me/923312497159" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none"><path d="M20.5 11.9a8.5 8.5 0 0 1-12.9 7.3L3 20l.9-4.2A8.5 8.5 0 1 1 20.5 11.9Z" stroke="#fff" stroke-width="1.8"></path><path d="M9.2 7.9c.2-.5.4-.5.8-.5h.7c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.6-.1.8l-.5.6c-.2.2-.2.5 0 .8.4.8 1.4 1.9 2.3 2.5.3.2.6.2.8 0l.7-.5c.2-.2.6-.2.8-.1l2.1 1c.5.2.5.5.5.8 0 1.4-1.1 2.2-2.3 2.2-1.8 0-4.3-1.1-6.4-3.2-2.1-2.1-3.2-4.6-3.2-6.4 0-1.2.8-2.3 2.2-2.3Z" fill="#fff"></path></svg></a>
+        <a id="footerInstagramIcon" class="footer-icon icon-ig" href="https://instagram.com/codexlabs_genz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke="#fff" stroke-width="1.8"></rect><circle cx="12" cy="12" r="4" stroke="#fff" stroke-width="1.8"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="#fff"></circle></svg></a>
+        <a id="footerEmailIcon" class="footer-icon" href="mailto:codexlabs.genz@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email" style="background: linear-gradient(135deg, #f7d7e2, #ffffff); color:#6d082f;"><svg viewBox="0 0 24 24" fill="none"><path d="M5 6.8h14A1.8 1.8 0 0 1 20.8 8.6v6.8A1.8 1.8 0 0 1 19 17.2H5A1.8 1.8 0 0 1 3.2 15.4V8.6A1.8 1.8 0 0 1 5 6.8Z" stroke="currentColor" stroke-width="1.8"></path><path d="m4.8 8.2 7.2 5.2 7.2-5.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+        <a id="footerGoogleIcon" class="footer-icon icon-g" href="https://forms.gle/uPd1nqqh4qkrQKP69" target="_blank" rel="noopener noreferrer" aria-label="Google Document"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3.8h6.5L18 8.3V20H7z" stroke="#6d082f" stroke-width="1.8"></path><path d="M13.5 3.8v4.5H18" stroke="#6d082f" stroke-width="1.8"></path><path d="M9 12h6M9 15.2h6" stroke="#6d082f" stroke-width="1.8" stroke-linecap="round"></path></svg></a>
+      </div>
+      <div class="footer-copy">© 2026 Web Development. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <div class="admin-overlay" id="adminOverlay" aria-hidden="true">
+    <div class="admin-panel">
+      <div class="admin-top">
+        <div><div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:28px">Admin Panel</div><div class="small">Edit the course details, levels, live course, and contact info.</div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn secondary" type="button" onclick="connectSourceFile()">Connect Source File</button><button class="btn primary" type="button" onclick="saveAdmin()">Save to source</button><span id="saveMsgInline" class="save-inline"></span></div>
+      </div>
+
+      <div id="loginBox" class="card hidden" style="max-width:420px;margin:0 auto 16px;background:#fff;color:#261016;">
+        <div style="font-weight:900;font-size:20px;margin-bottom:10px">Admin Login</div>
+        <form id="loginForm">
+          <div class="field"><label style="color:#261016;">Password</label><input id="adminPass" type="password" placeholder="Enter password" autocomplete="current-password"></div>
+          <div class="admin-actions"><button class="btn primary" type="submit">Login</button></div>
+        </form>
+        <div class="small" style="margin-top:8px;color:#5d636a;">A fresh login is required every time the panel opens.</div>
+        <div id="loginMsg" class="notice" style="color:#15915d;"></div>
+      </div>
+
+      <div id="editorBox" class="">
+        <div class="admin-grid">
+          <div class="field"><label>Academy Name</label><input id="brand"></div>
+          <div class="field"><label>Sub Heading</label><input id="subHeading"></div>
+          <div class="field"><label>Course Fee</label><input id="fee"></div>
+          <div class="field"><label>Contact Number</label><input id="contactNo"></div>
+          <div class="field"><label>Join Now Text</label><input id="joinTextInput"></div>
+          <div class="field"><label>Join Link</label><input id="joinLink"></div>
+          <div class="field"><label>Google Document Link</label><input id="googleFormLink"></div>
+          <div class="field"><label>Instagram Link</label><input id="instagramLink"></div>
+          <div class="field"><label>Email Handle</label><input id="emailHandle" placeholder="codexlabs.genz@gmail.com"></div>
+          <div class="field"><label>Live Course</label><select id="liveCourse"><option value="Basic">Basic</option><option value="Intermediate">Intermediate</option><option value="Advance">Advance</option></select></div>
+        </div>
+
+        <div class="admin-grid-3">
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Basic</div><button class="btn secondary" type="button" onclick="addLevelItem('basic')">Add item</button></div><div id="basicEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="What websites are and how they work" oninput="updateItem('basic', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Introduction to web development" oninput="updateItem('basic', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="How to create a web page" oninput="updateItem('basic', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="HTML basics (headings, paragraphs, images, links, lists)" oninput="updateItem('basic', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Creating simple web pages" oninput="updateItem('basic', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Forms and buttons" oninput="updateItem('basic', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 5)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Website structure and layouts" oninput="updateItem('basic', 6, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('basic', 6)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Intermediate</div><button class="btn secondary" type="button" onclick="addLevelItem('intermediate')">Add item</button></div><div id="intermediateEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Layout planning" oninput="updateItem('intermediate', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="CSS styling basics" oninput="updateItem('intermediate', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Flexbox and responsive design" oninput="updateItem('intermediate', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Navigation bars and cards" oninput="updateItem('intermediate', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('intermediate', 3)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Advance</div><button class="btn secondary" type="button" onclick="addLevelItem('advance')">Add item</button></div><div id="advanceEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Interactive page design" oninput="updateItem('advance', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Modern layout techniques" oninput="updateItem('advance', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Form styling and validation" oninput="updateItem('advance', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Project-based website building" oninput="updateItem('advance', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('advance', 3)">Delete</button></div></div></div></div>
+        </div>
+
+        <div class="admin-grid" style="margin-top:14px;">
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Information</div><button class="btn secondary" type="button" onclick="addLevelItem('info')">Add item</button></div><div id="infoEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="6 classes" oninput="updateItem('info', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="3 classes per week" oninput="updateItem('info', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Monday, Wednesday and Thursday" oninput="updateItem('info', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 2)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Time: 5 p.m till 6 p.m" oninput="updateItem('info', 3, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 3)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="E-certificate will be provided" oninput="updateItem('info', 4, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 4)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Starting from: June 29, 2026" oninput="updateItem('info', 5, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('info', 5)">Delete</button></div></div></div></div>
+          <div class="card"><div class="group-head"><div style="font-weight:900;">Requirements</div><button class="btn secondary" type="button" onclick="addLevelItem('requirements')">Add item</button></div><div id="requirementsEditor" style="margin-top:10px"><div class="admin-item"><input class="item-text" value="Age: 10+" oninput="updateItem('requirements', 0, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 0)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Laptop" oninput="updateItem('requirements', 1, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 1)">Delete</button></div></div><div class="admin-item"><input class="item-text" value="Windows 10+" oninput="updateItem('requirements', 2, this.value)"><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="deleteItem('requirements', 2)">Delete</button></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="course-data" type="application/json">{
+  "brand": "Codex Labs",
+  "subHeading": "Gen Z Programming Labs",
+  "fee": "Rs. 500",
+  "contactNo": "+92 331 2497159",
+  "joinText": "Join Now",
+  "joinLink": "https://forms.gle/uPd1nqqh4qkrQKP69",
+  "googleFormLink": "https://forms.gle/uPd1nqqh4qkrQKP69",
+  "instagramLink": "https://instagram.com/codexlabs_genz",
+  "emailHandle": "codexlabs.genz@gmail.com",
+  "liveCourse": "Basic",
+  "basic": [
+    "What websites are and how they work",
+    "Introduction to web development",
+    "How to create a web page",
+    "HTML basics (headings, paragraphs, images, links, lists)",
+    "Creating simple web pages",
+    "Forms and buttons",
+    "Website structure and layouts"
+  ],
+  "intermediate": [
+    "Layout planning",
+    "CSS styling basics",
+    "Flexbox and responsive design",
+    "Navigation bars and cards"
+  ],
+  "advance": [
+    "Interactive page design",
+    "Modern layout techniques",
+    "Form styling and validation",
+    "Project-based website building"
+  ],
+  "info": [
+    "6 classes",
+    "3 classes per week",
+    "Monday, Wednesday and Thursday",
+    "Time: 5 p.m till 6 p.m",
+    "E-certificate will be provided",
+    "Starting from: June 29, 2026"
+  ],
+  "requirements": [
+    "Age: 10+",
+    "Laptop",
+    "Windows 10+"
+  ]
+}</script>
+  <script>
+    const PASS_HASH = '816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7';
+    const DATA_SCRIPT_ID = 'course-data';
+
+    const defaultData = {
+      brand: 'Codex Labs',
+      subHeading: 'gen z programing labs',
+      fee: 'Rs. 500',
+      contactNo: '+92 331 2497159',
+      joinText: 'Join Now',
+      joinLink: 'https://forms.gle/eQ8Kf9whCsTspmCA7',
+      googleFormLink: 'https://forms.gle/eQ8Kf9whCsTspmCA7',
+      instagramLink: 'https://instagram.com/codexlabs_genz',
+      emailHandle: 'codexlabs.genz@gmail.com',
+      liveCourse: 'Basic',
+      basic: ['What websites are and how they work','Introduction to web development','How to create a web page','HTML basics (headings, paragraphs, images, links, lists)','Creating simple web pages','Forms and buttons','Website structure and layouts'],
+      intermediate: ['Layout planning','CSS styling basics','Flexbox and responsive design','Navigation bars and cards'],
+      advance: ['Interactive page design','Modern layout techniques','Form styling and validation','Project-based website building'],
+      info: ['6 classes','3 classes per week','Monday, Wednesday and Thursday','Time: 5 p.m','E-certificate will be provided','Starting from: June 29, 2026'],
+      requirements: ['Age group: 10+','Laptop','Laptop charger']
+    };
+
+    let data = loadData();
+    let loggedIn = false;
+    let sourceFileHandle = null;
+    const adminOverlay = document.getElementById('adminOverlay');
+    const loginBox = document.getElementById('loginBox');
+    const editorBox = document.getElementById('editorBox');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuBackdrop = document.getElementById('menuBackdrop');
+    const adminPass = document.getElementById('adminPass');
+    const infoSection = document.getElementById('info');
+    const infoToggle = document.getElementById('infoToggle');
+
+    function loadData(){
+      try {
+        const raw = document.getElementById(DATA_SCRIPT_ID)?.textContent?.trim();
+        return raw ? { ...defaultData, ...JSON.parse(raw) } : structuredClone(defaultData);
+      } catch {
+        return structuredClone(defaultData);
+      }
+    }
+
+    function setSourceDataScript(){
+      const script = document.getElementById(DATA_SCRIPT_ID);
+      if (!script) return;
+      script.textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function connectSourceFile(){
+      try {
+        if (!('showOpenFilePicker' in window)) {
+          document.getElementById('saveMsgInline').textContent = 'File picker not supported here';
+          return;
+        }
+        const [handle] = await window.showOpenFilePicker({
+          multiple: false,
+          types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
+        });
+        sourceFileHandle = handle;
+        if (sourceFileHandle?.requestPermission) {
+          await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+        }
+        document.getElementById('saveMsgInline').textContent = 'source connected';
+        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
+      } catch (err) {
+        document.getElementById('saveMsgInline').textContent = 'Connection cancelled';
+        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
+      }
+    }
+
+    function buildUpdatedHtml(){
+      setSourceDataScript();
+      const overlay = document.getElementById('adminOverlay');
+      const mobile = document.getElementById('mobileMenu');
+      const overlayWasOpen = overlay?.classList.contains('open');
+      const overlayAria = overlay?.getAttribute('aria-hidden');
+      const mobileWasOpen = mobile?.classList.contains('open');
+
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+      if (mobile) mobile.classList.remove('open');
+
+      const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+      if (overlayWasOpen && overlay) {
+        overlay.classList.add('open');
+        if (overlayAria !== null) overlay.setAttribute('aria-hidden', overlayAria);
+      }
+      if (mobileWasOpen && mobile) mobile.classList.add('open');
+
+      return html;
+    }
+
+    async function downloadUpdatedHtml(html){
+      const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'index-updated.html';
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    async function writeHtmlToFile(html){
+      if (!sourceFileHandle) return false;
+      if (sourceFileHandle.requestPermission) {
+        const perm = await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+        if (perm !== 'granted') return false;
+      }
+      const writable = await sourceFileHandle.createWritable();
+      await writable.write(html);
+      await writable.close();
+      return true;
+    }
+    function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
+    function toggleMobileMenu(event) {
+      if (event) {
+        event.preventDefault();
+        if (typeof event.stopPropagation === 'function') event.stopPropagation();
+      }
+      if (mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      menuBackdrop?.classList.add('open');
+      menuBackdrop?.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+      const btn = document.getElementById('menuBtn');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      menuBackdrop?.classList.remove('open');
+      menuBackdrop?.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+      const btn = document.getElementById('menuBtn');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleInfoSection() {
+      if (!infoSection) return;
+      const expanded = infoSection.classList.toggle('info-expanded');
+      if (infoToggle) infoToggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    }
+
+    function goTo(id){ const el = document.getElementById(id); if (el) el.scrollIntoView({behavior:'smooth', block:'start'}); closeMobileMenu(); }
+    function levelDisplayName(key){ return key === 'Basic' ? 'Basic' : key === 'Intermediate' ? 'Intermediate' : 'Advance'; }
+
+    function openAdmin(){ loggedIn=false; adminPass.value=''; document.getElementById('loginMsg').textContent=''; document.getElementById('saveMsgInline').textContent=''; adminOverlay.classList.add('open'); adminOverlay.setAttribute('aria-hidden','false'); loginBox.classList.remove('hidden'); editorBox.classList.add('hidden'); renderAdmin(); setTimeout(() => { adminOverlay.scrollTop = 0; adminPass.focus(); adminPass.select(); }, 0); }
+    function closeAdmin(){ const active = document.activeElement; if (active && active.blur) active.blur(); adminOverlay.classList.remove('open'); adminOverlay.setAttribute('aria-hidden','true'); loggedIn=false; adminPass.value=''; }
+    async function sha256(text){ const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)); return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
+    async function loginAdmin(){ const msg = document.getElementById('loginMsg'); const hash = await sha256(adminPass.value.trim()); if (hash === PASS_HASH) { loggedIn=true; loginBox.classList.add('hidden'); editorBox.classList.remove('hidden'); msg.textContent=''; renderAdmin(); } else { msg.textContent='Wrong password'; } }
+
+
+    function openExternal(url) {
+      try {
+        const safeUrl = new URL(url, window.location.href);
+        const href = safeUrl.toString();
+        if (href.startsWith('http://') || href.startsWith('https://')) {
+          window.open(href, '_blank', 'noopener,noreferrer');
+          return false;
+        }
+        return true;
+      } catch (err) {
+        return true;
+      }
+    }
+
+    function openStudentPortal() {
+      window.open('students-portal.html', '_blank');
+      return false;
+    }
+
+    function renderMain(){
+      document.getElementById('brandName').textContent = data.brand;
+      document.getElementById('brandSub').textContent = data.subHeading;
+      document.getElementById('heroTitle').textContent = data.brand;
+      document.getElementById('heroSubtitle').textContent = data.subHeading;
+      document.getElementById('heroCopy').textContent = 'Learn how websites work, how to build a web page, and how to create clean layouts with HTML, CSS, and simple forms.';
+      document.getElementById('feeValue').textContent = data.fee;
+      document.getElementById('joinText').textContent = data.joinText;
+      document.getElementById('basicCard').classList.toggle('live', data.liveCourse === 'Basic');
+      document.getElementById('intermediateCard').classList.toggle('live', data.liveCourse === 'Intermediate');
+      document.getElementById('advanceCard').classList.toggle('live', data.liveCourse === 'Advance');
+      document.getElementById('basicLiveRow').style.display = data.liveCourse === 'Basic' ? 'flex' : 'none';
+      document.getElementById('intermediateLiveRow').style.display = data.liveCourse === 'Intermediate' ? 'flex' : 'none';
+      document.getElementById('advanceLiveRow').style.display = data.liveCourse === 'Advance' ? 'flex' : 'none';
+      document.getElementById('basicList').innerHTML = data.basic.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('intermediateList').innerHTML = data.intermediate.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('advanceList').innerHTML = data.advance.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('infoList').innerHTML = data.info.map(item => `<li>${esc(item)}</li>`).join('');
+      document.getElementById('requirementsList').innerHTML = data.requirements.map(item => `<li>${esc(item)}</li>`).join('');
+      const liveMap = { Basic: data.basic, Intermediate: data.intermediate, Advance: data.advance };
+      document.getElementById('liveBubbleTitle').textContent = levelDisplayName(data.liveCourse);
+      document.getElementById('liveBubbleInfo').textContent = '';
+      document.getElementById('liveCourseLabel').textContent = `${levelDisplayName(data.liveCourse).toUpperCase()} COURSE IS NOW LIVE !!`;
+      document.getElementById('liveDetailList').innerHTML = (liveMap[data.liveCourse] || []).map(item => `<li>${esc(item)}</li>`).join('');
+      const contactTel = `tel:${String(data.contactNo).replace(/[^\d+]/g, '')}`;
+      document.getElementById('contactCardValue').href = contactTel;
+      document.getElementById('contactCardValue').textContent = data.contactNo;
+      const instagramUrl = data.instagramLink || 'https://instagram.com/codexlabs_genz';
+      document.getElementById('instagramCardLink').href = instagramUrl;
+      document.getElementById('instagramCardLink').textContent = instagramLabel(instagramUrl);
+      document.getElementById('emailCardLink').href = `mailto:${data.emailHandle}`;
+      document.getElementById('emailCardLink').textContent = data.emailHandle;
+      document.getElementById('googleCardValue').textContent = 'Register Now';
+      const joinUrl = data.joinLink || data.googleFormLink || 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+      const formUrl = data.googleFormLink || joinUrl || 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+      document.getElementById('joinBtn').href = joinUrl;
+      document.getElementById('joinBtn').textContent = data.joinText;
+      document.getElementById('googleCard').href = formUrl;
+      const footerWhatsApp = document.getElementById('footerWhatsApp');
+      const footerInstagramIcon = document.getElementById('footerInstagramIcon');
+      const footerEmailIcon = document.getElementById('footerEmailIcon');
+      const footerGoogleIcon = document.getElementById('footerGoogleIcon');
+      if (footerWhatsApp) footerWhatsApp.href = `https://wa.me/${String(data.contactNo).replace(/[^\d]/g, '')}`;
+      if (footerInstagramIcon) footerInstagramIcon.href = instagramUrl;
+      if (footerEmailIcon) footerEmailIcon.href = `mailto:${data.emailHandle}`;
+      if (footerGoogleIcon) footerGoogleIcon.href = formUrl;
+      syncLevelToggleButtons();
+    }
+
+
+    function bindLiveField(id, key, transform = v => v) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const eventName = el.tagName === 'SELECT' ? 'change' : 'input';
+      el.addEventListener(eventName, () => {
+        data[key] = transform(el.value);
+        renderMain();
+        syncLevelToggleButtons();
+      });
+    }
+
+    function syncLevelToggleButtons() {
+      document.querySelectorAll('[data-level-toggle]').forEach((btn) => {
+        const expanded = btn.closest('.level-card')?.classList.contains('expanded');
+        btn.setAttribute('aria-label', expanded ? 'Collapse level' : 'Expand level');
+        btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('[data-level-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.level-card');
+        if (!card) return;
+        card.classList.toggle('expanded');
+        syncLevelToggleButtons();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
+      const href = link.getAttribute('href') || '';
+      if (/^https?:\/\//i.test(href)) {
+        e.preventDefault();
+        openExternal(href);
+      } else if (href.startsWith('mailto:') || href.startsWith('tel:')) {
+        e.preventDefault();
+        window.location.href = href;
+      }
+    });
+
+    function instagramLabel(value) {
+      const raw = String(value || '').trim();
+      if (!raw) return '@codexlabs_genz';
+      try {
+        const url = new URL(raw.includes('://') ? raw : `https://${raw.replace(/^@/, '')}`);
+        const parts = url.pathname.split('/').filter(Boolean);
+        const handle = parts[0] || url.hostname.replace(/^www\./, '');
+        return handle.startsWith('@') ? handle : `@${handle}`;
+      } catch {
+        return raw.startsWith('@') ? raw : `@${raw.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*/, '')}`;
+      }
+    }
+
+    function listItem(text, oninputCode, deleteCode){ return `<div class="admin-item"><input class="item-text" value="${esc(text)}" oninput="${oninputCode}" /><div style="position:relative;display:flex;align-items:center;gap:8px;flex-shrink:0"><button type="button" class="dots-btn" onclick="toggleDelete(this)">⋯</button><button type="button" class="delete-btn" onclick="${deleteCode}">Delete</button></div></div>`; }
+    function toggleDelete(btn){ const del = btn.parentElement.querySelector('.delete-btn'); if (del) del.classList.toggle('show'); }
+
+    function renderAdmin(){
+      if (!loggedIn) return;
+      document.getElementById('brand').value = data.brand;
+      document.getElementById('subHeading').value = data.subHeading;
+      document.getElementById('fee').value = data.fee;
+      document.getElementById('contactNo').value = data.contactNo;
+      document.getElementById('joinTextInput').value = data.joinText;
+      document.getElementById('joinLink').value = data.joinLink;
+      document.getElementById('googleFormLink').value = data.googleFormLink;
+      document.getElementById('instagramLink').value = data.instagramLink;
+      document.getElementById('emailHandle').value = data.emailHandle;
+      document.getElementById('liveCourse').value = data.liveCourse;
+      document.getElementById('basicEditor').innerHTML = data.basic.map((item, i) => listItem(item, `updateItem('basic', ${i}, this.value)`, `deleteItem('basic', ${i})`)).join('');
+      document.getElementById('intermediateEditor').innerHTML = data.intermediate.map((item, i) => listItem(item, `updateItem('intermediate', ${i}, this.value)`, `deleteItem('intermediate', ${i})`)).join('');
+      document.getElementById('advanceEditor').innerHTML = data.advance.map((item, i) => listItem(item, `updateItem('advance', ${i}, this.value)`, `deleteItem('advance', ${i})`)).join('');
+      document.getElementById('infoEditor').innerHTML = data.info.map((item, i) => listItem(item, `updateItem('info', ${i}, this.value)`, `deleteItem('info', ${i})`)).join('');
+      document.getElementById('requirementsEditor').innerHTML = data.requirements.map((item, i) => listItem(item, `updateItem('requirements', ${i}, this.value)`, `deleteItem('requirements', ${i})`)).join('');
+    }
+
+    function updateItem(section, index, value){ data[section][index] = value; renderMain(); }
+    function deleteItem(section, index){ data[section].splice(index, 1); renderAdmin(); renderMain(); }
+    function addLevelItem(section){ const defaults = { basic:'New basic point', intermediate:'New intermediate point', advance:'New advance point', info:'New information', requirements:'New requirement' }; data[section].push(defaults[section]); renderAdmin(); renderMain(); }
+
+    async function saveAdmin(){
+      if (!loggedIn) return;
+      data.brand = document.getElementById('brand').value.trim() || data.brand;
+      data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading;
+      data.fee = document.getElementById('fee').value.trim() || data.fee;
+      data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo;
+      data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText;
+      data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink;
+      data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink;
+      data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink;
+      data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle;
+      data.liveCourse = document.getElementById('liveCourse').value;
+      if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+      renderMain();
+      syncLevelToggleButtons();
+      renderAdmin();
+
+      const msg = document.getElementById('saveMsgInline');
+      const html = buildUpdatedHtml();
+
+      try {
+        let saved = await writeHtmlToFile(html);
+        if (!saved) {
+          if ('showSaveFilePicker' in window) {
+            const handle = await window.showSaveFilePicker({
+              suggestedName: 'index.html',
+              types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
+            });
+            sourceFileHandle = handle;
+            if (sourceFileHandle?.requestPermission) {
+              await sourceFileHandle.requestPermission({ mode: 'readwrite' });
+            }
+            await writeHtmlToFile(html);
+            saved = true;
+          } else {
+            await downloadUpdatedHtml(html);
+            saved = true;
+          }
+        }
+        msg.textContent = saved ? 'saved to source' : 'saved';
+      } catch (err) {
+        await downloadUpdatedHtml(html);
+        msg.textContent = 'downloaded copy';
+      }
+      setTimeout(() => { msg.textContent = ''; }, 1600);
+    }
+    menuBackdrop?.addEventListener('click', closeMobileMenu);
+    document.getElementById('infoToggle')?.addEventListener('click', toggleInfoSection);
+    document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
+    document.getElementById('menuBrandTrigger')?.addEventListener('dblclick', openAdmin);
+    document.getElementById('menuBrandTrigger')?.addEventListener('click', () => { closeMobileMenu(); });
+    document.querySelectorAll('[data-target]').forEach(btn => btn.addEventListener('click', () => {
+      goTo(btn.getAttribute('data-target'));
+    }));
+    document.getElementById('loginForm').addEventListener('submit', (e) => { e.preventDefault(); loginAdmin(); });
+    document.addEventListener('keydown', (e) => { if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'a') { e.preventDefault(); openAdmin(); } if (e.key === 'Escape') { closeAdmin(); closeMobileMenu(); } });
+    adminOverlay.addEventListener('click', (e) => { if (e.target === adminOverlay) closeAdmin(); });
+
+    bindLiveField('brand', 'brand');
+    bindLiveField('subHeading', 'subHeading');
+    bindLiveField('fee', 'fee');
+    bindLiveField('contactNo', 'contactNo');
+    bindLiveField('joinTextInput', 'joinText');
+    bindLiveField('joinLink', 'joinLink');
+    bindLiveField('googleFormLink', 'googleFormLink');
+    bindLiveField('instagramLink', 'instagramLink');
+    bindLiveField('emailHandle', 'emailHandle');
+    bindLiveField('liveCourse', 'liveCourse');
+
+    renderMain();
+    syncLevelToggleButtons();
+  </script>
+
+</body></html>
+>>>>>>> 10fa7e997c1d60304850bbc2e87ff034c214449c
