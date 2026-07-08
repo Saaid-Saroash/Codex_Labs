@@ -452,6 +452,121 @@
       line-height: 1.7;
     }
 
+
+    .summary-section {
+      margin-top: 24px;
+    }
+    .summary-table-wrap {
+      overflow-x: auto;
+      border-radius: 24px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+    .summary-table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: separate;
+      border-spacing: 0;
+      color: white;
+    }
+    .summary-table th,
+    .summary-table td {
+      border-right: 1px solid rgba(255,255,255,.12);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding: 10px 12px;
+      text-align: center;
+      vertical-align: middle;
+      background: rgba(255,255,255,.04);
+      white-space: nowrap;
+    }
+    .summary-table thead th {
+      background: rgba(255,255,255,.12);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+    }
+    .summary-table .row-head {
+      text-align: left;
+      font-weight: 900;
+      background: rgba(255,255,255,.10);
+      position: sticky;
+      left: 0;
+      z-index: 1;
+    }
+    .summary-table .group-head {
+      background: rgba(246,216,216,.18);
+      font-size: 13px;
+    }
+    .summary-table .sub-head {
+      font-size: 11px;
+      letter-spacing: .14em;
+    }
+    .summary-table tfoot th,
+    .summary-table tfoot td {
+      background: rgba(246,216,216,.16);
+      font-weight: 900;
+    }
+    .summary-editor-shell {
+      display: grid;
+      gap: 14px;
+    }
+    .summary-editor-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .summary-editor-row {
+      display: grid;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+    }
+    .summary-editor-row-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-weight: 900;
+    }
+    .summary-editor-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+      gap: 10px;
+    }
+    .summary-editor-columns .field input {
+      min-width: 0;
+    }
+    .reorder-item {
+      cursor: grab;
+    }
+    .reorder-item.dragging {
+      opacity: .45;
+    }
+    .drag-handle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      cursor: grab;
+      font-size: 18px;
+      flex: 0 0 auto;
+      user-select: none;
+    }
+    .group-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
     .modal {
       position: fixed;
       inset: 0;
@@ -724,8 +839,8 @@
           <div class="field" style="margin-top: 12px;">
             <label for="portalPass">Password</label>
             <div class="input-wrap">
-              <input id="portalPass" type="text" placeholder="Enter password" autocomplete="current-password">
-              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path></svg></button>
+              <input id="portalPass" type="password" placeholder="Enter password" autocomplete="current-password">
+              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
             </div>
           </div>
           <div class="actions">
@@ -737,6 +852,75 @@
     </section>
 
     <section class="portal open" id="portalArea" aria-hidden="false">
+
+      <section class="summary-section" id="summarySection">
+        <div class="section-head">
+          <div class="eyebrow">Table</div>
+          <h2 id="summaryTitle">Attendance and score summary</h2>
+          <p>This table is managed from the admin panel. Rows and columns update automatically.</p>
+        </div>
+        <div class="summary-table-wrap">
+          <table class="summary-table" id="summaryTable">
+        <thead>
+          <tr>
+            <th rowspan="2">Students</th>
+            <th class="group-head" colspan="6">Attendance</th>
+            <th rowspan="2">Total</th>
+            <th class="group-head" colspan="6">Score Points</th>
+            <th rowspan="2">Total</th>
+          </tr>
+          <tr>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">THU</th><th class="sub-head">FRI</th>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">TUE</th><th class="sub-head">WED</th><th class="sub-head">THU</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+              <tr>
+                <th class="row-head">Amna Siddiqui</th>
+                <td>0</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>3</td>
+                <td>25/25</td><td>10/10</td><td>30/30</td><td></td><td></td><td></td>
+                <td>65</td>
+              </tr>
+            
+              <tr>
+                <th class="row-head">Anusha Afroz</th>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>4</td>
+                <td>24/25</td><td>9/10</td><td>30/30</td><td></td><td></td><td></td>
+                <td>63</td>
+              </tr>
+            
+              <tr>
+                <th class="row-head">Manahil Abbas</th>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>4</td>
+                <td>25/25</td><td>10/10</td><td>26/30</td><td></td><td></td><td></td>
+                <td>61</td>
+              </tr>
+            
+              <tr>
+                <th class="row-head">Manha Abbas</th>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>4</td>
+                <td>25/25</td><td>10/10</td><td>26/30</td><td></td><td></td><td></td>
+                <td>61</td>
+              </tr>
+            
+              <tr>
+                <th class="row-head">Muhammad Ahmad Sheikh</th>
+                <td>1</td><td>0</td><td>1</td><td>1</td><td></td><td></td>
+                <td>3</td>
+                <td>24/25</td><td>9/10</td><td>28/30</td><td></td><td></td><td></td>
+                <td>61</td>
+              </tr>
+            
+        </tbody>
+      </table>
+        </div>
+      </section>
+
       <section class="assignments" id="assignmentsSection">
         <div class="section-head">
           <div class="eyebrow">Assignments</div>
@@ -817,29 +1001,6 @@
               <div class="meta-box"><span class="label">Score points</span><div class="value">10</div></div>
             </div>
             <div class="assignment-text">https://forms.gle/3prFQwCfGH7w8QQS7</div>
-          </div>
-        </div>
-      
-        <div class="assignment-card" data-assignment="4">
-          <button class="assignment-head" type="button" onclick="toggleAssignment(4)" aria-expanded="false">
-            <div class="assignment-title">
-              <small>Student Overview</small>
-              <span>Score Points</span>
-            </div>
-            <div class="arrow">›</div>
-          </button>
-          <div class="assignment-body">
-            <div class="assignment-meta">
-              <div class="meta-box"><span class="label">Assignment date</span><div class="value">June 29, 2026</div></div>
-              <div class="meta-box"><span class="label">Course name</span><div class="value">Score Points</div></div>
-              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 9, 2026</div></div>
-              <div class="meta-box"><span class="label">Score points</span><div class="value"></div></div>
-            </div>
-            <div class="assignment-text">Amna Siddiqui                            35
-Anusha Afroz                             63
-Manahil Abbas                           35
-Manha Abbas                             35 
-Muhammad Ahmad Sheikh       59</div>
           </div>
         </div>
       </div>
@@ -932,13 +1093,14 @@ Muhammad Ahmad Sheikh       59</div>
       </div>
 
       <div class="tab-bar">
-        <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
+        <button class="tab-btn active" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn active" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
+        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
 
-      <div class="tab-panel" id="panelPortal">
+      <div class="tab-panel active" id="panelPortal">
         <div class="admin-grid">
           <div class="field">
             <label>Portal title</label>
@@ -965,37 +1127,49 @@ Muhammad Ahmad Sheikh       59</div>
 
       <div class="tab-panel" id="panelVideos">
         <div class="admin-grid-3" id="videoEditor">
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Video 1</span>
-            <button type="button" onclick="removeVideo(0)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(0)">Delete</button>
+            </div>
           </div>
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 6, 2026 pt. 1" oninput="state.videos[0].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-1.mp4" oninput="state.videos[0].src = this.value;"></div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 1, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 1, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Video 2</span>
-            <button type="button" onclick="removeVideo(1)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(1)">Delete</button>
+            </div>
           </div>
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 6, 2026 pt. 2" oninput="state.videos[1].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-2.mp4" oninput="state.videos[1].src = this.value;"></div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 2, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 2, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Video 3</span>
-            <button type="button" onclick="removeVideo(2)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(2)">Delete</button>
+            </div>
           </div>
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 8, 2026 pt. 1" oninput="state.videos[2].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-3.mp4" oninput="state.videos[2].src = this.value;"></div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 3, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 3, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Video 4</span>
-            <button type="button" onclick="removeVideo(3)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(3)">Delete</button>
+            </div>
           </div>
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 8, 2026 pt. 2" oninput="state.videos[3].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-4.mp4" oninput="state.videos[3].src = this.value;"></div>
@@ -1007,12 +1181,528 @@ Muhammad Ahmad Sheikh       59</div>
         <p class="inline-note">Edit video titles and file paths as needed. Thumbnails are generated from the actual files after sign-in.</p>
       </div>
 
-      <div class="tab-panel active" id="panelAssignments">
+
+      <div class="tab-panel" id="panelSummary">
+        <div class="summary-editor-shell">
+          <div class="card">
+            <div class="admin-grid">
+              <div class="field">
+                <label>Table title</label>
+                <input id="editSummaryTitle" oninput="state.summaryTable.title = this.value; renderSummaryTable();">
+              </div>
+              <div class="field">
+                <label>Table note</label>
+                <input id="editSummaryNote" oninput="state.summaryTable.note = this.value;">
+              </div>
+            </div>
+            <div class="mini-actions" style="margin-top: 12px;">
+              <button class="btn" type="button" onclick="addSummaryRow()">Add row</button>
+              <button class="btn" type="button" onclick="addSummaryColumn('attendance')">Add attendance column</button>
+              <button class="btn" type="button" onclick="addSummaryColumn('score')">Add score column</button>
+            </div>
+            <div class="group-controls" style="margin-top: 10px;">
+              <button class="btn" type="button" onclick="removeSummaryColumn('attendance')">Remove attendance column</button>
+              <button class="btn" type="button" onclick="removeSummaryColumn('score')">Remove score column</button>
+            </div>
+          </div>
+          <div class="summary-editor-grid" id="summaryEditor">
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row 1</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(0)">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="Amna Siddiqui" oninput="state.summaryTable.rows[0].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="3" disabled="">
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="65" disabled="">
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            
+              <div class="field">
+                <label>Att. 1 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[0] = this.value; renderSummaryTable();">
+                <input value="0" oninput="state.summaryTable.rows[0].attendance[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 2 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[1] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[0].attendance[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 3 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[2] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[0].attendance[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 4 label</label>
+                <input value="WED" oninput="state.summaryTable.attendanceColumns[3] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[0].attendance[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 5 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[0].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 6 label</label>
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[0].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+            
+              <div class="field">
+                <label>Score 1 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
+                <input value="25" oninput="state.summaryTable.rows[0].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 2 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
+                <input value="10" oninput="state.summaryTable.rows[0].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 3 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
+                <input value="30" oninput="state.summaryTable.rows[0].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 4 label</label>
+                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[0].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 5 label</label>
+                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[0].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 6 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[0].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+          </div>
+        </div>
+      
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row 2</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(1)">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="Anusha Afroz" oninput="state.summaryTable.rows[1].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="4" disabled="">
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="63" disabled="">
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            
+              <div class="field">
+                <label>Att. 1 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[0] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[1].attendance[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 2 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[1] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[1].attendance[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 3 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[2] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[1].attendance[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 4 label</label>
+                <input value="WED" oninput="state.summaryTable.attendanceColumns[3] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[1].attendance[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 5 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[1].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 6 label</label>
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[1].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+            
+              <div class="field">
+                <label>Score 1 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
+                <input value="24" oninput="state.summaryTable.rows[1].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 2 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
+                <input value="9" oninput="state.summaryTable.rows[1].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 3 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
+                <input value="30" oninput="state.summaryTable.rows[1].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 4 label</label>
+                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[1].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 5 label</label>
+                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[1].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 6 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[1].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+          </div>
+        </div>
+      
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row 3</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(2)">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="Manahil Abbas" oninput="state.summaryTable.rows[2].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="4" disabled="">
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="61" disabled="">
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            
+              <div class="field">
+                <label>Att. 1 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[0] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[2].attendance[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 2 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[1] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[2].attendance[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 3 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[2] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[2].attendance[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 4 label</label>
+                <input value="WED" oninput="state.summaryTable.attendanceColumns[3] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[2].attendance[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 5 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[2].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 6 label</label>
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[2].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+            
+              <div class="field">
+                <label>Score 1 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
+                <input value="25" oninput="state.summaryTable.rows[2].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 2 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
+                <input value="10" oninput="state.summaryTable.rows[2].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 3 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
+                <input value="26" oninput="state.summaryTable.rows[2].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 4 label</label>
+                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[2].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 5 label</label>
+                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[2].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 6 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[2].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+          </div>
+        </div>
+      
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row 4</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(3)">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="Manha Abbas" oninput="state.summaryTable.rows[3].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="4" disabled="">
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="61" disabled="">
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            
+              <div class="field">
+                <label>Att. 1 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[0] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[3].attendance[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 2 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[1] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[3].attendance[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 3 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[2] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[3].attendance[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 4 label</label>
+                <input value="WED" oninput="state.summaryTable.attendanceColumns[3] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[3].attendance[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 5 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[3].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 6 label</label>
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[3].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+            
+              <div class="field">
+                <label>Score 1 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
+                <input value="25" oninput="state.summaryTable.rows[3].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 2 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
+                <input value="10" oninput="state.summaryTable.rows[3].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 3 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
+                <input value="26" oninput="state.summaryTable.rows[3].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 4 label</label>
+                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[3].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 5 label</label>
+                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[3].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 6 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[3].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+          </div>
+        </div>
+      
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row 5</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(4)">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="Muhammad Ahmad Sheikh" oninput="state.summaryTable.rows[4].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="3" disabled="">
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="61" disabled="">
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            
+              <div class="field">
+                <label>Att. 1 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[0] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[4].attendance[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 2 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[1] = this.value; renderSummaryTable();">
+                <input value="0" oninput="state.summaryTable.rows[4].attendance[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 3 label</label>
+                <input value="MON" oninput="state.summaryTable.attendanceColumns[2] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[4].attendance[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 4 label</label>
+                <input value="WED" oninput="state.summaryTable.attendanceColumns[3] = this.value; renderSummaryTable();">
+                <input value="1" oninput="state.summaryTable.rows[4].attendance[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 5 label</label>
+                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[4].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Att. 6 label</label>
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[4].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+            
+              <div class="field">
+                <label>Score 1 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
+                <input value="24" oninput="state.summaryTable.rows[4].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 2 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
+                <input value="9" oninput="state.summaryTable.rows[4].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 3 label</label>
+                <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
+                <input value="28" oninput="state.summaryTable.rows[4].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 4 label</label>
+                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[4].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 5 label</label>
+                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[4].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+              <div class="field">
+                <label>Score 6 label</label>
+                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.rows[4].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="panelAssignments">
         <div class="editor-list" id="assignmentEditor">
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Assignment 1</span>
-            <button type="button" onclick="removeAssignment(0)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(0)">Delete</button>
+            </div>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
             <div class="field"><label>Title</label><input value="Assignment 1" oninput="state.assignments[0].title = this.value;"></div>
@@ -1024,10 +1714,13 @@ Muhammad Ahmad Sheikh       59</div>
           </div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 1, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 1, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Assignment 2</span>
-            <button type="button" onclick="removeAssignment(1)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(1)">Delete</button>
+            </div>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
             <div class="field"><label>Title</label><input value="Assignment 2" oninput="state.assignments[1].title = this.value;"></div>
@@ -1039,10 +1732,13 @@ Muhammad Ahmad Sheikh       59</div>
           </div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 2, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 2, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Assignment 3</span>
-            <button type="button" onclick="removeAssignment(2)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(2)">Delete</button>
+            </div>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
             <div class="field"><label>Title</label><input value="Assignment 3" oninput="state.assignments[2].title = this.value;"></div>
@@ -1054,10 +1750,13 @@ Muhammad Ahmad Sheikh       59</div>
           </div>
         </div>
       
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 3, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 3, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Assignment 4</span>
-            <button type="button" onclick="removeAssignment(3)">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(3)">Delete</button>
+            </div>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
             <div class="field"><label>Title</label><input value="Assignment 4" oninput="state.assignments[3].title = this.value;"></div>
@@ -1066,25 +1765,6 @@ Muhammad Ahmad Sheikh       59</div>
             <div class="field"><label>Dead line</label><input value="July 9, 2026" oninput="state.assignments[3].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="10" oninput="state.assignments[3].score = this.value;"></div>
             <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;">https://forms.gle/3prFQwCfGH7w8QQS7</textarea></div>
-          </div>
-        </div>
-      
-        <div class="card">
-          <div class="editor-item-head">
-            <span>Student Overview</span>
-            <button type="button" onclick="removeAssignment(4)">Delete</button>
-          </div>
-          <div class="admin-grid" style="margin-top:12px;">
-            <div class="field"><label>Title</label><input value="Student Overview" oninput="state.assignments[4].title = this.value;"></div>
-            <div class="field"><label>Assignment date</label><input value="June 29, 2026" oninput="state.assignments[4].date = this.value;"></div>
-            <div class="field"><label>Course name</label><input value="Score Points" oninput="state.assignments[4].course = this.value;"></div>
-            <div class="field"><label>Dead line</label><input value="July 9, 2026" oninput="state.assignments[4].deadline = this.value;"></div>
-            <div class="field"><label>Score points</label><input value="" oninput="state.assignments[4].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[4].text = this.value;">Amna Siddiqui                            35
-Anusha Afroz                             63
-Manahil Abbas                           35
-Manha Abbas                             35 
-Muhammad Ahmad Sheikh       59</textarea></div>
           </div>
         </div>
       </div>
@@ -1155,16 +1835,125 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       "deadline": "July 9, 2026",
       "score": "10",
       "text": "https://forms.gle/3prFQwCfGH7w8QQS7"
-    },
-    {
-      "title": "Student Overview",
-      "date": "June 29, 2026",
-      "course": "Score Points",
-      "deadline": "July 9, 2026",
-      "score": "",
-      "text": "Amna Siddiqui                            35\nAnusha Afroz                             63\nManahil Abbas                           35\nManha Abbas                             35 \nMuhammad Ahmad Sheikh       59"
     }
-  ]
+  ],
+  "summaryTable": {
+    "title": "Attendance and score summary",
+    "note": "Editable class record",
+    "attendanceColumns": [
+      "MON",
+      "THU",
+      "MON",
+      "WED",
+      "THU",
+      "FRI"
+    ],
+    "scoreColumns": [
+      "MON",
+      "THU",
+      "MON",
+      "TUE",
+      "WED",
+      "THU"
+    ],
+    "rows": [
+      {
+        "student": "Amna Siddiqui",
+        "attendance": [
+          0,
+          1,
+          1,
+          1,
+          "",
+          ""
+        ],
+        "score": [
+          25,
+          10,
+          30,
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "student": "Anusha Afroz",
+        "attendance": [
+          1,
+          1,
+          1,
+          1,
+          "",
+          ""
+        ],
+        "score": [
+          24,
+          9,
+          30,
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "student": "Manahil Abbas",
+        "attendance": [
+          1,
+          1,
+          1,
+          1,
+          "",
+          ""
+        ],
+        "score": [
+          25,
+          10,
+          26,
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "student": "Manha Abbas",
+        "attendance": [
+          1,
+          1,
+          1,
+          1,
+          "",
+          ""
+        ],
+        "score": [
+          25,
+          10,
+          26,
+          "",
+          "",
+          ""
+        ]
+      },
+      {
+        "student": "Muhammad Ahmad Sheikh",
+        "attendance": [
+          1,
+          0,
+          1,
+          1,
+          "",
+          ""
+        ],
+        "score": [
+          24,
+          9,
+          28,
+          "",
+          "",
+          ""
+        ]
+      }
+    ]
+  }
 }</script>
   
   <script>
@@ -1214,14 +2003,36 @@ Muhammad Ahmad Sheikh       59</textarea></div>
     const brandNameEl = document.getElementById("brandName");
     const brandSubEl = document.getElementById("brandSub");
     const saveMsgEl = document.getElementById("saveMsg");
+    const summaryTitleEl = document.getElementById("summaryTitle");
+    const summaryTableEl = document.getElementById("summaryTable");
+    const editSummaryTitle = () => document.getElementById("editSummaryTitle");
+    const editSummaryNote = () => document.getElementById("editSummaryNote");
     const titleInput = () => document.getElementById("editPortalTitle");
     const subtitleInput = () => document.getElementById("editPortalSubtitle");
     const usernameInput = () => document.getElementById("editUsername");
     const passwordInput = () => document.getElementById("editPassword");
     const introInput = () => document.getElementById("editIntro");
 
+    function getDefaultSummaryTable() {
+      return {
+        title: "Attendance and score summary",
+        note: "Editable class record",
+        attendanceColumns: ["MON", "THU", "MON", "WED"],
+        scoreColumns: ["MON", "THU", "MON", "TUE", "WED", "THU"],
+        rows: [
+          { student: "Amna Siddiqui", attendance: [0, 1, 1, 1], score: [25, 10, 30, "", "", ""] },
+          { student: "Anusha Afroz", attendance: [1, 1, 1, 1], score: [24, 9, 30, "", "", ""] },
+          { student: "Manahil Abbas", attendance: [1, 1, 1, 1], score: [25, 10, 26, "", "", ""] },
+          { student: "Manha Abbas", attendance: [1, 1, 1, 1], score: [25, 10, 26, "", "", ""] },
+          { student: "Muhammad Ahmad Sheikh", attendance: [1, 0, 1, 1], score: [24, 9, 28, "", "", ""] }
+        ]
+      };
+    }
+
     function loadState() {
-      return structuredClone(defaultData);
+      const loaded = structuredClone(defaultData);
+      if (!loaded.summaryTable) loaded.summaryTable = getDefaultSummaryTable();
+      return loaded;
     }
 
     function saveState() {
@@ -1490,11 +2301,243 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       });
     }
 
+    const adminDragState = {
+      type: "",
+      index: -1
+    };
+
+    function reorderArray(array, from, to) {
+      if (from === to || from < 0 || to < 0 || from >= array.length || to >= array.length) return;
+      const [item] = array.splice(from, 1);
+      array.splice(to, 0, item);
+    }
+
+    function startAdminDrag(type, index, event) {
+      adminDragState.type = type;
+      adminDragState.index = index;
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text/plain", `${type}:${index}`);
+      event.currentTarget.classList.add("dragging");
+    }
+
+    function allowAdminDrop(event) {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    }
+
+    function endAdminDrag(event) {
+      event?.currentTarget?.classList?.remove("dragging");
+      adminDragState.type = "";
+      adminDragState.index = -1;
+    }
+
+    function dropAdminItem(type, index, event) {
+      event.preventDefault();
+      const transfer = event.dataTransfer.getData("text/plain");
+      const [incomingType, incomingIndexRaw] = transfer.split(":");
+      const from = adminDragState.type === type ? adminDragState.index : Number(incomingIndexRaw);
+      if (incomingType && incomingType !== type) return;
+      if (!Number.isFinite(from)) return;
+      reorderArray(type === "videos" ? state.videos : state.assignments, from, index);
+      if (type === "videos") renderVideoEditor();
+      if (type === "assignments") renderAssignmentEditor();
+    }
+
+    function parseNumericValue(value) {
+      const raw = String(value ?? "").trim();
+      if (!raw) return 0;
+      const match = raw.match(/^-?\d+(?:\.\d+)?/);
+      return match ? Number(match[0]) : 0;
+    }
+
+    function sumNumeric(values) {
+      return values.reduce((total, value) => total + parseNumericValue(value), 0);
+    }
+
+    function formatScoreDisplay(value, maxValue) {
+      const raw = String(value ?? "").trim();
+      if (!raw) return "";
+      const numeric = raw.match(/^-?\d+(?:\.\d+)?/);
+      if (!numeric) return escapeHtml(raw);
+      const max = parseNumericValue(maxValue);
+      if (max > 0) {
+        return `${escapeHtml(numeric[0])}/${escapeHtml(max)}`;
+      }
+      return escapeHtml(raw);
+    }
+
+    function ensureSummaryTable() {
+      if (!state.summaryTable) state.summaryTable = getDefaultSummaryTable();
+      const table = state.summaryTable;
+      table.title = table.title || "Attendance and score summary";
+      table.note = table.note || "Editable class record";
+      if (!Array.isArray(table.attendanceColumns) || table.attendanceColumns.length === 0) {
+        table.attendanceColumns = ["MON", "THU", "MON", "WED"];
+      }
+      if (!Array.isArray(table.scoreColumns) || table.scoreColumns.length === 0) {
+        table.scoreColumns = ["MON", "THU", "MON", "TUE", "WED", "THU"];
+      }
+      if (!Array.isArray(table.rows) || table.rows.length === 0) {
+        table.rows = getDefaultSummaryTable().rows;
+      }
+      table.rows.forEach((row) => {
+        row.student = row.student || "";
+        row.attendance = Array.isArray(row.attendance) ? row.attendance : [];
+        row.score = Array.isArray(row.score) ? row.score : [];
+        while (row.attendance.length < table.attendanceColumns.length) row.attendance.push("");
+        while (row.score.length < table.scoreColumns.length) row.score.push("");
+        row.attendance = row.attendance.slice(0, table.attendanceColumns.length);
+        row.score = row.score.slice(0, table.scoreColumns.length);
+      });
+    }
+
+    function renderSummaryTable() {
+      ensureSummaryTable();
+      const table = state.summaryTable;
+      const attendanceCount = table.attendanceColumns.length;
+      const scoreCount = table.scoreColumns.length;
+      const rows = table.rows;
+      const attendanceTotals = Array.from({ length: attendanceCount }, (_, i) => rows.reduce((sum, row) => sum + parseNumericValue(row.attendance?.[i]), 0));
+      const scoreTotals = Array.from({ length: scoreCount }, (_, i) => rows.reduce((sum, row) => sum + parseNumericValue(row.score?.[i]), 0));
+      const attendanceTotalAll = rows.reduce((sum, row) => sum + sumNumeric(row.attendance || []), 0);
+      const scoreTotalAll = rows.reduce((sum, row) => sum + sumNumeric(row.score || []), 0);
+      const scoreColumnMax = Array.from({ length: scoreCount }, (_, i) => rows.reduce((max, row) => Math.max(max, parseNumericValue(row.score?.[i])), 0));
+
+      if (summaryTitleEl) summaryTitleEl.textContent = table.title || "Attendance and score summary";
+      if (editSummaryTitle()) editSummaryTitle().value = table.title || "";
+      if (editSummaryNote()) editSummaryNote().value = table.note || "";
+      summaryTableEl.innerHTML = `
+        <thead>
+          <tr>
+            <th rowspan="2">Students</th>
+            <th class="group-head" colspan="${attendanceCount}">Attendance</th>
+            <th rowspan="2">Total</th>
+            <th class="group-head" colspan="${scoreCount}">Score Points</th>
+            <th rowspan="2">Total</th>
+          </tr>
+          <tr>
+            ${table.attendanceColumns.map((label) => `<th class="sub-head">${escapeHtml(label)}</th>`).join("")}
+            ${table.scoreColumns.map((label) => `<th class="sub-head">${escapeHtml(label)}</th>`).join("")}
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map((row) => {
+            const attendanceTotal = sumNumeric(row.attendance || []);
+            const scoreTotal = sumNumeric(row.score || []);
+            return `
+              <tr>
+                <th class="row-head">${escapeHtml(row.student)}</th>
+                ${table.attendanceColumns.map((_, idx) => `<td>${escapeHtml(row.attendance?.[idx] ?? "")}</td>`).join("")}
+                <td>${attendanceTotal}</td>
+                ${table.scoreColumns.map((_, idx) => `<td>${formatScoreDisplay(row.score?.[idx], scoreColumnMax[idx])}</td>`).join("")}
+                <td>${scoreTotal}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      `;
+    }
+
+    function renderSummaryEditor() {
+      ensureSummaryTable();
+      const table = state.summaryTable;
+      const box = document.getElementById("summaryEditor");
+      if (editSummaryTitle()) editSummaryTitle().value = table.title || "";
+      if (editSummaryNote()) editSummaryNote().value = table.note || "";
+      box.innerHTML = table.rows.map((row, rowIndex) => `
+        <div class="summary-editor-row reorder-item">
+          <div class="summary-editor-row-head">
+            <span>Row ${rowIndex + 1}</span>
+            <button type="button" class="btn" onclick="removeSummaryRow(${rowIndex})">Delete row</button>
+          </div>
+          <div class="admin-grid">
+            <div class="field">
+              <label>Student name</label>
+              <input value="${escapeHtml(row.student)}" oninput="state.summaryTable.rows[${rowIndex}].student = this.value; renderSummaryTable();">
+            </div>
+            <div class="field">
+              <label>Attendance total</label>
+              <input value="${sumNumeric(row.attendance || [])}" disabled>
+            </div>
+            <div class="field">
+              <label>Score total</label>
+              <input value="${sumNumeric(row.score || [])}" disabled>
+            </div>
+          </div>
+          <div class="summary-editor-columns">
+            ${table.attendanceColumns.map((label, colIndex) => `
+              <div class="field">
+                <label>Att. ${colIndex + 1} label</label>
+                <input value="${escapeHtml(label)}" oninput="state.summaryTable.attendanceColumns[${colIndex}] = this.value; renderSummaryTable();">
+                <input value="${escapeHtml(row.attendance?.[colIndex] ?? "")}" oninput="state.summaryTable.rows[${rowIndex}].attendance[${colIndex}] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            `).join("")}
+            ${table.scoreColumns.map((label, colIndex) => `
+              <div class="field">
+                <label>Score ${colIndex + 1} label</label>
+                <input value="${escapeHtml(label)}" oninput="state.summaryTable.scoreColumns[${colIndex}] = this.value; renderSummaryTable();">
+                <input value="${escapeHtml(row.score?.[colIndex] ?? "")}" oninput="state.summaryTable.rows[${rowIndex}].score[${colIndex}] = this.value; renderSummaryTable();" style="margin-top:8px;">
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+      renderSummaryTable();
+    }
+
+    function addSummaryRow() {
+      ensureSummaryTable();
+      state.summaryTable.rows.push({
+        student: `Student ${state.summaryTable.rows.length + 1}`,
+        attendance: Array(state.summaryTable.attendanceColumns.length).fill(""),
+        score: Array(state.summaryTable.scoreColumns.length).fill("")
+      });
+      renderSummaryEditor();
+    }
+
+    function removeSummaryRow(index) {
+      ensureSummaryTable();
+      if (state.summaryTable.rows.length <= 1) return;
+      state.summaryTable.rows.splice(index, 1);
+      renderSummaryEditor();
+    }
+
+    function addSummaryColumn(group) {
+      ensureSummaryTable();
+      const table = state.summaryTable;
+      if (group === "attendance") {
+        const label = `COL ${table.attendanceColumns.length + 1}`;
+        table.attendanceColumns.push(label);
+        table.rows.forEach((row) => row.attendance.push(""));
+      } else {
+        const label = `COL ${table.scoreColumns.length + 1}`;
+        table.scoreColumns.push(label);
+        table.rows.forEach((row) => row.score.push(""));
+      }
+      renderSummaryEditor();
+    }
+
+    function removeSummaryColumn(group) {
+      ensureSummaryTable();
+      const table = state.summaryTable;
+      if (group === "attendance") {
+        if (table.attendanceColumns.length <= 1) return;
+        table.attendanceColumns.pop();
+        table.rows.forEach((row) => row.attendance.pop());
+      } else {
+        if (table.scoreColumns.length <= 1) return;
+        table.scoreColumns.pop();
+        table.rows.forEach((row) => row.score.pop());
+      }
+      renderSummaryEditor();
+    }
+
     function showPortal() {
       loginCard.classList.add("hidden");
       portalArea.classList.add("open");
       portalArea.setAttribute("aria-hidden", "false");
       updateAuthButtons();
+      renderSummaryTable();
       renderAssignments();
       renderVideos();
       updatePortalHeader();
@@ -1637,11 +2680,14 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       currentAdminTab = tab;
       document.getElementById("tabPortal").classList.toggle("active", tab === "portal");
       document.getElementById("tabVideos").classList.toggle("active", tab === "videos");
+      document.getElementById("tabTable").classList.toggle("active", tab === "summary");
       document.getElementById("tabAssignments").classList.toggle("active", tab === "assignments");
       document.getElementById("panelPortal").classList.toggle("active", tab === "portal");
       document.getElementById("panelVideos").classList.toggle("active", tab === "videos");
+      document.getElementById("panelSummary").classList.toggle("active", tab === "summary");
       document.getElementById("panelAssignments").classList.toggle("active", tab === "assignments");
       if (tab === "videos") renderVideoEditor();
+      if (tab === "summary") renderSummaryEditor();
       if (tab === "assignments") renderAssignmentEditor();
       if (tab === "portal") fillPortalEditor();
     }
@@ -1675,8 +2721,15 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       adminPin.value = "";
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
       switchAdminTab(currentAdminTab);
+      renderSummaryEditor();
       closeDrawer();
       touchSession();
+      if (!isAdminAuthed()) {
+        setTimeout(() => {
+          adminPin.focus();
+          try { adminPin.setSelectionRange(adminPin.value.length, adminPin.value.length); } catch {}
+        }, 0);
+      }
     }
 
     function closeAdmin() {
@@ -1739,10 +2792,13 @@ Muhammad Ahmad Sheikh       59</textarea></div>
     function renderVideoEditor() {
       const box = document.getElementById("videoEditor");
       box.innerHTML = state.videos.map((v, idx) => `
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', ${idx}, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', ${idx}, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>Video ${idx + 1}</span>
-            <button type="button" onclick="removeVideo(${idx})">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(${idx})">Delete</button>
+            </div>
           </div>
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="${escapeHtml(v.title)}" oninput="state.videos[${idx}].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="${escapeHtml(v.src)}" oninput="state.videos[${idx}].src = this.value;"></div>
@@ -1763,10 +2819,13 @@ Muhammad Ahmad Sheikh       59</textarea></div>
     function renderAssignmentEditor() {
       const box = document.getElementById("assignmentEditor");
       box.innerHTML = state.assignments.map((a, idx) => `
-        <div class="card">
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', ${idx}, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', ${idx}, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>${escapeHtml(a.title)}</span>
-            <button type="button" onclick="removeAssignment(${idx})">Delete</button>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(${idx})">Delete</button>
+            </div>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
             <div class="field"><label>Title</label><input value="${escapeHtml(a.title)}" oninput="state.assignments[${idx}].title = this.value;"></div>
@@ -1802,6 +2861,9 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       state.portalSubtitle = subtitleInput().value.trim() || defaultData.portalSubtitle;
       state.username = usernameInput().value.trim() || defaultData.username;
       state.introText = introInput().value.trim() || defaultData.introText;
+      ensureSummaryTable();
+      state.summaryTable.title = editSummaryTitle()?.value.trim() || state.summaryTable.title;
+      state.summaryTable.note = editSummaryNote()?.value.trim() || state.summaryTable.note;
       const newPass = passwordInput().value.trim();
       if (newPass) {
         state.passHash = await sha256(newPass);
@@ -1827,9 +2889,11 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       try {
         await applyPortalEditorToState();
         updatePortalHeader();
+        renderSummaryTable();
         renderAssignments();
         renderVideos();
         renderVideoEditor();
+        renderSummaryEditor();
         renderAssignmentEditor();
         const savedToFile = await saveCurrentHtmlToFile();
         saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
@@ -1897,6 +2961,7 @@ Muhammad Ahmad Sheikh       59</textarea></div>
     window.addEventListener("load", () => {
       state = loadState();
       updatePortalHeader();
+      renderSummaryTable();
       openPortalWhenLoggedIn();
       setEyeIcon(peekBtn, portalPass.type === "password");
       setEyeIcon(adminPeekBtn, adminPin.type === "password");
