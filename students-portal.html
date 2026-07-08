@@ -804,6 +804,25 @@
         <div class="assignment-card" data-assignment="3">
           <button class="assignment-head" type="button" onclick="toggleAssignment(3)" aria-expanded="false">
             <div class="assignment-title">
+              <small>Assignment 4</small>
+              <span>Quiz 2</span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">July 8, 2026</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">Quiz 2</div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 9, 2026</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value"></div></div>
+            </div>
+            <div class="assignment-text"></div>
+          </div>
+        </div>
+      
+        <div class="assignment-card" data-assignment="4">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(4)" aria-expanded="false">
+            <div class="assignment-title">
               <small>Student Overview</small>
               <span>Score Points</span>
             </div>
@@ -833,20 +852,36 @@ Muhammad Ahmad Sheikh       59</div>
           <p>Recorded lessons are displayed as thumbnail cards. Selecting a card opens the player in a modal window.</p>
         </div>
         <div class="grid" id="videoGrid">
-        <button class="video-card" type="button" onclick="openVideo(0)" aria-label="Open Recording 1">
+        <button class="video-card" type="button" onclick="openVideo(0)" aria-label="Open July 6, 2026 pt. 1">
           <div class="video-preview">
-            <img id="thumb-0" alt="Recording 1 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%201%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <img id="thumb-0" alt="July 6, 2026 pt. 1 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3EJuly%206%2C%202026%20pt.%201%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
             <div class="play-badge">▶</div>
           </div>
-          <h3>Recording 1</h3>
+          <h3>July 6, 2026 pt. 1</h3>
         </button>
       
-        <button class="video-card" type="button" onclick="openVideo(1)" aria-label="Open Recording 2">
+        <button class="video-card" type="button" onclick="openVideo(1)" aria-label="Open July 6, 2026 pt. 2">
           <div class="video-preview">
-            <img id="thumb-1" alt="Recording 2 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%202%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <img id="thumb-1" alt="July 6, 2026 pt. 2 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3EJuly%206%2C%202026%20pt.%202%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
             <div class="play-badge">▶</div>
           </div>
-          <h3>Recording 2</h3>
+          <h3>July 6, 2026 pt. 2</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(2)" aria-label="Open July 8, 2026 pt. 1">
+          <div class="video-preview">
+            <img id="thumb-2" alt="July 8, 2026 pt. 1 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3EJuly%208%2C%202026%20pt.%201%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>July 8, 2026 pt. 1</h3>
+        </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(3)" aria-label="Open July 8, 2026 pt. 2">
+          <div class="video-preview">
+            <img id="thumb-3" alt="July 8, 2026 pt. 2 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3EJuly%208%2C%202026%20pt.%202%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>July 8, 2026 pt. 2</h3>
         </button>
       </div>
         
@@ -893,7 +928,7 @@ Muhammad Ahmad Sheikh       59</div>
       <div class="mini-actions" style="margin-bottom: 10px;">
         <button class="btn" type="button" onclick="connectSourceFile()">Connect source file</button>
         <button class="btn primary" type="button" onclick="saveAll()">Save to source</button>
-        <span class="save-msg" id="saveMsg">Source file connected.</span>
+        <span class="save-msg" id="saveMsg">Saved to source file.</span>
       </div>
 
       <div class="tab-bar">
@@ -935,7 +970,7 @@ Muhammad Ahmad Sheikh       59</div>
             <span>Video 1</span>
             <button type="button" onclick="removeVideo(0)">Delete</button>
           </div>
-          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 1" oninput="state.videos[0].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 6, 2026 pt. 1" oninput="state.videos[0].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-1.mp4" oninput="state.videos[0].src = this.value;"></div>
         </div>
       
@@ -944,8 +979,26 @@ Muhammad Ahmad Sheikh       59</div>
             <span>Video 2</span>
             <button type="button" onclick="removeVideo(1)">Delete</button>
           </div>
-          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 2" oninput="state.videos[1].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 6, 2026 pt. 2" oninput="state.videos[1].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-2.mp4" oninput="state.videos[1].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 3</span>
+            <button type="button" onclick="removeVideo(2)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 8, 2026 pt. 1" oninput="state.videos[2].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-3.mp4" oninput="state.videos[2].src = this.value;"></div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Video 4</span>
+            <button type="button" onclick="removeVideo(3)">Delete</button>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 8, 2026 pt. 2" oninput="state.videos[3].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-4.mp4" oninput="state.videos[3].src = this.value;"></div>
         </div>
       </div>
         <div class="mini-actions">
@@ -1003,16 +1056,31 @@ Muhammad Ahmad Sheikh       59</div>
       
         <div class="card">
           <div class="editor-item-head">
-            <span>Student Overview</span>
+            <span>Assignment 4</span>
             <button type="button" onclick="removeAssignment(3)">Delete</button>
           </div>
           <div class="admin-grid" style="margin-top:12px;">
-            <div class="field"><label>Title</label><input value="Student Overview" oninput="state.assignments[3].title = this.value;"></div>
-            <div class="field"><label>Assignment date</label><input value="June 29, 2026" oninput="state.assignments[3].date = this.value;"></div>
-            <div class="field"><label>Course name</label><input value="Score Points" oninput="state.assignments[3].course = this.value;"></div>
+            <div class="field"><label>Title</label><input value="Assignment 4" oninput="state.assignments[3].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="July 8, 2026" oninput="state.assignments[3].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="Quiz 2" oninput="state.assignments[3].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="July 9, 2026" oninput="state.assignments[3].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="" oninput="state.assignments[3].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;">Amna Siddiqui                            35
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;"></textarea></div>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="editor-item-head">
+            <span>Student Overview</span>
+            <button type="button" onclick="removeAssignment(4)">Delete</button>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Student Overview" oninput="state.assignments[4].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="June 29, 2026" oninput="state.assignments[4].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="Score Points" oninput="state.assignments[4].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="July 9, 2026" oninput="state.assignments[4].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="" oninput="state.assignments[4].score = this.value;"></div>
+            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[4].text = this.value;">Amna Siddiqui                            35
 Anusha Afroz                             63
 Manahil Abbas                           35
 Manha Abbas                             35 
@@ -1039,12 +1107,20 @@ Muhammad Ahmad Sheikh       59</textarea></div>
   "adminPinHash": "816d797f1f1c71bb6104ad8a44416f92eb1a08fdc4bbfa5f33c20b304b2b47a7",
   "videos": [
     {
-      "title": "Recording 1",
+      "title": "July 6, 2026 pt. 1",
       "src": "videos/recording-1.mp4"
     },
     {
-      "title": "Recording 2",
+      "title": "July 6, 2026 pt. 2",
       "src": "videos/recording-2.mp4"
+    },
+    {
+      "title": "July 8, 2026 pt. 1",
+      "src": "videos/recording-3.mp4"
+    },
+    {
+      "title": "July 8, 2026 pt. 2",
+      "src": "videos/recording-4.mp4"
     }
   ],
   "assignments": [
@@ -1071,6 +1147,14 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       "deadline": "July 8, 2026",
       "score": "20",
       "text": "redesign the layout of website as instructed in class"
+    },
+    {
+      "title": "Assignment 4",
+      "date": "July 8, 2026",
+      "course": "Quiz 2",
+      "deadline": "July 9, 2026",
+      "score": "",
+      "text": ""
     },
     {
       "title": "Student Overview",
@@ -1821,5 +1905,6 @@ Muhammad Ahmad Sheikh       59</textarea></div>
       updateAuthButtons();
     });
   </script>
+
 
 </body></html>
