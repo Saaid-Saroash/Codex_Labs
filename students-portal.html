@@ -385,6 +385,59 @@
       line-height: 1.7;
       white-space: pre-line;
     }
+    .assignment-text + .assignment-text {
+      margin-top: 10px;
+    }
+    .assignment-link {
+      display: block;
+      color: inherit;
+      text-decoration: underline;
+      word-break: break-word;
+      cursor: pointer;
+    }
+    .assignment-editor-blocks {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .assignment-text-editor {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 10px;
+      align-items: end;
+      padding: 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+    }
+    .assignment-text-editor .field { margin: 0; }
+    .assignment-text-editor textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+    .link-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 4px;
+      font-weight: 800;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .link-toggle input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+    }
+    .assignment-text-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
 
     .grid {
       display: grid;
@@ -458,31 +511,37 @@
     }
     .summary-table-wrap {
       overflow-x: auto;
-      border-radius: 24px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
-      padding: 14px;
+      padding: 2px;
     }
     .summary-table {
       width: 100%;
-      min-width: 920px;
+      min-width: 1000px;
       border-collapse: separate;
       border-spacing: 0;
       color: white;
+      table-layout: fixed;
     }
     .summary-table th,
     .summary-table td {
-      border-right: 1px solid rgba(255,255,255,.12);
-      border-bottom: 1px solid rgba(255,255,255,.12);
-      padding: 10px 12px;
+      border-right: 1px solid rgba(255,255,255,.10);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      padding: 12px 10px;
       text-align: center;
       vertical-align: middle;
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.03);
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 15px;
+      line-height: 1.15;
     }
     .summary-table thead th {
-      background: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .12em;
@@ -491,13 +550,21 @@
     .summary-table .row-head {
       text-align: left;
       font-weight: 900;
-      background: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
       position: sticky;
       left: 0;
       z-index: 1;
+      white-space: nowrap;
+      word-break: normal;
+      overflow: visible;
+      text-overflow: clip;
+      min-width: 220px;
+      width: 21%;
+      line-height: 1.35;
+      padding-left: 14px;
     }
     .summary-table .group-head {
-      background: rgba(246,216,216,.18);
+      background: rgba(246,216,216,.14);
       font-size: 13px;
     }
     .summary-table .sub-head {
@@ -681,8 +748,8 @@
       position: fixed;
       inset: 50% auto auto 50%;
       transform: translate(-50%, -50%);
-      width: min(1100px, calc(100% - 24px));
-      max-height: calc(100vh - 24px);
+      width: min(1240px, calc(100% - 20px));
+      max-height: calc(100vh - 18px);
       overflow: auto;
       background: #3b0419;
       border: 1px solid var(--border);
@@ -775,6 +842,35 @@
       .controls { padding: 12px; }
       .admin-grid, .admin-grid-3 { grid-template-columns: 1fr; }
     }
+    @media (max-width: 720px) {
+      .summary-table-wrap { padding: 10px; border-radius: 18px; }
+      .summary-table {
+        min-width: 760px;
+        font-size: 11px;
+      }
+      .summary-table th,
+      .summary-table td {
+        padding: 8px 9px;
+      }
+      .summary-table thead th {
+        font-size: 10px;
+        letter-spacing: .08em;
+      }
+      .summary-table .row-head {
+        min-width: 170px;
+        width: 170px;
+      }
+      .assignment-text-editor {
+        grid-template-columns: 1fr;
+      }
+      .assignment-text-actions {
+        justify-content: flex-start;
+      }
+      .link-toggle {
+        min-height: auto;
+        padding: 0;
+      }
+    }
     @media (min-width: 901px) {
       .menu-btn { display: none; }
       .drawer { display: none; }
@@ -861,58 +957,67 @@
         </div>
         <div class="summary-table-wrap">
           <table class="summary-table" id="summaryTable">
+        
+        <colgroup>
+          <col style="width:21%;">
+          <col style="width:4.9%;"><col style="width:4.9%;"><col style="width:4.9%;"><col style="width:4.9%;"><col style="width:4.9%;">
+          <col style="width:6.2%;">
+          <col style="width:6.2%;"><col style="width:6.2%;"><col style="width:6.2%;"><col style="width:6.2%;"><col style="width:6.2%;">
+          <col style="width:6.2%;">
+        </colgroup>
+      
         <thead>
           <tr>
             <th rowspan="2">Students</th>
-            <th class="group-head" colspan="6">Attendance</th>
+            <th class="group-head" colspan="5">Attendance</th>
             <th rowspan="2">Total</th>
-            <th class="group-head" colspan="6">Score Points</th>
+            <th class="group-head" colspan="5">Score Points</th>
             <th rowspan="2">Total</th>
           </tr>
           <tr>
-            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">THU</th><th class="sub-head">FRI</th>
-            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">TUE</th><th class="sub-head">WED</th><th class="sub-head">THU</th>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">THU</th>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head"></th>
           </tr>
         </thead>
         <tbody>
           
               <tr>
                 <th class="row-head">Amna Siddiqui</th>
-                <td>0</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>0</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>3</td>
-                <td>25/25</td><td>10/10</td><td>30/30</td><td></td><td></td><td></td>
-                <td>65</td>
+                <td>25/25</td><td>10/10</td><td>30/30</td><td>9/10</td><td></td>
+                <td>74</td>
               </tr>
             
               <tr>
                 <th class="row-head">Anusha Afroz</th>
-                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>4</td>
-                <td>24/25</td><td>9/10</td><td>30/30</td><td></td><td></td><td></td>
-                <td>63</td>
+                <td>24/25</td><td>9/10</td><td>30/30</td><td>9/10</td><td></td>
+                <td>72</td>
               </tr>
             
               <tr>
                 <th class="row-head">Manahil Abbas</th>
-                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>4</td>
-                <td>25/25</td><td>10/10</td><td>26/30</td><td></td><td></td><td></td>
-                <td>61</td>
+                <td>25/25</td><td>10/10</td><td>26/30</td><td>10/10</td><td></td>
+                <td>71</td>
               </tr>
             
               <tr>
                 <th class="row-head">Manha Abbas</th>
-                <td>1</td><td>1</td><td>1</td><td>1</td><td></td><td></td>
+                <td>1</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>4</td>
-                <td>25/25</td><td>10/10</td><td>26/30</td><td></td><td></td><td></td>
-                <td>61</td>
+                <td>25/25</td><td>10/10</td><td>26/30</td><td>10/10</td><td></td>
+                <td>71</td>
               </tr>
             
               <tr>
                 <th class="row-head">Muhammad Ahmad Sheikh</th>
-                <td>1</td><td>0</td><td>1</td><td>1</td><td></td><td></td>
+                <td>1</td><td>0</td><td>1</td><td>1</td><td></td>
                 <td>3</td>
-                <td>24/25</td><td>9/10</td><td>28/30</td><td></td><td></td><td></td>
+                <td>24/25</td><td>9/10</td><td>28/30</td><td></td><td></td>
                 <td>61</td>
               </tr>
             
@@ -943,7 +1048,7 @@
               <div class="meta-box"><span class="label">Dead line</span><div class="value">June 30, 2026</div></div>
               <div class="meta-box"><span class="label">Score points</span><div class="value">25</div></div>
             </div>
-            <div class="assignment-text">https://forms.gle/TQWwh79RKdWidEsb9</div>
+            <a class="assignment-text assignment-link" href="https://forms.gle/TQWwh79RKdWidEsb9" target="_blank" rel="noopener noreferrer">https://forms.gle/TQWwh79RKdWidEsb9</a>
           </div>
         </div>
       
@@ -1000,7 +1105,7 @@
               <div class="meta-box"><span class="label">Dead line</span><div class="value">July 9, 2026</div></div>
               <div class="meta-box"><span class="label">Score points</span><div class="value">10</div></div>
             </div>
-            <div class="assignment-text">https://forms.gle/3prFQwCfGH7w8QQS7</div>
+            <a class="assignment-text assignment-link" href="https://forms.gle/3prFQwCfGH7w8QQS7" target="_blank" rel="noopener noreferrer">https://forms.gle/3prFQwCfGH7w8QQS7</a>
           </div>
         </div>
       </div>
@@ -1089,18 +1194,18 @@
       <div class="mini-actions" style="margin-bottom: 10px;">
         <button class="btn" type="button" onclick="connectSourceFile()">Connect source file</button>
         <button class="btn primary" type="button" onclick="saveAll()">Save to source</button>
-        <span class="save-msg" id="saveMsg">Saved to source file.</span>
+        <span class="save-msg" id="saveMsg"></span>
       </div>
 
       <div class="tab-bar">
-        <button class="tab-btn active" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
+        <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn active" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
         <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
 
-      <div class="tab-panel active" id="panelPortal">
+      <div class="tab-panel" id="panelPortal">
         <div class="admin-grid">
           <div class="field">
             <label>Portal title</label>
@@ -1182,7 +1287,7 @@
       </div>
 
 
-      <div class="tab-panel" id="panelSummary">
+      <div class="tab-panel active" id="panelSummary">
         <div class="summary-editor-shell">
           <div class="card">
             <div class="admin-grid">
@@ -1222,7 +1327,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="65" disabled="">
+              <input value="74" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1257,47 +1362,45 @@
                 <input value="" oninput="state.summaryTable.rows[0].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
-              <div class="field">
-                <label>Att. 6 label</label>
-                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[0].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
             
               <div class="field">
                 <label>Score 1 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
                 <input value="25" oninput="state.summaryTable.rows[0].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 1 total</label>
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 2 label</label>
                 <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
                 <input value="10" oninput="state.summaryTable.rows[0].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 2 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
                 <input value="30" oninput="state.summaryTable.rows[0].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 3 total</label>
+                <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 4 label</label>
-                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[0].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="9" oninput="state.summaryTable.rows[0].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 4 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[0].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
-              <div class="field">
-                <label>Score 6 label</label>
-                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[0].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 5 total</label>
+                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1319,7 +1422,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="63" disabled="">
+              <input value="72" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1354,47 +1457,45 @@
                 <input value="" oninput="state.summaryTable.rows[1].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
-              <div class="field">
-                <label>Att. 6 label</label>
-                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[1].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
             
               <div class="field">
                 <label>Score 1 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
                 <input value="24" oninput="state.summaryTable.rows[1].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 1 total</label>
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 2 label</label>
                 <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
                 <input value="9" oninput="state.summaryTable.rows[1].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 2 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
                 <input value="30" oninput="state.summaryTable.rows[1].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 3 total</label>
+                <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 4 label</label>
-                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[1].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="9" oninput="state.summaryTable.rows[1].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 4 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[1].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
-              <div class="field">
-                <label>Score 6 label</label>
-                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[1].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 5 total</label>
+                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1416,7 +1517,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="61" disabled="">
+              <input value="71" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1451,47 +1552,45 @@
                 <input value="" oninput="state.summaryTable.rows[2].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
-              <div class="field">
-                <label>Att. 6 label</label>
-                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[2].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
             
               <div class="field">
                 <label>Score 1 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
                 <input value="25" oninput="state.summaryTable.rows[2].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 1 total</label>
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 2 label</label>
                 <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
                 <input value="10" oninput="state.summaryTable.rows[2].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 2 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
                 <input value="26" oninput="state.summaryTable.rows[2].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 3 total</label>
+                <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 4 label</label>
-                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[2].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="10" oninput="state.summaryTable.rows[2].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 4 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[2].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
-              <div class="field">
-                <label>Score 6 label</label>
-                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[2].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 5 total</label>
+                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1513,7 +1612,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="61" disabled="">
+              <input value="71" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1548,47 +1647,45 @@
                 <input value="" oninput="state.summaryTable.rows[3].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
-              <div class="field">
-                <label>Att. 6 label</label>
-                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[3].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
             
               <div class="field">
                 <label>Score 1 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
                 <input value="25" oninput="state.summaryTable.rows[3].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 1 total</label>
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 2 label</label>
                 <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
                 <input value="10" oninput="state.summaryTable.rows[3].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 2 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
                 <input value="26" oninput="state.summaryTable.rows[3].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 3 total</label>
+                <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 4 label</label>
-                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[3].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="10" oninput="state.summaryTable.rows[3].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 4 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[3].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
-              <div class="field">
-                <label>Score 6 label</label>
-                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[3].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 5 total</label>
+                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1645,47 +1742,45 @@
                 <input value="" oninput="state.summaryTable.rows[4].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
-              <div class="field">
-                <label>Att. 6 label</label>
-                <input value="FRI" oninput="state.summaryTable.attendanceColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[4].attendance[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
             
               <div class="field">
                 <label>Score 1 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[0] = this.value; renderSummaryTable();">
                 <input value="24" oninput="state.summaryTable.rows[4].score[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 1 total</label>
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[0] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 2 label</label>
                 <input value="THU" oninput="state.summaryTable.scoreColumns[1] = this.value; renderSummaryTable();">
                 <input value="9" oninput="state.summaryTable.rows[4].score[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 2 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[1] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
                 <input value="28" oninput="state.summaryTable.rows[4].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 3 total</label>
+                <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 4 label</label>
-                <input value="TUE" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
+                <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[4].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 4 total</label>
+                <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="WED" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[4].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
-              </div>
-            
-              <div class="field">
-                <label>Score 6 label</label>
-                <input value="THU" oninput="state.summaryTable.scoreColumns[5] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[4].score[5] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score 5 total</label>
+                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1710,7 +1805,29 @@
             <div class="field"><label>Course name</label><input value="Quiz" oninput="state.assignments[0].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="June 30, 2026" oninput="state.assignments[0].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="25" oninput="state.assignments[0].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[0].text = this.value;">https://forms.gle/TQWwh79RKdWidEsb9</textarea></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box 1</label>
+                  <textarea rows="3" oninput="updateAssignmentText(0, 0, 'value', this.value)">https://forms.gle/TQWwh79RKdWidEsb9</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" checked="" onchange="updateAssignmentText(0, 0, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(0, 0)">Delete</button>
+                </div>
+              </div>
+            
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(0)">Add text box</button>
           </div>
         </div>
       
@@ -1728,7 +1845,29 @@
             <div class="field"><label>Course name</label><input value="work completion" oninput="state.assignments[1].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="July 2, 2026" oninput="state.assignments[1].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="10" oninput="state.assignments[1].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[1].text = this.value;">Complete the given work and show it in the next class</textarea></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box 1</label>
+                  <textarea rows="3" oninput="updateAssignmentText(1, 0, 'value', this.value)">Complete the given work and show it in the next class</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" onchange="updateAssignmentText(1, 0, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(1, 0)">Delete</button>
+                </div>
+              </div>
+            
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(1)">Add text box</button>
           </div>
         </div>
       
@@ -1746,7 +1885,29 @@
             <div class="field"><label>Course name</label><input value="Layout Practice" oninput="state.assignments[2].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="July 8, 2026" oninput="state.assignments[2].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="20" oninput="state.assignments[2].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[2].text = this.value;">redesign the layout of website as instructed in class</textarea></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box 1</label>
+                  <textarea rows="3" oninput="updateAssignmentText(2, 0, 'value', this.value)">redesign the layout of website as instructed in class</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" onchange="updateAssignmentText(2, 0, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(2, 0)">Delete</button>
+                </div>
+              </div>
+            
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(2)">Add text box</button>
           </div>
         </div>
       
@@ -1764,7 +1925,29 @@
             <div class="field"><label>Course name</label><input value="Quiz 2" oninput="state.assignments[3].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="July 9, 2026" oninput="state.assignments[3].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="10" oninput="state.assignments[3].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[3].text = this.value;">https://forms.gle/3prFQwCfGH7w8QQS7</textarea></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box 1</label>
+                  <textarea rows="3" oninput="updateAssignmentText(3, 0, 'value', this.value)">https://forms.gle/3prFQwCfGH7w8QQS7</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" checked="" onchange="updateAssignmentText(3, 0, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(3, 0)">Delete</button>
+                </div>
+              </div>
+            
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(3)">Add text box</button>
           </div>
         </div>
       </div>
@@ -1810,7 +1993,13 @@
       "course": "Quiz",
       "deadline": "June 30, 2026",
       "score": "25",
-      "text": "https://forms.gle/TQWwh79RKdWidEsb9"
+      "text": "https://forms.gle/TQWwh79RKdWidEsb9",
+      "texts": [
+        {
+          "value": "https://forms.gle/TQWwh79RKdWidEsb9",
+          "link": true
+        }
+      ]
     },
     {
       "title": "Assignment 2",
@@ -1818,7 +2007,13 @@
       "course": "work completion",
       "deadline": "July 2, 2026",
       "score": "10",
-      "text": "Complete the given work and show it in the next class"
+      "text": "Complete the given work and show it in the next class",
+      "texts": [
+        {
+          "value": "Complete the given work and show it in the next class",
+          "link": false
+        }
+      ]
     },
     {
       "title": "Assignment 3",
@@ -1826,7 +2021,13 @@
       "course": "Layout Practice",
       "deadline": "July 8, 2026",
       "score": "20",
-      "text": "redesign the layout of website as instructed in class"
+      "text": "redesign the layout of website as instructed in class",
+      "texts": [
+        {
+          "value": "redesign the layout of website as instructed in class",
+          "link": false
+        }
+      ]
     },
     {
       "title": "Assignment 4",
@@ -1834,7 +2035,13 @@
       "course": "Quiz 2",
       "deadline": "July 9, 2026",
       "score": "10",
-      "text": "https://forms.gle/3prFQwCfGH7w8QQS7"
+      "text": "https://forms.gle/3prFQwCfGH7w8QQS7",
+      "texts": [
+        {
+          "value": "https://forms.gle/3prFQwCfGH7w8QQS7",
+          "link": true
+        }
+      ]
     }
   ],
   "summaryTable": {
@@ -1845,16 +2052,14 @@
       "THU",
       "MON",
       "WED",
-      "THU",
-      "FRI"
+      "THU"
     ],
     "scoreColumns": [
       "MON",
       "THU",
       "MON",
-      "TUE",
       "WED",
-      "THU"
+      ""
     ],
     "rows": [
       {
@@ -1864,15 +2069,13 @@
           1,
           1,
           1,
-          "",
           ""
         ],
         "score": [
           25,
           10,
           30,
-          "",
-          "",
+          "9",
           ""
         ]
       },
@@ -1883,15 +2086,13 @@
           1,
           1,
           1,
-          "",
           ""
         ],
         "score": [
           24,
           9,
           30,
-          "",
-          "",
+          "9",
           ""
         ]
       },
@@ -1902,15 +2103,13 @@
           1,
           1,
           1,
-          "",
           ""
         ],
         "score": [
           25,
           10,
           26,
-          "",
-          "",
+          "10",
           ""
         ]
       },
@@ -1921,15 +2120,13 @@
           1,
           1,
           1,
-          "",
           ""
         ],
         "score": [
           25,
           10,
           26,
-          "",
-          "",
+          "10",
           ""
         ]
       },
@@ -1940,7 +2137,6 @@
           0,
           1,
           1,
-          "",
           ""
         ],
         "score": [
@@ -1948,10 +2144,16 @@
           9,
           28,
           "",
-          "",
           ""
         ]
       }
+    ],
+    "scoreMaxValues": [
+      25,
+      10,
+      30,
+      10,
+      ""
     ]
   }
 }</script>
@@ -1961,7 +2163,7 @@
     const ADMIN_KEY = "studentsPortalAdmin";
     const SESSION_ID_KEY = "studentsPortalSessionId";
     const LAST_ACTIVE_KEY = "studentsPortalLastActive";
-    const SESSION_TIMEOUT_MS = 15 * 60 * 1000;
+    const SESSION_TIMEOUT_MS = 60 * 60 * 1000;
     const DATA_SCRIPT_ID = "portal-data";
 
     const defaultData = JSON.parse(document.getElementById(DATA_SCRIPT_ID).textContent);
@@ -2019,6 +2221,7 @@
         note: "Editable class record",
         attendanceColumns: ["MON", "THU", "MON", "WED"],
         scoreColumns: ["MON", "THU", "MON", "TUE", "WED", "THU"],
+        scoreMaxValues: [25, 10, 30, 10, 10, 10],
         rows: [
           { student: "Amna Siddiqui", attendance: [0, 1, 1, 1], score: [25, 10, 30, "", "", ""] },
           { student: "Anusha Afroz", attendance: [1, 1, 1, 1], score: [24, 9, 30, "", "", ""] },
@@ -2032,6 +2235,8 @@
     function loadState() {
       const loaded = structuredClone(defaultData);
       if (!loaded.summaryTable) loaded.summaryTable = getDefaultSummaryTable();
+      if (!Array.isArray(loaded.assignments)) loaded.assignments = [];
+      loaded.assignments.forEach((assignment) => normalizeAssignmentTextBlocks(assignment));
       return loaded;
     }
 
@@ -2058,6 +2263,40 @@
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;");
+    }
+
+    function isValidHttpUrl(value) {
+      if (!value) return false;
+      try {
+        const url = new URL(String(value).trim());
+        return url.protocol === "http:" || url.protocol === "https:";
+      } catch {
+        return false;
+      }
+    }
+
+    function normalizeAssignmentTextBlocks(assignment) {
+      if (!assignment) return [];
+      const blocks = Array.isArray(assignment.texts) ? assignment.texts : [];
+      const normalized = blocks.length
+        ? blocks.map((block) => {
+            if (typeof block === "string") {
+              return { value: block, link: isValidHttpUrl(block) };
+            }
+            const value = String(block?.value ?? block?.text ?? "");
+            return { value, link: !!block?.link };
+          })
+        : [{ value: String(assignment.text ?? ""), link: isValidHttpUrl(assignment.text) }];
+
+      assignment.texts = normalized;
+      assignment.text = normalized.map((block) => block.value).join("\n\n");
+      return assignment.texts;
+    }
+
+    function syncAssignmentText(assignment) {
+      if (!assignment) return;
+      normalizeAssignmentTextBlocks(assignment);
+      assignment.text = assignment.texts.map((block) => block.value).join("\n\n");
     }
 
     function setEyeIcon(btn, hidden) {
@@ -2156,12 +2395,19 @@
       sessionStorage.setItem(LAST_ACTIVE_KEY, String(Date.now()));
     }
 
+    function sessionExpired() {
+      if (!isAuthed()) return false;
+      const lastActive = Number(sessionStorage.getItem(LAST_ACTIVE_KEY) || "0");
+      if (!lastActive) return false;
+      return Date.now() - lastActive > SESSION_TIMEOUT_MS;
+    }
+
     function checkSessionTimeout() {
       if (!isAuthed()) return;
       const lastActive = Number(sessionStorage.getItem(LAST_ACTIVE_KEY) || "0");
       if (!lastActive) return;
       if (Date.now() - lastActive > SESSION_TIMEOUT_MS) {
-        logoutPortal("Session expired after 15 minutes of inactivity.");
+        logoutPortal("Session expired after 1 hour of inactivity.");
       }
     }
 
@@ -2187,7 +2433,17 @@
 
     function renderAssignments() {
       const list = document.getElementById("assignmentList");
-      list.innerHTML = state.assignments.map((a, idx) => `
+      list.innerHTML = state.assignments.map((a, idx) => {
+        normalizeAssignmentTextBlocks(a);
+        const textBlocks = a.texts.map((block) => {
+          const safeText = escapeHtml(block.value || "");
+          const url = String(block.value || "").trim();
+          if (block.link && isValidHttpUrl(url)) {
+            return `<a class="assignment-text assignment-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+          }
+          return `<div class="assignment-text">${safeText}</div>`;
+        }).join("");
+        return `
         <div class="assignment-card" data-assignment="${idx}">
           <button class="assignment-head" type="button" onclick="toggleAssignment(${idx})" aria-expanded="false">
             <div class="assignment-title">
@@ -2203,10 +2459,10 @@
               <div class="meta-box"><span class="label">Dead line</span><div class="value">${escapeHtml(a.deadline)}</div></div>
               <div class="meta-box"><span class="label">Score points</span><div class="value">${escapeHtml(a.score)}</div></div>
             </div>
-            <div class="assignment-text">${escapeHtml(a.text)}</div>
+            ${textBlocks}
           </div>
         </div>
-      `).join("");
+      `}).join("");
     }
 
     function toggleAssignment(index) {
@@ -2380,6 +2636,19 @@
       if (!Array.isArray(table.rows) || table.rows.length === 0) {
         table.rows = getDefaultSummaryTable().rows;
       }
+      if (!Array.isArray(table.scoreMaxValues)) {
+        const defaults = getDefaultSummaryTable().scoreMaxValues || [];
+        table.scoreMaxValues = Array.from({ length: table.scoreColumns.length }, (_, i) => {
+          const inferred = table.rows.reduce((max, row) => Math.max(max, parseNumericValue(row?.score?.[i])), 0);
+          return parseNumericValue(defaults[i]) || inferred || 10;
+        });
+      }
+      while (table.scoreMaxValues.length < table.scoreColumns.length) {
+        const i = table.scoreMaxValues.length;
+        const inferred = table.rows.reduce((max, row) => Math.max(max, parseNumericValue(row?.score?.[i])), 0);
+        table.scoreMaxValues.push(inferred || 10);
+      }
+      table.scoreMaxValues = table.scoreMaxValues.slice(0, table.scoreColumns.length);
       table.rows.forEach((row) => {
         row.student = row.student || "";
         row.attendance = Array.isArray(row.attendance) ? row.attendance : [];
@@ -2401,12 +2670,26 @@
       const scoreTotals = Array.from({ length: scoreCount }, (_, i) => rows.reduce((sum, row) => sum + parseNumericValue(row.score?.[i]), 0));
       const attendanceTotalAll = rows.reduce((sum, row) => sum + sumNumeric(row.attendance || []), 0);
       const scoreTotalAll = rows.reduce((sum, row) => sum + sumNumeric(row.score || []), 0);
-      const scoreColumnMax = Array.from({ length: scoreCount }, (_, i) => rows.reduce((max, row) => Math.max(max, parseNumericValue(row.score?.[i])), 0));
+      const scoreColumnMax = Array.from({ length: scoreCount }, (_, i) => parseNumericValue(table.scoreMaxValues?.[i]) || rows.reduce((max, row) => Math.max(max, parseNumericValue(row.score?.[i])), 0) || 10);
+      const attendanceColWidth = attendanceCount ? 4.90 : 0;
+      const scoreColWidth = scoreCount ? 6.20 : 0;
+      const studentColWidth = 21.00;
+      const totalColWidth = 6.20;
+      const colgroup = `
+        <colgroup>
+          <col style="width:${studentColWidth}%;">
+          ${table.attendanceColumns.map(() => `<col style="width:${attendanceColWidth}%;">`).join("")}
+          <col style="width:${totalColWidth}%;">
+          ${table.scoreColumns.map(() => `<col style="width:${scoreColWidth}%;">`).join("")}
+          <col style="width:${totalColWidth}%;">
+        </colgroup>
+      `;
 
       if (summaryTitleEl) summaryTitleEl.textContent = table.title || "Attendance and score summary";
       if (editSummaryTitle()) editSummaryTitle().value = table.title || "";
       if (editSummaryNote()) editSummaryNote().value = table.note || "";
       summaryTableEl.innerHTML = `
+        ${colgroup}
         <thead>
           <tr>
             <th rowspan="2">Students</th>
@@ -2477,6 +2760,8 @@
                 <label>Score ${colIndex + 1} label</label>
                 <input value="${escapeHtml(label)}" oninput="state.summaryTable.scoreColumns[${colIndex}] = this.value; renderSummaryTable();">
                 <input value="${escapeHtml(row.score?.[colIndex] ?? "")}" oninput="state.summaryTable.rows[${rowIndex}].score[${colIndex}] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <label style="margin-top:8px;">Score ${colIndex + 1} total</label>
+                <input value="${escapeHtml(table.scoreMaxValues?.[colIndex] ?? "")}" oninput="state.summaryTable.scoreMaxValues[${colIndex}] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             `).join("")}
           </div>
@@ -2512,6 +2797,7 @@
       } else {
         const label = `COL ${table.scoreColumns.length + 1}`;
         table.scoreColumns.push(label);
+        table.scoreMaxValues.push(10);
         table.rows.forEach((row) => row.score.push(""));
       }
       renderSummaryEditor();
@@ -2527,6 +2813,7 @@
       } else {
         if (table.scoreColumns.length <= 1) return;
         table.scoreColumns.pop();
+        table.scoreMaxValues.pop();
         table.rows.forEach((row) => row.score.pop());
       }
       renderSummaryEditor();
@@ -2818,7 +3105,9 @@
 
     function renderAssignmentEditor() {
       const box = document.getElementById("assignmentEditor");
-      box.innerHTML = state.assignments.map((a, idx) => `
+      box.innerHTML = state.assignments.map((a, idx) => {
+        normalizeAssignmentTextBlocks(a);
+        return `
         <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', ${idx}, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', ${idx}, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
             <span>${escapeHtml(a.title)}</span>
@@ -2833,10 +3122,32 @@
             <div class="field"><label>Course name</label><input value="${escapeHtml(a.course)}" oninput="state.assignments[${idx}].course = this.value;"></div>
             <div class="field"><label>Dead line</label><input value="${escapeHtml(a.deadline)}" oninput="state.assignments[${idx}].deadline = this.value;"></div>
             <div class="field"><label>Score points</label><input value="${escapeHtml(a.score)}" oninput="state.assignments[${idx}].score = this.value;"></div>
-            <div class="field"><label>Assignment text</label><textarea rows="3" oninput="state.assignments[${idx}].text = this.value;">${escapeHtml(a.text)}</textarea></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            ${a.texts.map((block, blockIndex) => `
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box ${blockIndex + 1}</label>
+                  <textarea rows="3" oninput="updateAssignmentText(${idx}, ${blockIndex}, 'value', this.value)">${escapeHtml(block.value || "")}</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" ${block.link ? "checked" : ""} onchange="updateAssignmentText(${idx}, ${blockIndex}, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(${idx}, ${blockIndex})">Delete</button>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(${idx})">Add text box</button>
           </div>
         </div>
-      `).join("");
+      `;}).join("");
     }
 
     function addAssignment() {
@@ -2846,14 +3157,56 @@
         course: "",
         deadline: "",
         score: "",
-        text: "Assignment details will appear here."
+        text: "Assignment details will appear here.",
+        texts: [{ value: "Assignment details will appear here.", link: false }]
       });
       renderAssignmentEditor();
+      renderAssignments();
     }
 
     function removeAssignment(idx) {
       state.assignments.splice(idx, 1);
       renderAssignmentEditor();
+      renderAssignments();
+    }
+
+    function updateAssignmentText(assignmentIndex, blockIndex, prop, value) {
+      const assignment = state.assignments[assignmentIndex];
+      if (!assignment) return;
+      normalizeAssignmentTextBlocks(assignment);
+      const block = assignment.texts[blockIndex];
+      if (!block) return;
+      if (prop === 'link') {
+        block.link = !!value;
+      } else {
+        block.value = value;
+        if (!block.link) {
+          block.link = isValidHttpUrl(value);
+        }
+      }
+      syncAssignmentText(assignment);
+      renderAssignments();
+    }
+
+    function addAssignmentText(assignmentIndex) {
+      const assignment = state.assignments[assignmentIndex];
+      if (!assignment) return;
+      normalizeAssignmentTextBlocks(assignment);
+      assignment.texts.push({ value: "", link: false });
+      syncAssignmentText(assignment);
+      renderAssignmentEditor();
+      renderAssignments();
+    }
+
+    function removeAssignmentText(assignmentIndex, blockIndex) {
+      const assignment = state.assignments[assignmentIndex];
+      if (!assignment) return;
+      normalizeAssignmentTextBlocks(assignment);
+      if (assignment.texts.length <= 1) return;
+      assignment.texts.splice(blockIndex, 1);
+      syncAssignmentText(assignment);
+      renderAssignmentEditor();
+      renderAssignments();
     }
 
     async function applyPortalEditorToState() {
@@ -2905,9 +3258,13 @@
 
     function openPortalWhenLoggedIn() {
       sessionStorage.removeItem(ADMIN_KEY);
-      if (isAuthed()) {
+      if (isAuthed() && !sessionExpired()) {
         showPortal();
       } else {
+        if (isAuthed() && sessionExpired()) {
+          resetSessionData();
+          loginMsg.textContent = "Session expired after 1 hour of inactivity.";
+        }
         hidePortal();
       }
       updateAuthButtons();
@@ -2955,8 +3312,6 @@
     document.addEventListener("keydown", touchSession, { passive: true });
     document.addEventListener("click", touchSession, { passive: true });
     document.addEventListener("scroll", touchSession, { passive: true });
-    window.addEventListener("beforeunload", resetSessionData);
-    window.addEventListener("pagehide", resetSessionData);
 
     window.addEventListener("load", () => {
       state = loadState();
