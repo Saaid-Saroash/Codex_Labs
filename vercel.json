@@ -1,9 +1,29 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/save.js", "use": "@vercel/node" }
+    {
+      "src": "api/save.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
-    { "src": "/api/save", "dest": "/api/save.js" }
+    {
+      "src": "/api/save",
+      "methods": ["OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "https://saaid-saroash.github.io",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
+      "dest": "api/save.js"
+    },
+    {
+      "src": "/api/save",
+      "methods": ["POST"],
+      "headers": {
+        "Access-Control-Allow-Origin": "https://saaid-saroash.github.io"
+      },
+      "dest": "api/save.js"
+    }
   ]
 }
