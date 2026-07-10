@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // CORS
+  res.setHeader("Access-Control-Allow-Origin", "https://saaid-saroash.github.io");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -8,31 +9,42 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
   }
 
   try {
     const { filename, content, message } = req.body || {};
 
-    if (!filename || typeof filename !== "string") {
-      return res.status(400).json({ error: "filename is required" });
+    if (!filename) {
+      return res.status(400).json({
+        error: "Missing filename"
+      });
     }
+
     if (typeof content !== "string") {
-      return res.status(400).json({ error: "content must be a string" });
+      return res.status(400).json({
+        error: "Missing content"
+      });
     }
 
     const owner = process.env.GITHUB_OWNER;
     const repo = process.env.GITHUB_REPO;
-    const token = process.env.GITHUB_TOKEN;
     const branch = process.env.GITHUB_BRANCH || "main";
+    const token = process.env.GITHUB_TOKEN;
 
     if (!owner || !repo || !token) {
       return res.status(500).json({
-        error: "Missing GITHUB_OWNER, GITHUB_REPO, or GITHUB_TOKEN environment variables."
+        error: "Missing environment variables",
+        owner: !!owner,
+        repo: !!repo,
+        token: !!token
       });
     }
 
-    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(filename).replace(/%2F/g, "/")}`;
+    const apiUrl =
+      `https://api.github.com/repos/${owner}/${repo}/contents/${filename}`;
 
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -41,11 +53,24 @@ export default async function handler(req, res) {
       "Content-Type": "application/json"
     };
 
-    let sha = null;
-    const existing = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, { headers });
-    if (existing.ok) {
-      const existingJson = await existing.json();
-      sha = existingJson.sha || null;
+    // Get existing file
+    const existingResponse = await fetch(
+      `${apiUrl}?ref=${encodeURIComponent(branch)}`,
+      { headers }
+    );
+
+    let sha = undefined;
+
+    if (existingResponse.ok) {
+      const existing = await existingResponse.json();
+      sha = existing.sha;
+    } else if (existingResponse.status !== 404) {
+      const err = await existingResponse.text();
+
+      return res.status(existingResponse.status).json({
+        error: "Unable to read existing file",
+        github: err
+      });
     }
 
     const body = {
@@ -53,30 +78,36 @@ export default async function handler(req, res) {
       content: Buffer.from(content, "utf8").toString("base64"),
       branch
     };
+
     if (sha) body.sha = sha;
 
-    const updateResponse = await fetch(apiUrl, {
+    const githubResponse = await fetch(apiUrl, {
       method: "PUT",
       headers,
       body: JSON.stringify(body)
     });
 
-    const result = await updateResponse.json().catch(() => ({}));
-    if (!updateResponse.ok) {
-      return res.status(updateResponse.status).json({
-        error: result.message || "GitHub update failed",
-        details: result
+    const githubResult = await githubResponse.json();
+
+    if (!githubResponse.ok) {
+      return res.status(githubResponse.status).json({
+        error: "GitHub rejected the request",
+        github: githubResult
       });
     }
 
     return res.status(200).json({
-      ok: true,
+      success: true,
       filename,
-      commit: result.commit?.sha || null
+      commit: githubResult.commit?.sha
     });
-  } catch (error) {
+
+  } catch (err) {
+    console.error(err);
+
     return res.status(500).json({
-      error: error?.message || "Server error"
+      error: err.message,
+      stack: err.stack
     });
   }
 }
