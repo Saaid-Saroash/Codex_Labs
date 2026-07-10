@@ -968,6 +968,7 @@
     let data = loadData();
     let loggedIn = false;
     let sourceFileHandle = null;
+    const SAVE_BRIDGE_URL = 'https://codex-labs.vercel.app/api/save';
     const adminOverlay = document.getElementById('adminOverlay');
     const loginBox = document.getElementById('loginBox');
     const editorBox = document.getElementById('editorBox');
@@ -1060,6 +1061,25 @@
       await writable.close();
       return true;
     }
+
+
+async function saveHtmlToGithub(filename, html, message) {
+  if (!SAVE_BRIDGE_URL) return false;
+  try {
+    const res = await fetch(SAVE_BRIDGE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        filename,
+        content: html,
+        message: message || `Update ${filename}`
+      })
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
     function esc(s){ return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;'); }
     function toggleMobileMenu(event) {
       if (event) {
@@ -1255,53 +1275,58 @@
     function deleteItem(section, index){ data[section].splice(index, 1); renderAdmin(); renderMain(); }
     function addLevelItem(section){ const defaults = { basic:'New basic point', intermediate:'New intermediate point', advance:'New advance point', info:'New information', requirements:'New requirement' }; data[section].push(defaults[section]); renderAdmin(); renderMain(); }
 
-    async function saveAdmin(){
-      if (!loggedIn) return;
-      data.brand = document.getElementById('brand').value.trim() || data.brand;
-      data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading;
-      data.fee = document.getElementById('fee').value.trim() || data.fee;
-      data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo;
-      data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText;
-      data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink;
-      data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink;
-      data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink;
-      data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle;
-      data.liveCourse = document.getElementById('liveCourse').value;
-      if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7';
-      renderMain();
-      syncLevelToggleButtons();
-      renderAdmin();
+async function saveAdmin(){
+  if (!loggedIn) return;
+  data.brand = document.getElementById('brand').value.trim() || data.brand;
+  data.subHeading = document.getElementById('subHeading').value.trim() || data.subHeading;
+  data.fee = document.getElementById('fee').value.trim() || data.fee;
+  data.contactNo = document.getElementById('contactNo').value.trim() || data.contactNo;
+  data.joinText = document.getElementById('joinTextInput').value.trim() || data.joinText;
+  data.joinLink = document.getElementById('joinLink').value.trim() || data.joinLink;
+  data.googleFormLink = document.getElementById('googleFormLink').value.trim() || data.googleFormLink;
+  data.instagramLink = document.getElementById('instagramLink').value.trim() || data.instagramLink;
+  data.emailHandle = document.getElementById('emailHandle').value.trim() || data.emailHandle;
+  data.liveCourse = document.getElementById('liveCourse').value;
+  if (!data.googleFormLink) data.googleFormLink = 'https://forms.gle/eQ8Kf9whCsTspmCA7';
+  renderMain();
+  syncLevelToggleButtons();
+  renderAdmin();
 
-      const msg = document.getElementById('saveMsgInline');
-      const html = buildUpdatedHtml();
+  const msg = document.getElementById('saveMsgInline');
+  const html = buildUpdatedHtml();
 
-      try {
-        let saved = await writeHtmlToFile(html);
-        if (!saved) {
-          if ('showSaveFilePicker' in window) {
-            const handle = await window.showSaveFilePicker({
-              suggestedName: 'index.html',
-              types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
-            });
-            sourceFileHandle = handle;
-            if (sourceFileHandle?.requestPermission) {
-              await sourceFileHandle.requestPermission({ mode: 'readwrite' });
-            }
-            await writeHtmlToFile(html);
-            saved = true;
-          } else {
-            await downloadUpdatedHtml(html);
-            saved = true;
+  try {
+    const gitHubSaved = await saveHtmlToGithub('index.html', html, 'Update index.html from admin panel');
+    if (gitHubSaved) {
+      msg.textContent = 'saved to GitHub';
+    } else {
+      let saved = await writeHtmlToFile(html);
+      if (!saved) {
+        if ('showSaveFilePicker' in window) {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: 'index.html',
+            types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
+          });
+          sourceFileHandle = handle;
+          if (sourceFileHandle?.requestPermission) {
+            await sourceFileHandle.requestPermission({ mode: 'readwrite' });
           }
+          await writeHtmlToFile(html);
+          saved = true;
+        } else {
+          await downloadUpdatedHtml(html);
+          saved = true;
         }
-        msg.textContent = saved ? 'saved to source' : 'saved';
-      } catch (err) {
-        await downloadUpdatedHtml(html);
-        msg.textContent = 'downloaded copy';
       }
-      setTimeout(() => { msg.textContent = ''; }, 1600);
+      msg.textContent = saved ? 'saved to source' : 'saved';
     }
-    menuBackdrop?.addEventListener('click', closeMobileMenu);
+  } catch (err) {
+    await downloadUpdatedHtml(html);
+    msg.textContent = 'downloaded copy';
+  }
+  setTimeout(() => { msg.textContent = ''; }, 1600);
+}
+menuBackdrop?.addEventListener('click', closeMobileMenu);
     document.getElementById('infoToggle')?.addEventListener('click', toggleInfoSection);
     document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
     document.getElementById('menuBrandTrigger')?.addEventListener('dblclick', openAdmin);
