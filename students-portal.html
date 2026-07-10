@@ -970,16 +970,16 @@
                 <th class="row-head">Manahil Abbas</th>
                 <td>1</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>4</td>
-                <td>25/25</td><td>10/10</td><td>26/30</td><td>10/10</td><td></td>
-                <td>71</td>
+                <td>25/25</td><td>10/10</td><td>28/30</td><td>10/10</td><td></td>
+                <td>73</td>
               </tr>
             
               <tr>
                 <th class="row-head">Manha Abbas</th>
                 <td>1</td><td>1</td><td>1</td><td>1</td><td></td>
                 <td>4</td>
-                <td>25/25</td><td>10/10</td><td>26/30</td><td>10/10</td><td></td>
-                <td>71</td>
+                <td>25/25</td><td>10/10</td><td>28/30</td><td>10/10</td><td></td>
+                <td>73</td>
               </tr>
             
               <tr>
@@ -1077,25 +1077,6 @@
             <a class="assignment-text assignment-link" href="https://forms.gle/3prFQwCfGH7w8QQS7" target="_blank" rel="noopener noreferrer">https://forms.gle/3prFQwCfGH7w8QQS7</a>
           </div>
         </div>
-      
-        <div class="assignment-card" data-assignment="4">
-          <button class="assignment-head" type="button" onclick="toggleAssignment(4)" aria-expanded="false">
-            <div class="assignment-title">
-              <small>Assignment 5</small>
-              <span></span>
-            </div>
-            <div class="arrow">›</div>
-          </button>
-          <div class="assignment-body">
-            <div class="assignment-meta">
-              <div class="meta-box"><span class="label">Assignment date</span><div class="value"></div></div>
-              <div class="meta-box"><span class="label">Course name</span><div class="value"></div></div>
-              <div class="meta-box"><span class="label">Dead line</span><div class="value"></div></div>
-              <div class="meta-box"><span class="label">Score points</span><div class="value">youtube.com</div></div>
-            </div>
-            <div class="assignment-text">youtube.com</div>
-          </div>
-        </div>
       </div>
       </section>
 
@@ -1187,8 +1168,8 @@
       <div class="tab-bar">
         <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
-        <button class="tab-btn active" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
+        <button class="tab-btn active" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
 
@@ -1274,7 +1255,7 @@
       </div>
 
 
-      <div class="tab-panel" id="panelSummary">
+      <div class="tab-panel active" id="panelSummary">
         <div class="summary-editor-shell">
           <div class="card">
             <div class="admin-grid">
@@ -1504,7 +1485,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="71" disabled="">
+              <input value="73" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1559,7 +1540,7 @@
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
-                <input value="26" oninput="state.summaryTable.rows[2].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="28" oninput="state.summaryTable.rows[2].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 3 total</label>
                 <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
@@ -1599,7 +1580,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="71" disabled="">
+              <input value="73" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1654,7 +1635,7 @@
               <div class="field">
                 <label>Score 3 label</label>
                 <input value="MON" oninput="state.summaryTable.scoreColumns[2] = this.value; renderSummaryTable();">
-                <input value="26" oninput="state.summaryTable.rows[3].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="28" oninput="state.summaryTable.rows[3].score[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 3 total</label>
                 <input value="30" oninput="state.summaryTable.scoreMaxValues[2] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
@@ -1776,7 +1757,7 @@
         </div>
       </div>
 
-      <div class="tab-panel active" id="panelAssignments">
+      <div class="tab-panel" id="panelAssignments">
         <div class="editor-list" id="assignmentEditor">
         <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
@@ -1935,46 +1916,6 @@
           </div>
           <div class="mini-actions">
             <button class="btn" type="button" onclick="addAssignmentText(3)">Add text box</button>
-          </div>
-        </div>
-      
-        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 4, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 4, event)" ondragend="endAdminDrag(event)">
-          <div class="editor-item-head">
-            <span>Assignment 5</span>
-            <div style="display:flex; gap:10px; align-items:center;">
-              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
-              <button type="button" onclick="removeAssignment(4)">Delete</button>
-            </div>
-          </div>
-          <div class="admin-grid" style="margin-top:12px;">
-            <div class="field"><label>Title</label><input value="Assignment 5" oninput="state.assignments[4].title = this.value;"></div>
-            <div class="field"><label>Assignment date</label><input value="" oninput="state.assignments[4].date = this.value;"></div>
-            <div class="field"><label>Course name</label><input value="" oninput="state.assignments[4].course = this.value;"></div>
-            <div class="field"><label>Dead line</label><input value="" oninput="state.assignments[4].deadline = this.value;"></div>
-            <div class="field"><label>Score points</label><input value="youtube.com" oninput="state.assignments[4].score = this.value;"></div>
-          </div>
-          <div class="field" style="margin-top:12px;">
-            <label>Assignment text boxes</label>
-          </div>
-          <div class="assignment-editor-blocks">
-            
-              <div class="assignment-text-editor">
-                <div class="field">
-                  <label>Text box 1</label>
-                  <textarea rows="3" oninput="updateAssignmentText(4, 0, 'value', this.value)">youtube.com</textarea>
-                </div>
-                <label class="link-toggle">
-                  <input type="checkbox" checked="" onchange="updateAssignmentText(4, 0, 'link', this.checked)">
-                  link
-                </label>
-                <div class="assignment-text-actions">
-                  <button type="button" onclick="removeAssignmentText(4, 0)">Delete</button>
-                </div>
-              </div>
-            
-          </div>
-          <div class="mini-actions">
-            <button class="btn" type="button" onclick="addAssignmentText(4)">Add text box</button>
           </div>
         </div>
       </div>
