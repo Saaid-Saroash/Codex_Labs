@@ -1161,8 +1161,7 @@
 
     <div id="adminEditor" class="">
       <div class="mini-actions" style="margin-bottom: 10px;">
-        <button class="btn" type="button" onclick="connectSourceFile()">Connect source file</button>
-        <button class="btn primary" type="button" onclick="saveAll()">Save to source</button>
+        <button class="btn primary" type="button" onclick="saveAll()">Save to GitHub</button>
         <span class="save-msg" id="saveMsg"></span>
       </div>
 
@@ -2139,7 +2138,6 @@
     let state = structuredClone(defaultData);
     let currentIndex = -1;
     let currentAdminTab = "portal";
-    let sourceFileHandle = null;
     const SAVE_BRIDGE_URL = 'https://codex-labs.vercel.app/api/save';
     let currentSessionId = null;
     let sessionTimer = null;
@@ -3019,33 +3017,6 @@
       touchSession();
     }
 
-    async function connectSourceFile() {
-      try {
-        if (!("showOpenFilePicker" in window)) {
-          saveMsgEl.textContent = "File picker not supported here.";
-          return;
-        }
-        const [handle] = await window.showOpenFilePicker({
-          multiple: false,
-          types: [
-            {
-              description: "HTML file",
-              accept: { "text/html": [".html", ".htm"] }
-            }
-          ]
-        });
-        sourceFileHandle = handle;
-        if (sourceFileHandle.requestPermission) {
-          await sourceFileHandle.requestPermission({ mode: "readwrite" });
-        }
-        saveMsgEl.textContent = "Source file connected.";
-        setTimeout(() => saveMsgEl.textContent = "", 1600);
-      } catch {
-        saveMsgEl.textContent = "Source file connection cancelled.";
-        setTimeout(() => saveMsgEl.textContent = "", 1600);
-      }
-    }
-
     function renderVideoEditor() {
       const box = document.getElementById("videoEditor");
       box.innerHTML = state.videos.map((v, idx) => `
@@ -3193,22 +3164,6 @@
       }
     }
 
-    async function saveCurrentHtmlToFile() {
-      if (!sourceFileHandle) return false;
-      if (sourceFileHandle.requestPermission) {
-        const perm = await sourceFileHandle.requestPermission({ mode: "readwrite" });
-        if (perm !== "granted") return false;
-      }
-      const dataScript = document.getElementById(DATA_SCRIPT_ID);
-      dataScript.textContent = JSON.stringify(state, null, 2);
-      const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-      const writable = await sourceFileHandle.createWritable();
-      await writable.write(html);
-      await writable.close();
-      return true;
-    }
-
-
 async function saveHtmlToGithub(filename, html, message) {
   if (!SAVE_BRIDGE_URL) return false;
   try {
@@ -3239,12 +3194,7 @@ async function saveAll() {
     renderAssignmentEditor();
     const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
     const gitHubSaved = await saveHtmlToGithub('students-portal.html', html, 'Update students-portal.html from admin panel');
-    if (gitHubSaved) {
-      saveMsgEl.textContent = "Saved to GitHub.";
-    } else {
-      const savedToFile = await saveCurrentHtmlToFile();
-      saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
-    }
+    saveMsgEl.textContent = gitHubSaved ? "Saved to GitHub." : "Save failed.";
   } catch {
     saveMsgEl.textContent = "Save failed.";
   }
