@@ -511,37 +511,31 @@
     }
     .summary-table-wrap {
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border-radius: 22px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 24px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow);
-      padding: 2px;
+      padding: 14px;
     }
     .summary-table {
       width: 100%;
-      min-width: 1000px;
+      min-width: 920px;
       border-collapse: separate;
       border-spacing: 0;
       color: white;
-      table-layout: fixed;
     }
     .summary-table th,
     .summary-table td {
-      border-right: 1px solid rgba(255,255,255,.10);
-      border-bottom: 1px solid rgba(255,255,255,.10);
-      padding: 12px 10px;
+      border-right: 1px solid rgba(255,255,255,.12);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding: 10px 12px;
       text-align: center;
       vertical-align: middle;
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.04);
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 15px;
-      line-height: 1.15;
     }
     .summary-table thead th {
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.12);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .12em;
@@ -550,21 +544,13 @@
     .summary-table .row-head {
       text-align: left;
       font-weight: 900;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.10);
       position: sticky;
       left: 0;
       z-index: 1;
-      white-space: nowrap;
-      word-break: normal;
-      overflow: visible;
-      text-overflow: clip;
-      min-width: 220px;
-      width: 21%;
-      line-height: 1.35;
-      padding-left: 14px;
     }
     .summary-table .group-head {
-      background: rgba(246,216,216,.14);
+      background: rgba(246,216,216,.18);
       font-size: 13px;
     }
     .summary-table .sub-head {
@@ -843,23 +829,6 @@
       .admin-grid, .admin-grid-3 { grid-template-columns: 1fr; }
     }
     @media (max-width: 720px) {
-      .summary-table-wrap { padding: 10px; border-radius: 18px; }
-      .summary-table {
-        min-width: 760px;
-        font-size: 11px;
-      }
-      .summary-table th,
-      .summary-table td {
-        padding: 8px 9px;
-      }
-      .summary-table thead th {
-        font-size: 10px;
-        letter-spacing: .08em;
-      }
-      .summary-table .row-head {
-        min-width: 170px;
-        width: 170px;
-      }
       .assignment-text-editor {
         grid-template-columns: 1fr;
       }
@@ -1017,8 +986,8 @@
                 <th class="row-head">Muhammad Ahmad Sheikh</th>
                 <td>1</td><td>0</td><td>1</td><td>1</td><td></td>
                 <td>3</td>
-                <td>24/25</td><td>9/10</td><td>28/30</td><td></td><td></td>
-                <td>61</td>
+                <td>24/25</td><td>9/10</td><td>28/30</td><td>8/10</td><td></td>
+                <td>69</td>
               </tr>
             
         </tbody>
@@ -1707,7 +1676,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="61" disabled="">
+              <input value="69" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1770,7 +1739,7 @@
               <div class="field">
                 <label>Score 4 label</label>
                 <input value="WED" oninput="state.summaryTable.scoreColumns[3] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[4].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="8" oninput="state.summaryTable.rows[4].score[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 4 total</label>
                 <input value="10" oninput="state.summaryTable.scoreMaxValues[3] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
@@ -2143,7 +2112,7 @@
           24,
           9,
           28,
-          "",
+          "8",
           ""
         ]
       }
