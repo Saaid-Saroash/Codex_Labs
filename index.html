@@ -856,7 +856,7 @@
     <div class="admin-panel">
       <div class="admin-top">
         <div><div style="display:flex;align-items:center;gap:10px;font-weight:900;font-size:28px">Admin Panel</div><div class="small">Edit the course details, levels, live course, and contact info.</div></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn secondary" type="button" onclick="connectSourceFile()">Connect Source File</button><button class="btn primary" type="button" onclick="saveAdmin()">Save to source</button><span id="saveMsgInline" class="save-inline"></span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;"><button class="btn secondary" onclick="closeAdmin()">Close</button><button class="btn primary" type="button" onclick="saveAdmin()">Save to GitHub</button><span id="saveMsgInline" class="save-inline"></span></div>
       </div>
 
       <div id="loginBox" class="card hidden" style="max-width:420px;margin:0 auto 16px;background:#fff;color:#261016;">
@@ -967,7 +967,6 @@
 
     let data = loadData();
     let loggedIn = false;
-    let sourceFileHandle = null;
     const SAVE_BRIDGE_URL = 'https://codex-labs.vercel.app/api/save';
     const adminOverlay = document.getElementById('adminOverlay');
     const loginBox = document.getElementById('loginBox');
@@ -991,28 +990,6 @@
       const script = document.getElementById(DATA_SCRIPT_ID);
       if (!script) return;
       script.textContent = JSON.stringify(data, null, 2);
-    }
-
-    async function connectSourceFile(){
-      try {
-        if (!('showOpenFilePicker' in window)) {
-          document.getElementById('saveMsgInline').textContent = 'File picker not supported here';
-          return;
-        }
-        const [handle] = await window.showOpenFilePicker({
-          multiple: false,
-          types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
-        });
-        sourceFileHandle = handle;
-        if (sourceFileHandle?.requestPermission) {
-          await sourceFileHandle.requestPermission({ mode: 'readwrite' });
-        }
-        document.getElementById('saveMsgInline').textContent = 'source connected';
-        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
-      } catch (err) {
-        document.getElementById('saveMsgInline').textContent = 'Connection cancelled';
-        setTimeout(() => { document.getElementById('saveMsgInline').textContent = ''; }, 1600);
-      }
     }
 
     function buildUpdatedHtml(){
@@ -1049,19 +1026,6 @@
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     }
-
-    async function writeHtmlToFile(html){
-      if (!sourceFileHandle) return false;
-      if (sourceFileHandle.requestPermission) {
-        const perm = await sourceFileHandle.requestPermission({ mode: 'readwrite' });
-        if (perm !== 'granted') return false;
-      }
-      const writable = await sourceFileHandle.createWritable();
-      await writable.write(html);
-      await writable.close();
-      return true;
-    }
-
 
 async function saveHtmlToGithub(filename, html, message) {
   if (!SAVE_BRIDGE_URL) return false;
@@ -1297,35 +1261,13 @@ async function saveAdmin(){
 
   try {
     const gitHubSaved = await saveHtmlToGithub('index.html', html, 'Update index.html from admin panel');
-    if (gitHubSaved) {
-      msg.textContent = 'saved to GitHub';
-    } else {
-      let saved = await writeHtmlToFile(html);
-      if (!saved) {
-        if ('showSaveFilePicker' in window) {
-          const handle = await window.showSaveFilePicker({
-            suggestedName: 'index.html',
-            types: [{ description: 'HTML file', accept: { 'text/html': ['.html', '.htm'] } }]
-          });
-          sourceFileHandle = handle;
-          if (sourceFileHandle?.requestPermission) {
-            await sourceFileHandle.requestPermission({ mode: 'readwrite' });
-          }
-          await writeHtmlToFile(html);
-          saved = true;
-        } else {
-          await downloadUpdatedHtml(html);
-          saved = true;
-        }
-      }
-      msg.textContent = saved ? 'saved to source' : 'saved';
-    }
-  } catch (err) {
-    await downloadUpdatedHtml(html);
-    msg.textContent = 'downloaded copy';
+    msg.textContent = gitHubSaved ? 'saved to GitHub' : 'save failed';
+  } catch {
+    msg.textContent = 'save failed';
   }
   setTimeout(() => { msg.textContent = ''; }, 1600);
 }
+
 menuBackdrop?.addEventListener('click', closeMobileMenu);
     document.getElementById('infoToggle')?.addEventListener('click', toggleInfoSection);
     document.getElementById('brandTrigger').addEventListener('dblclick', openAdmin);
