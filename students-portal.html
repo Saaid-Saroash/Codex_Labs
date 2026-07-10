@@ -2140,6 +2140,7 @@
     let currentIndex = -1;
     let currentAdminTab = "portal";
     let sourceFileHandle = null;
+    const SAVE_BRIDGE_URL = 'https://codex-labs.vercel.app/api/save';
     let currentSessionId = null;
     let sessionTimer = null;
 
@@ -3207,25 +3208,50 @@
       return true;
     }
 
-    async function saveAll() {
-      try {
-        await applyPortalEditorToState();
-        updatePortalHeader();
-        renderSummaryTable();
-        renderAssignments();
-        renderVideos();
-        renderVideoEditor();
-        renderSummaryEditor();
-        renderAssignmentEditor();
-        const savedToFile = await saveCurrentHtmlToFile();
-        saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
-      } catch {
-        saveMsgEl.textContent = "Save failed.";
-      }
-      setTimeout(() => saveMsgEl.textContent = "", 1800);
-    }
 
-    function openPortalWhenLoggedIn() {
+async function saveHtmlToGithub(filename, html, message) {
+  if (!SAVE_BRIDGE_URL) return false;
+  try {
+    const res = await fetch(SAVE_BRIDGE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        filename,
+        content: html,
+        message: message || `Update ${filename}`
+      })
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function saveAll() {
+  try {
+    await applyPortalEditorToState();
+    updatePortalHeader();
+    renderSummaryTable();
+    renderAssignments();
+    renderVideos();
+    renderVideoEditor();
+    renderSummaryEditor();
+    renderAssignmentEditor();
+    const html = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+    const gitHubSaved = await saveHtmlToGithub('students-portal.html', html, 'Update students-portal.html from admin panel');
+    if (gitHubSaved) {
+      saveMsgEl.textContent = "Saved to GitHub.";
+    } else {
+      const savedToFile = await saveCurrentHtmlToFile();
+      saveMsgEl.textContent = savedToFile ? "Saved to source file." : "Connect source file first.";
+    }
+  } catch {
+    saveMsgEl.textContent = "Save failed.";
+  }
+  setTimeout(() => { saveMsgEl.textContent = ""; }, 1800);
+}
+
+function openPortalWhenLoggedIn() {
       sessionStorage.removeItem(ADMIN_KEY);
       if (isAuthed() && !sessionExpired()) {
         showPortal();
