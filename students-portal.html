@@ -904,8 +904,8 @@
           <div class="field" style="margin-top: 12px;">
             <label for="portalPass">Password</label>
             <div class="input-wrap">
-              <input id="portalPass" type="text" placeholder="Enter password" autocomplete="current-password">
-              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path></svg></button>
+              <input id="portalPass" type="password" placeholder="Enter password" autocomplete="current-password">
+              <button class="peek-btn" id="peekBtn" type="button" onclick="togglePassword()" aria-label="Show or hide password"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M2.5 12s3.6-6.5 9.5-6.5S21.5 12 21.5 12 17.9 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Z" stroke="currentColor" stroke-width="1.8"></path><path d="M4 4l16 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
             </div>
           </div>
           <div class="actions">
@@ -1077,6 +1077,25 @@
             <a class="assignment-text assignment-link" href="https://forms.gle/3prFQwCfGH7w8QQS7" target="_blank" rel="noopener noreferrer">https://forms.gle/3prFQwCfGH7w8QQS7</a>
           </div>
         </div>
+      
+        <div class="assignment-card" data-assignment="4">
+          <button class="assignment-head" type="button" onclick="toggleAssignment(4)" aria-expanded="false">
+            <div class="assignment-title">
+              <small>Assignment 5</small>
+              <span>Final Website Designing </span>
+            </div>
+            <div class="arrow">›</div>
+          </button>
+          <div class="assignment-body">
+            <div class="assignment-meta">
+              <div class="meta-box"><span class="label">Assignment date</span><div class="value">July 10, 2026</div></div>
+              <div class="meta-box"><span class="label">Course name</span><div class="value">Final Website Designing </div></div>
+              <div class="meta-box"><span class="label">Dead line</span><div class="value">July 13, 2026</div></div>
+              <div class="meta-box"><span class="label">Score points</span><div class="value">25</div></div>
+            </div>
+            <div class="assignment-text">Design a website using everything you learned in the whole course</div>
+          </div>
+        </div>
       </div>
       </section>
 
@@ -1176,8 +1195,8 @@
       <div class="tab-bar">
         <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn active" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
-        <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
+        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn active" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
 
@@ -1275,7 +1294,7 @@
       </div>
 
 
-      <div class="tab-panel active" id="panelSummary">
+      <div class="tab-panel" id="panelSummary">
         <div class="summary-editor-shell">
           <div class="card">
             <div class="admin-grid">
@@ -1777,7 +1796,7 @@
         </div>
       </div>
 
-      <div class="tab-panel" id="panelAssignments">
+      <div class="tab-panel active" id="panelAssignments">
         <div class="editor-list" id="assignmentEditor">
         <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
@@ -1936,6 +1955,46 @@
           </div>
           <div class="mini-actions">
             <button class="btn" type="button" onclick="addAssignmentText(3)">Add text box</button>
+          </div>
+        </div>
+      
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 4, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 4, event)" ondragend="endAdminDrag(event)">
+          <div class="editor-item-head">
+            <span>Assignment 5</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeAssignment(4)">Delete</button>
+            </div>
+          </div>
+          <div class="admin-grid" style="margin-top:12px;">
+            <div class="field"><label>Title</label><input value="Assignment 5" oninput="state.assignments[4].title = this.value;"></div>
+            <div class="field"><label>Assignment date</label><input value="July 10, 2026" oninput="state.assignments[4].date = this.value;"></div>
+            <div class="field"><label>Course name</label><input value="Final Website Designing " oninput="state.assignments[4].course = this.value;"></div>
+            <div class="field"><label>Dead line</label><input value="July 13, 2026" oninput="state.assignments[4].deadline = this.value;"></div>
+            <div class="field"><label>Score points</label><input value="25" oninput="state.assignments[4].score = this.value;"></div>
+          </div>
+          <div class="field" style="margin-top:12px;">
+            <label>Assignment text boxes</label>
+          </div>
+          <div class="assignment-editor-blocks">
+            
+              <div class="assignment-text-editor">
+                <div class="field">
+                  <label>Text box 1</label>
+                  <textarea rows="3" oninput="updateAssignmentText(4, 0, 'value', this.value)">Design a website using everything you learned in the whole course</textarea>
+                </div>
+                <label class="link-toggle">
+                  <input type="checkbox" onchange="updateAssignmentText(4, 0, 'link', this.checked)">
+                  link
+                </label>
+                <div class="assignment-text-actions">
+                  <button type="button" onclick="removeAssignmentText(4, 0)">Delete</button>
+                </div>
+              </div>
+            
+          </div>
+          <div class="mini-actions">
+            <button class="btn" type="button" onclick="addAssignmentText(4)">Add text box</button>
           </div>
         </div>
       </div>
