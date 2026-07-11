@@ -1114,6 +1114,14 @@
           </div>
           <h3>July 8, 2026 pt. 2</h3>
         </button>
+      
+        <button class="video-card" type="button" onclick="openVideo(4)" aria-label="Open Recording 5">
+          <div class="video-preview">
+            <img id="thumb-4" alt="Recording 5 thumbnail" src="data:image/svg+xml;charset=utf-8,%0A%20%20%20%20%20%20%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22640%22%20height%3D%22640%22%20viewBox%3D%220%200%20640%20640%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f6d8d8%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%235a0626%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%22640%22%20height%3D%22640%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22120%22%20r%3D%22130%22%20fill%3D%22rgba(255%2C255%2C255%2C.14)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%22120%22%20cy%3D%22520%22%20r%3D%22150%22%20fill%3D%22rgba(0%2C0%2C0%2C.12)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2246%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22700%22%3EStudents%20Portal%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%20%20%3Ctext%20x%3D%2250%25%22%20y%3D%2260%25%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2252%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-weight%3D%22900%22%3ERecording%205%3C%2Ftext%3E%0A%20%20%20%20%20%20%20%20%3C%2Fsvg%3E">
+            <div class="play-badge">▶</div>
+          </div>
+          <h3>Recording 5</h3>
+        </button>
       </div>
         
       </section>
@@ -1134,8 +1142,8 @@
     </div>
   </div>
 
-  <div class="admin-backdrop open" id="adminBackdrop" aria-hidden="false" onclick="closeAdmin()"></div>
-  <section class="admin-modal open" id="adminModal" aria-hidden="false">
+  <div class="admin-backdrop" id="adminBackdrop" aria-hidden="true" onclick="closeAdmin()"></div>
+  <section class="admin-modal" id="adminModal" aria-hidden="true">
     <div class="modal-top">
       <h3 class="modal-title">Admin panel</h3>
       <button class="close" type="button" onclick="closeAdmin()">Close</button>
@@ -1164,8 +1172,8 @@
 
       <div class="tab-bar">
         <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
-        <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn active" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn active" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
+        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
         <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
@@ -1195,7 +1203,7 @@
         </div>
       </div>
 
-      <div class="tab-panel" id="panelVideos">
+      <div class="tab-panel active" id="panelVideos">
         <div class="admin-grid-3" id="videoEditor">
         <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
@@ -1244,6 +1252,18 @@
           <div class="field" style="margin-top:10px;"><label>Title</label><input value="July 8, 2026 pt. 2" oninput="state.videos[3].title = this.value;"></div>
           <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-4.mp4" oninput="state.videos[3].src = this.value;"></div>
         </div>
+      
+        <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('videos', 4, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('videos', 4, event)" ondragend="endAdminDrag(event)">
+          <div class="editor-item-head">
+            <span>Video 5</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="drag-handle" aria-hidden="true">⋮⋮</span>
+              <button type="button" onclick="removeVideo(4)">Delete</button>
+            </div>
+          </div>
+          <div class="field" style="margin-top:10px;"><label>Title</label><input value="Recording 5" oninput="state.videos[4].title = this.value;"></div>
+          <div class="field" style="margin-top:10px;"><label>File path</label><input value="videos/recording-5.mp4" oninput="state.videos[4].src = this.value;"></div>
+        </div>
       </div>
         <div class="mini-actions">
           <button class="btn" type="button" onclick="addVideo()">Add video</button>
@@ -1252,7 +1272,7 @@
       </div>
 
 
-      <div class="tab-panel active" id="panelSummary">
+      <div class="tab-panel" id="panelSummary">
         <div class="summary-editor-shell">
           <div class="card">
             <div class="admin-grid">
@@ -1949,6 +1969,10 @@
     {
       "title": "July 8, 2026 pt. 2",
       "src": "videos/recording-4.mp4"
+    },
+    {
+      "title": "Recording 5",
+      "src": "videos/recording-5.mp4"
     }
   ],
   "assignments": [
@@ -3337,6 +3361,7 @@ function openPortalWhenLoggedIn() {
       updateAuthButtons();
     });
   </script>
+
 
 
 </body></html>
