@@ -940,8 +940,8 @@
             <th rowspan="2">Total</th>
           </tr>
           <tr>
-            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">THU</th>
-            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head"></th>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">FRI</th>
+            <th class="sub-head">MON</th><th class="sub-head">THU</th><th class="sub-head">MON</th><th class="sub-head">WED</th><th class="sub-head">FRI</th>
           </tr>
         </thead>
         <tbody>
@@ -982,8 +982,8 @@
                 <th class="row-head">Muhammad Ahmad Sheikh</th>
                 <td>1</td><td>0</td><td>1</td><td>1</td><td>1</td>
                 <td>4</td>
-                <td>24/25</td><td>9/10</td><td>28/30</td><td>8/10</td><td></td>
-                <td>69</td>
+                <td>24/25</td><td>9/10</td><td>28/30</td><td>8/10</td><td>22/25</td>
+                <td>91</td>
               </tr>
             
         </tbody>
@@ -1192,8 +1192,8 @@
       <div class="tab-bar">
         <button class="tab-btn" id="tabPortal" type="button" onclick="switchAdminTab('portal')">Portal</button>
         <button class="tab-btn" id="tabVideos" type="button" onclick="switchAdminTab('videos')">Videos</button>
-        <button class="tab-btn" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
-        <button class="tab-btn active" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
+        <button class="tab-btn active" id="tabTable" type="button" onclick="switchAdminTab('summary')">Table</button>
+        <button class="tab-btn" id="tabAssignments" type="button" onclick="switchAdminTab('assignments')">Assignments</button>
 
       </div>
 
@@ -1291,7 +1291,7 @@
       </div>
 
 
-      <div class="tab-panel" id="panelSummary">
+      <div class="tab-panel active" id="panelSummary">
         <div class="summary-editor-shell">
           <div class="card">
             <div class="admin-grid">
@@ -1362,7 +1362,7 @@
             
               <div class="field">
                 <label>Att. 5 label</label>
-                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
                 <input value="1" oninput="state.summaryTable.rows[0].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
@@ -1401,10 +1401,10 @@
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[0].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 5 total</label>
-                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1457,7 +1457,7 @@
             
               <div class="field">
                 <label>Att. 5 label</label>
-                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
                 <input value="0" oninput="state.summaryTable.rows[1].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
@@ -1496,10 +1496,10 @@
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[1].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 5 total</label>
-                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1552,7 +1552,7 @@
             
               <div class="field">
                 <label>Att. 5 label</label>
-                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
                 <input value="1" oninput="state.summaryTable.rows[2].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
@@ -1591,10 +1591,10 @@
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[2].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 5 total</label>
-                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1647,7 +1647,7 @@
             
               <div class="field">
                 <label>Att. 5 label</label>
-                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
                 <input value="1" oninput="state.summaryTable.rows[3].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
@@ -1686,10 +1686,10 @@
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
                 <input value="" oninput="state.summaryTable.rows[3].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 5 total</label>
-                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1711,7 +1711,7 @@
             </div>
             <div class="field">
               <label>Score total</label>
-              <input value="69" disabled="">
+              <input value="91" disabled="">
             </div>
           </div>
           <div class="summary-editor-columns">
@@ -1742,7 +1742,7 @@
             
               <div class="field">
                 <label>Att. 5 label</label>
-                <input value="THU" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
+                <input value="FRI" oninput="state.summaryTable.attendanceColumns[4] = this.value; renderSummaryTable();">
                 <input value="1" oninput="state.summaryTable.rows[4].attendance[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
@@ -1781,10 +1781,10 @@
             
               <div class="field">
                 <label>Score 5 label</label>
-                <input value="" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
-                <input value="" oninput="state.summaryTable.rows[4].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="FRI" oninput="state.summaryTable.scoreColumns[4] = this.value; renderSummaryTable();">
+                <input value="22" oninput="state.summaryTable.rows[4].score[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
                 <label style="margin-top:8px;">Score 5 total</label>
-                <input value="" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
+                <input value="25" oninput="state.summaryTable.scoreMaxValues[4] = this.value; renderSummaryTable();" style="margin-top:8px;">
               </div>
             
           </div>
@@ -1793,7 +1793,7 @@
         </div>
       </div>
 
-      <div class="tab-panel active" id="panelAssignments">
+      <div class="tab-panel" id="panelAssignments">
         <div class="editor-list" id="assignmentEditor">
         <div class="card reorder-item" draggable="true" ondragstart="startAdminDrag('assignments', 0, event)" ondragover="allowAdminDrop(event)" ondrop="dropAdminItem('assignments', 0, event)" ondragend="endAdminDrag(event)">
           <div class="editor-item-head">
@@ -2114,14 +2114,14 @@
       "THU",
       "MON",
       "WED",
-      "THU"
+      "FRI"
     ],
     "scoreColumns": [
       "MON",
       "THU",
       "MON",
       "WED",
-      ""
+      "FRI"
     ],
     "rows": [
       {
@@ -2206,7 +2206,7 @@
           9,
           28,
           "8",
-          ""
+          "22"
         ]
       }
     ],
@@ -2215,7 +2215,7 @@
       10,
       30,
       10,
-      ""
+      "25"
     ]
   }
 }</script>
